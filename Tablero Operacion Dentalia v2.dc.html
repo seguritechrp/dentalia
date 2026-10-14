@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/seguritech-design-system-019dda45-6e51-7e57-833f-1447d7a2049e/colors_and_type.css">
+<script src="_ds/seguritech-design-system-019dda45-6e51-7e57-833f-1447d7a2049e/_ds_bundle.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#FFFFFF;color:#13201F;font-family:'IBM Plex Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#004AAD}a:hover{color:#0077D6}
+*{box-sizing:border-box}
+button{font-family:'IBM Plex Sans',sans-serif}
+</style>
+</helmet>
+<div style="display:flex;min-width:1440px;height:{{ rootH }};min-height:760px;background:#FFFFFF;color:#13201F;font-family:'IBM Plex Sans',system-ui,sans-serif">
+
+<aside data-screen-label="Menú lateral" style="width:{{ sideW }};flex:none;position:relative;z-index:10;background:#FFFFFF;display:flex;flex-direction:column;padding:22px 0 24px;transition:width .32s cubic-bezier(.4,0,.2,1)">
+  <div style="position: relative; height: 62px; margin-bottom: 60px; width: 251px">
+    <div style="position:absolute;left:28px;top:4px;width:112px;height:42px;overflow:hidden;opacity:{{ lblOp }};transition:opacity .25s">
+      
+    <img src="assets/dentalia-logo.png" alt="Dentalia" style="width: 100%; display: block; margin: -31px 0 0 -2px; height: 112px"></div>
+    <div style="position:absolute;left:20px;top:14px;width:46px;height:15px;overflow:hidden;opacity:{{ markOp }};transition:opacity .25s">
+      <img src="assets/dentalia-logo.png" alt="" style="width:115px;display:block;margin:-31px 0 0 -64px">
+    </div>
+  </div>
+  <button onClick="{{ toggleSide }}" data-tip="{{ sideTip }}" data-side="right" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="position:absolute;top:84px;right:-22px;width:44px;height:44px;border-radius:50%;border:0;background:#FFFFFF;box-shadow:0 2px 10px rgba(0,74,173,.16);display:flex;align-items:center;justify-content:center;cursor:pointer;color:#1B3A6B;transition:background-color .2s" style-hover="background-color:#E6ECF5">
+    <span style="display:flex;transform:{{ sideRot }};transition:transform .32s"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></span>
+  </button>
+
+  <nav style="display:flex;flex-direction:column;gap:6px">
+    <button onClick="{{ go.inicio }}" data-tip="Inicio" data-nav="1" data-side="right" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="display:flex;align-items:center;gap:14px;width:calc(100% - 28px);margin-left:14px;border:0;border-bottom:2px solid {{ nav.inicio.bd }};background:transparent;color:{{ nav.inicio.fg }};font-weight:{{ nav.inicio.fw }};font-size:16px;padding:11px 0 11px 16px;cursor:pointer;text-align:left;white-space:nowrap;overflow:hidden;border-radius:8px 8px 0 0;transition:background-color .2s,color .2s" style-hover="background-color:#F2F6FC">
+      <svg style="flex:none" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+      <span style="opacity:{{ lblOp }};transition:opacity .2s">Inicio</span>
+    </button>
+    <button onClick="{{ go.espera }}" data-tip="Espera del paciente" data-nav="1" data-side="right" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="display:flex;align-items:center;gap:14px;width:calc(100% - 28px);margin-left:14px;border:0;border-bottom:2px solid {{ nav.espera.bd }};background:transparent;color:{{ nav.espera.fg }};font-weight:{{ nav.espera.fw }};font-size:16px;padding:11px 0 11px 16px;cursor:pointer;text-align:left;white-space:nowrap;overflow:hidden;border-radius:8px 8px 0 0;transition:background-color .2s,color .2s" style-hover="background-color:#F2F6FC">
+      <svg style="flex:none" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path><path d="M12 7v5l4 2"></path></svg>
+      <span style="opacity:{{ lblOp }};transition:opacity .2s">Espera del paciente</span>
+    </button>
+    <button onClick="{{ go.saturacion }}" data-tip="Saturación" data-nav="1" data-side="right" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="display:flex;align-items:center;gap:14px;width:calc(100% - 28px);margin-left:14px;border:0;border-bottom:2px solid {{ nav.saturacion.bd }};background:transparent;color:{{ nav.saturacion.fg }};font-weight:{{ nav.saturacion.fw }};font-size:16px;padding:11px 0 11px 16px;cursor:pointer;text-align:left;white-space:nowrap;overflow:hidden;border-radius:8px 8px 0 0;transition:background-color .2s,color .2s" style-hover="background-color:#F2F6FC">
+      <svg style="flex:none" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+      <span style="opacity:{{ lblOp }};transition:opacity .2s">Saturación</span>
+    </button>
+    <button onClick="{{ go.consultorios }}" data-tip="Consultorios" data-nav="1" data-side="right" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="display:flex;align-items:center;gap:14px;width:calc(100% - 28px);margin-left:14px;border:0;border-bottom:2px solid {{ nav.consultorios.bd }};background:transparent;color:{{ nav.consultorios.fg }};font-weight:{{ nav.consultorios.fw }};font-size:16px;padding:11px 0 11px 16px;cursor:pointer;text-align:left;white-space:nowrap;overflow:hidden;border-radius:8px 8px 0 0;transition:background-color .2s,color .2s" style-hover="background-color:#F2F6FC">
+      <svg style="flex:none" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"></path><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"></path><path d="M5 18v2"></path><path d="M19 18v2"></path></svg>
+      <span style="opacity:{{ lblOp }};transition:opacity .2s">Consultorios</span>
+    </button>
+    <button onClick="{{ go.cruces }}" data-tip="Espera – Ocupación" data-nav="1" data-side="right" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="display:flex;align-items:center;gap:14px;width:calc(100% - 28px);margin-left:14px;border:0;border-bottom:2px solid {{ nav.cruces.bd }};background:transparent;color:{{ nav.cruces.fg }};font-weight:{{ nav.cruces.fw }};font-size:16px;padding:11px 0 11px 16px;cursor:pointer;text-align:left;white-space:nowrap;overflow:hidden;border-radius:8px 8px 0 0;transition:background-color .2s,color .2s" style-hover="background-color:#F2F6FC">
+      <svg style="flex:none" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 4 7l4 4"></path><path d="M4 7h16"></path><path d="m16 21 4-4-4-4"></path><path d="M20 17H4"></path></svg>
+      <span style="opacity:{{ lblOp }};transition:opacity .2s">Espera – Ocupación</span>
+    </button>
+    <button onClick="{{ go.afluencia }}" data-tip="Afluencias" data-nav="1" data-side="right" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="display:flex;align-items:center;gap:14px;width:calc(100% - 28px);margin-left:14px;border:0;border-bottom:2px solid {{ nav.afluencia.bd }};background:transparent;color:{{ nav.afluencia.fg }};font-weight:{{ nav.afluencia.fw }};font-size:16px;padding:11px 0 11px 16px;cursor:pointer;text-align:left;white-space:nowrap;overflow:hidden;border-radius:8px 8px 0 0;transition:background-color .2s,color .2s" style-hover="background-color:#F2F6FC">
+      <svg style="flex:none" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4h3a2 2 0 0 1 2 2v14"></path><path d="M2 20h3"></path><path d="M13 20h9"></path><path d="M10 12v.01"></path><path d="M13 4.562v16.157a1 1 0 0 1-1.242.97L5 20V5.562a2 2 0 0 1 1.515-1.94l4-1A2 2 0 0 1 13 4.561Z"></path></svg>
+      <span style="opacity:{{ lblOp }};transition:opacity .2s">Afluencias</span>
+    </button>
+    <button onClick="{{ go.abandono }}" data-tip="Abandono" data-nav="1" data-side="right" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="display:flex;align-items:center;gap:14px;width:calc(100% - 28px);margin-left:14px;border:0;border-bottom:2px solid {{ nav.abandono.bd }};background:transparent;color:{{ nav.abandono.fg }};font-weight:{{ nav.abandono.fw }};font-size:16px;padding:11px 0 11px 16px;cursor:pointer;text-align:left;white-space:nowrap;overflow:hidden;border-radius:8px 8px 0 0;transition:background-color .2s,color .2s" style-hover="background-color:#F2F6FC">
+      <svg style="flex:none" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="8" x2="16" y1="15" y2="15"></line><line x1="9" x2="9.01" y1="9" y2="9"></line><line x1="15" x2="15.01" y1="9" y2="9"></line></svg>
+      <span style="opacity:{{ lblOp }};transition:opacity .2s">Abandono</span>
+    </button>
+  </nav>
+
+  <div onMouseEnter="{{ userOn }}" onMouseLeave="{{ userOff }}" style="position:relative;margin-top:auto;padding-left:28px">
+    <sc-if value="{{ userOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;left:18px;bottom:44px;padding-bottom:6px;z-index:40">
+        <div style="background:#FFFFFF;border:1px solid #D5DEEA;border-radius:12px;box-shadow:0 6px 20px rgba(0,74,173,.14);padding:6px;min-width:190px">
+          <div style="padding:8px 10px 6px;font-size:12px;color:#4A5A70">Sesión: Gerente regional</div>
+          <button onClick="{{ logout }}" style="display:flex;align-items:center;gap:10px;width:100%;border:0;background:transparent;color:#A12424;font-size:14px;font-weight:500;padding:9px 10px;border-radius:8px;cursor:pointer;transition:background-color .2s" style-hover="background-color:#F8DCDC">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" x2="9" y1="12" y2="12"></line></svg>
+            Cerrar sesión
+          </button>
+        </div>
+      </div>
+    </sc-if>
+    <div style="display:flex;align-items:center;gap:12px;height:44px;color:#004AAD;cursor:pointer">
+      <svg style="flex:none" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="10" r="3"></circle><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"></path></svg>
+      <span style="opacity:{{ lblOp }};transition:opacity .2s;font-size:14px;font-weight:500;letter-spacing:.05em;white-space:nowrap">GERENTE REGIONAL</span>
+    </div>
+  </div>
+  <div style="display: flex; align-items: center; gap: 12px; padding: 12px 0 0 29px; opacity: 0">
+    <button onClick="{{ toggleDark }}" data-tip="{{ darkTip }}" data-side="right" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="border:0;background:transparent;padding:2px;color:#0077D6;cursor:pointer;display:flex;border-radius:6px;transition:background-color .2s" style-hover="background-color:#F2F6FC">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41-1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
+    </button>
+    <button onClick="{{ toggleDark }}" aria-label="Modo oscuro" style="opacity:{{ lblOp }};transition:opacity .2s,background-color .2s;width:44px;height:24px;border-radius:12px;border:0;background:{{ swBg }};position:relative;cursor:pointer;padding:0">
+      <span style="position:absolute;top:3px;left:{{ swL }};width:18px;height:18px;border-radius:50%;background:#FFFFFF;transition:left .2s"></span>
+    </button>
+  </div>
+</aside>
+
+<div style="flex:1;min-width:0;position:relative;margin:12px 12px 12px 0;border-radius:32px;border:1px solid #D5DEEA;background:#E6ECF5;overflow:hidden">
+  <div ref="{{ scrollRef }}" style="height:{{ mainH }};overflow:{{ mainOv }};padding:14px 28px 110px 40px">
+
+    <header data-screen-label="Filtros" style="position:sticky;top:0;z-index:30;margin-bottom:30px">
+      <div style="background: #FFFFFF; border-radius: 40px; box-shadow: 0 2px 14px rgba(0,74,173,.10); padding: 12px 22px; display: flex; align-items: center; gap: 13px; min-height: 76px; justify-content: flex-start; flex-wrap: wrap">
+        <div style="display:flex;flex-direction:column;gap:5px;flex:none">
+          <span style="font-size:15px;font-weight:700;color:#004AAD;letter-spacing:.04em;white-space:nowrap">OPERACIÓN DE SUCURSALES</span>
+          <span style="align-self:flex-start;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#8F5410;background:#FBEDCF;border:1px dashed #C97A20;padding:1px 7px;border-radius:3px">Datos de ejemplo</span>
+        </div>
+        <div style="width:1px;align-self:stretch;background:#E6ECF5"></div>
+        <div style="display: flex; flex-direction: column; gap: 4px; flex: 1; align-self: center; flex-grow: 0">
+          <span style="font-size: 11px; color: #6B7A90; letter-spacing: .06em; width: 322px; height: 16px">SUCURSAL</span>
+          <div style="display: flex; gap: 2px; width: 453px; height: 25px">
+            <sc-for list="{{ branches }}" as="b" hint-placeholder-count="4">
+              <button onClick="{{ b.select }}" style="border:0;border-radius:20px;padding:4px 10px;font-size:14px;font-weight:{{ b.fw }};cursor:pointer;background:{{ b.bg }};color:{{ b.fg }};white-space:nowrap;transition:background-color .2s,filter .2s" style-hover="filter:brightness(.95)">{{ b.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+        <div style="width:1px;align-self:stretch;background:#E6ECF5"></div>
+        <div style="display: flex; flex-direction: column; gap: 4px; flex: none; position: relative; flex-grow: 1">
+          <span style="font-size:11px;color:#6B7A90;letter-spacing:.06em">PERIODO</span>
+          <div style="display:flex;gap:2px">
+            <sc-for list="{{ periods }}" as="b" hint-placeholder-count="3">
+              <button onClick="{{ b.select }}" style="border:0;border-radius:20px;padding:4px 10px;font-size:14px;font-weight:{{ b.fw }};cursor:pointer;background:{{ b.bg }};color:{{ b.fg }};white-space:nowrap;transition:background-color .2s,filter .2s" style-hover="filter:brightness(.95)">{{ b.label }}</button>
+            </sc-for>
+          </div>
+          <sc-if value="{{ pickerOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="position: absolute; top: 62px; right: 0; z-index: 50; background: #FFFFFF; border: 1px solid #D5DEEA; border-radius: 14px; box-shadow: 0 8px 24px rgba(0,74,173,.14); padding: 8px; min-width: 230px; left: 124.44px; width: 230px">
+              <div style="font-size:11px;color:#6B7A90;letter-spacing:.06em;padding:6px 10px">ELEGIR PERIODO</div>
+              <sc-for list="{{ pickList }}" as="o" hint-placeholder-count="4">
+                <button onClick="{{ o.select }}" style="display:flex;justify-content:space-between;gap:16px;width:100%;border:0;background:{{ o.bg }};color:#13201F;padding:9px 10px;border-radius:8px;cursor:pointer;font-size:14px;text-align:left;transition:background-color .2s" style-hover="background-color:#EEF4FB"><span style="font-weight:500">{{ o.label }}</span><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#4A5A70">{{ o.range }}</span></button>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+        <div style="width:1px;align-self:stretch;background:#E6ECF5"></div>
+        <div style="display:flex;flex-direction:column;gap:2px;flex:none;white-space:nowrap">
+          <span style="font-size:11px;color:#6B7A90;letter-spacing:.06em">FECHA DE CORTE</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;color:#004AAD">{{ cut }}</span>
+          <span style="font-size:11px;color:#4A5A70">{{ periodRange }}</span>
+        </div>
+      </div>
+    </header>
+
+    <sc-if value="{{ v.inicio }}" hint-placeholder-val="{{ true }}">
+      <section data-screen-label="Inicio">
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:28px 24px">
+          <sc-for list="{{ kpis }}" as="k" hint-placeholder-count="5">
+            <div style="width:calc((100% - 48px) / 3);background:#FFFFFF;border-radius:24px;padding:22px 20px 20px 22px;border:1px solid #FFFFFF;box-shadow:0 1px 3px rgba(0,74,173,.05),0 8px 24px rgba(0,74,173,.06);display:flex;flex-direction:column;gap:12px;min-height:310px;transition:border-color .25s,background-color .25s" style-hover="border-color:#B7D6EF;background-color:#FCFDFF">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+                <div style="display:flex;align-items:center;gap:8px;padding-top:8px;min-width:0">
+                  <span style="font-size:17px;font-weight:500;color:#004AAD;white-space:nowrap">{{ k.name }}</span>
+                  <sc-if value="{{ k.est }}" hint-placeholder-val="{{ false }}"><span style="font-size:11px;font-weight:500;color:#4A5A70;border:1px dashed #8C8C8C;border-radius:4px;padding:1px 6px">Estimado</span></sc-if>
+                </div>
+                <button onClick="{{ k.go }}" data-tip="{{ k.tipGo }}" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="flex:none;width:38px;height:38px;border-radius:50%;border:0;background:#FFFFFF;box-shadow:0 2px 8px rgba(0,74,173,.16);display:flex;align-items:center;justify-content:center;cursor:pointer;color:#1B3A6B;transition:background-color .2s,color .2s" style-hover="background-color:#E6ECF5;color:#004AAD"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg></button>
+              </div>
+              <div style="display:flex;align-items:baseline;gap:12px;margin-top:6px">
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:62px;font-weight:500;letter-spacing:-0.03em;line-height:1;color:#004AAD">{{ k.value }}</span>
+                <span style="font-size:22px;font-weight:600;color:#5B9BD5">{{ k.unit }}</span>
+              </div>
+              <sc-if value="{{ k.split }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;flex-direction:column;gap:8px;width:88%">
+                  <div style="display:flex;height:7px;gap:3px">
+                    <div data-tip="{{ k.aTip }}" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="width:{{ k.aW }};background:#8CC0E4;border-radius:4px 0 0 4px"></div>
+                    <div data-tip="{{ k.bTip }}" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="flex:1;background:#004AAD;border-radius:0 4px 4px 0"></div>
+                  </div>
+                  <div style="display:flex;gap:22px">
+                    <div><div style="font-family:'IBM Plex Mono',monospace;font-size:17px;color:#3F86C8;font-weight:500">{{ k.aVal }}</div><div style="font-size:12px;color:#4A5A70;white-space:nowrap">Entrada → recepción</div></div>
+                    <div><div style="font-family:'IBM Plex Mono',monospace;font-size:17px;color:#004AAD;font-weight:500">{{ k.bVal }}</div><div style="font-size:12px;color:#4A5A70;white-space:nowrap">Recepción → operatorio</div></div>
+                  </div>
+                </div>
+              </sc-if>
+              <sc-if value="{{ k.noSplit }}" hint-placeholder-val="{{ true }}">
+                <div style="font-size:14px;color:#1B3A6B">{{ k.sub }}</div>
+              </sc-if>
+              <div style="flex:1"></div>
+              <div style="height:1px;background:#D5DEEA;width:72%"></div>
+              <sc-if value="{{ k.split }}" hint-placeholder-val="{{ false }}">
+                <div style="font-size:14px;color:#1B3A6B"><strong style="font-weight:600">Meta</strong> <span style="color:#D5DEEA">|</span> {{ k.metaTxt }}</div>
+              </sc-if>
+              <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:8px;flex-wrap:wrap">
+                <span style="display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:600;white-space:nowrap;padding:4px 12px 4px 6px;border-radius:20px;background:{{ k.stBg }};color:{{ k.stFg }}"><span style="width:16px;height:16px;border-radius:50%;background:{{ k.stDot }}"></span>{{ k.stLabel }}</span>
+                <div style="text-align:right;margin-left:auto"><div style="font-size:14px;color:{{ k.varColor }};white-space:nowrap">{{ k.varTxt }}</div><div style="font-size:12px;color:#6B7A90;white-space:nowrap">{{ varRef }}</div></div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="margin-top:40px;background:#FFFFFF;border-radius:24px;padding:24px 28px;border:1px solid #D5DEEA">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:16px">
+            <div style="display:flex;align-items:center;gap:10px;color:#004AAD"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg><span style="font-size:15px;font-weight:600">Fuente y factibilidad de los indicadores</span></div>
+            <span style="font-size:12px;color:#4A5A70">Mongo / FocusAI · carga por CSV · datos de ejemplo</span>
+          </div>
+          <div style="display:grid;grid-template-columns:200px 150px 130px minmax(0,1fr);gap:0 20px;font-size:13px">
+            <span style="font-size:11px;color:#6B7A90;letter-spacing:.06em;padding-bottom:8px">INDICADOR</span>
+            <span style="font-size:11px;color:#6B7A90;letter-spacing:.06em;padding-bottom:8px">VEREDICTO</span>
+            <span style="font-size:11px;color:#6B7A90;letter-spacing:.06em;padding-bottom:8px">PERIODICIDAD</span>
+            <span style="font-size:11px;color:#6B7A90;letter-spacing:.06em;padding-bottom:8px">DEPENDENCIA</span>
+            <sc-for list="{{ feas }}" as="f" hint-placeholder-count="5">
+              <span style="padding:10px 0;border-top:1px solid #EEF2F8;font-weight:500">{{ f.name }}</span>
+              <span style="padding:8px 0;border-top:1px solid #EEF2F8"><span style="display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:12px;background:{{ f.vBg }};color:{{ f.vFg }}">{{ f.ver }}</span></span>
+              <span style="padding:10px 0;border-top:1px solid #EEF2F8;color:#4A5A70">{{ f.per }}</span>
+              <span style="padding:10px 0;border-top:1px solid #EEF2F8;color:#1B3A6B;line-height:1.45">{{ f.dep }}</span>
+            </sc-for>
+          </div>
+          <div style="margin-top:18px;padding-top:14px;border-top:1px solid #D5DEEA;display:grid;grid-template-columns:200px minmax(0,1fr) minmax(0,1fr);gap:20px;font-size:12px;color:#4A5A70;line-height:1.5">
+            <span style="font-size:11px;letter-spacing:.06em;color:#6B7A90">FUERA DE ALCANCE</span>
+            <span><strong style="color:#13201F;font-weight:600">Incidencias por manejo de efectivo</strong> · Sin detección de efectivo en el ETL; solo se atiende como alerta con validación humana.</span>
+            <span><strong style="color:#13201F;font-weight:600">Cumplimiento de protocolo verbal</strong> · El audio y las transcripciones aún no están integrados a Mongo.</span>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ v.espera }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Espera del paciente" style="display:flex;flex-direction:column;gap:24px">
+        <div style="background:#FFFFFF;border-radius:24px;padding:22px 28px">
+          <div style="display:flex;align-items:center;gap:12px;color:#8CC0E4"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path><path d="M12 7v5l4 2"></path></svg><h2 style="margin:0;font-size:28px;font-weight:600;color:#004AAD">Espera del paciente</h2></div>
+          <p style="margin:8px 0 0 40px;font-size:16px;color:#13201F">Cuánto espera un paciente desde que entra hasta que pasa a consultorio, por hora del día.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);gap:24px">
+          <div style="background:#FFFFFF;border-radius:24px;padding:24px">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:18px">
+              <div><div style="font-size:16px;font-weight:600">Tiempo de espera por hora</div><div style="font-size:12px;color:#4A5A70;margin-top:2px">Minutos promedio · hora de entrada</div></div>
+              <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-end;font-size:12px;color:#4A5A70">
+                <span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:#8CC0E4"></span>Entrada → recepción</span>
+                <span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:#004AAD"></span>Recepción → operatorio</span>
+                <span style="display:flex;align-items:center;gap:6px"><span style="width:16px;border-top:2px dashed #BE3030"></span>Meta {{ meta }} min</span>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:26px minmax(0,1fr);column-gap:10px;row-gap:8px">
+              <div style="position:relative;height:260px"><sc-for list="{{ waitTicks }}" as="t" hint-placeholder-count="6"><span style="position:absolute;right:0;bottom:{{ t.b }};transform:translateY(50%);font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B7A90">{{ t.v }}</span></sc-for></div>
+              <div style="position:relative;height:260px;border-bottom:1px solid #C9D3E0">
+                <sc-for list="{{ waitTicks }}" as="t" hint-placeholder-count="6"><div style="position:absolute;left:0;right:0;bottom:{{ t.b }};border-top:1px solid #EEF2F8"></div></sc-for>
+                <div style="position:absolute;inset:0;display:flex;gap:6px;align-items:flex-end">
+                  <sc-for list="{{ waitBars }}" as="w" hint-placeholder-count="12">
+                    <div data-tip="{{ w.tip }}" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;border-radius:8px 8px 0 0;transition:background-color .2s" style-hover="background-color:#EEF4FB">
+                      <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;margin-bottom:4px;color:{{ w.tc }};font-weight:{{ w.tw }}">{{ w.total }}</span>
+                      <div style="width:62%;height:{{ w.bH }};background:#004AAD;border-radius:3px 3px 0 0"></div>
+                      <div style="width:62%;height:{{ w.aH }};background:#8CC0E4;border-top:1px solid #FFFFFF"></div>
+                    </div>
+                  </sc-for>
+                </div>
+                <div style="position:absolute;left:0;right:0;bottom:{{ metaB }};border-top:2px dashed #BE3030;pointer-events:none"><span style="position:absolute;right:0;top:-20px;font-size:11px;font-weight:600;color:#A12424;background:#FFFFFF;padding:0 4px">Meta &lt; {{ meta }} min</span></div>
+              </div>
+              <div></div>
+              <div style="display:flex;gap:6px"><sc-for list="{{ waitBars }}" as="w" hint-placeholder-count="12"><span style="flex:1;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#4A5A70">{{ w.label }}</span></sc-for></div>
+            </div>
+          </div>
+          <div style="background:#FFFFFF;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:22px">
+            <div><div style="font-size:16px;font-weight:600">Distribución de esperas</div><div style="font-size:12px;color:#4A5A70;margin-top:2px">% de pacientes del periodo por rango de espera total</div></div>
+            <div style="display:flex;height:40px;border-radius:6px;overflow:hidden;gap:2px">
+              <sc-for list="{{ dist }}" as="d" hint-placeholder-count="3">
+                <div data-tip="{{ d.tip }}" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="width:{{ d.w }};background:{{ d.bg }};color:{{ d.fg }};display:flex;align-items:center;padding-left:10px;white-space:nowrap;overflow:hidden;font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;transition:filter .2s" style-hover="filter:brightness(1.08)">{{ d.inLabel }}</div>
+              </sc-for>
+            </div>
+            <div style="display:flex;flex-direction:column">
+              <sc-for list="{{ dist }}" as="d" hint-placeholder-count="3">
+                <div style="display:flex;align-items:center;justify-content:space-between;font-size:14px;border-bottom:1px solid #EEF2F8;padding:11px 0">
+                  <span style="display:flex;align-items:center;gap:8px"><span style="width:10px;height:10px;background:{{ d.bg }}"></span>{{ d.label }}</span>
+                  <span style="display:flex;gap:14px;align-items:center"><span style="font-size:12px;color:{{ d.tc }};font-weight:600">{{ d.tag }}</span><span style="font-family:'IBM Plex Mono',monospace;font-weight:600;min-width:42px;text-align:right">{{ d.pct }}</span></span>
+                </div>
+              </sc-for>
+            </div>
+            <div style="margin-top:auto;background:#F4F7FB;border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.55;text-wrap:pretty">El tramo recepción → operatorio concentra <strong style="font-family:'IBM Plex Mono',monospace;font-weight:600">{{ bShare }}</strong> de la espera: el paciente ya fue atendido en recepción pero aún no pasa a consultorio.</div>
+          </div>
+        </div>
+        <div style="background:#FFFFFF;border-radius:24px;padding:24px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:18px">
+            <div><div style="font-size:16px;font-weight:600">Espera por sucursal</div><div style="font-size:12px;color:#4A5A70;margin-top:2px">Minutos promedio por tramo · seleccione una sucursal para filtrar el tablero</div></div>
+            <div style="display:flex;gap:14px;font-size:12px;color:#4A5A70">
+              <span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:#8CC0E4"></span>Entrada → recepción</span>
+              <span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:#004AAD"></span>Recepción → operatorio</span>
+              <span style="display:flex;align-items:center;gap:6px"><span style="height:12px;border-left:2px dashed #BE3030"></span>Meta</span>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <sc-for list="{{ waitBranches }}" as="r" hint-placeholder-count="3">
+              <div onClick="{{ r.select }}" data-tip="{{ r.tip }}" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="display:grid;grid-template-columns:120px minmax(0,1fr) 70px 130px;gap:16px;align-items:center;padding:10px 12px;border-radius:10px;cursor:pointer;background:{{ r.bg }};transition:background-color .2s" style-hover="background-color:#EEF4FB">
+                <span style="font-size:14px;font-weight:{{ r.fw }}">{{ r.name }}</span>
+                <div style="position:relative;height:16px;background:#F4F7FB;border-radius:3px;display:flex;gap:2px">
+                  <div style="width:{{ r.aW }};background:#8CC0E4;border-radius:3px 0 0 3px"></div>
+                  <div style="width:{{ r.bW }};background:#004AAD;border-radius:0 3px 3px 0"></div>
+                  <div style="position:absolute;top:-4px;bottom:-4px;left:{{ metaW }};border-left:2px dashed #BE3030"></div>
+                </div>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;text-align:right">{{ r.total }}</span>
+                <span style="justify-self:end;display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:3px 10px 3px 5px;border-radius:14px;background:{{ r.stBg }};color:{{ r.stFg }}"><span style="width:12px;height:12px;border-radius:50%;background:{{ r.stDot }}"></span>{{ r.stLabel }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ v.saturacion }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Saturación" style="display:flex;flex-direction:column;gap:24px">
+        <div style="background:#FFFFFF;border-radius:24px;padding:22px 28px">
+          <div style="display:flex;align-items:center;gap:12px;color:#8CC0E4"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg><h2 style="margin:0;font-size:28px;font-weight:600;color:#004AAD">Saturación</h2></div>
+          <p style="margin:8px 0 0 40px;font-size:16px">Cuándo y dónde se disparan las alertas de aglomeración en la sucursal.</p>
+        </div>
+        <div data-screen-label="Plano operativo" style="background:#FFFFFF;border-radius:24px;padding:24px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:18px;flex-wrap:wrap">
+            <div><div style="font-size:16px;font-weight:600">Plano operativo de clínica · {{ plan.name }}</div><div style="font-size:12px;color:#4A5A70;margin-top:2px">Mapa de calor por espacio · mayor intensidad = mayor {{ plan.metricWord }} · {{ plan.unitTxt }}</div></div>
+            <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+              <sc-if value="{{ plan.showBr }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;gap:2px;background:#F4F7FB;border-radius:20px;padding:3px">
+                  <sc-for list="{{ plan.brTabs }}" as="t" hint-placeholder-count="3"><button onClick="{{ t.select }}" style="border:0;border-radius:18px;padding:5px 12px;font-size:13px;font-weight:{{ t.fw }};background:{{ t.bg }};color:{{ t.fg }};cursor:pointer;transition:background-color .2s,filter .2s" style-hover="filter:brightness(.96)">{{ t.label }}</button></sc-for>
+                </div>
+              </sc-if>
+              <div style="display:flex;border:1px solid #004AAD;border-radius:20px;overflow:hidden">
+                <sc-for list="{{ plan.mTabs }}" as="t" hint-placeholder-count="2"><button onClick="{{ t.select }}" data-tip="{{ t.tip }}" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="border:0;padding:6px 18px;font-size:13px;font-weight:{{ t.fw }};background:{{ t.bg }};color:{{ t.fg }};cursor:pointer;transition:background-color .2s,filter .2s" style-hover="filter:brightness(.96)">{{ t.label }}</button></sc-for>
+              </div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:24px">
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="background:#F4F7FB;border-radius:16px;padding:16px;display:flex;justify-content:center;align-items:center;min-height:320px">
+                <div style="position:relative;width:100%;max-width:{{ plan.mw }};aspect-ratio:{{ plan.ar }};overflow:hidden;border-radius:6px;background:#FFFFFF">
+                  <sc-if value="{{ plan.isUni }}" hint-placeholder-val="{{ false }}"><img src="assets/plano-universidad.png" alt="Plano sucursal Universidad" style="position:absolute;width:{{ plan.iw }};left:{{ plan.il }};top:{{ plan.it }};max-width:none;opacity:.85;pointer-events:none"></sc-if>
+                  <sc-if value="{{ plan.isSat }}" hint-placeholder-val="{{ false }}"><img src="assets/plano-satelite.png" alt="Plano sucursal Satélite" style="position:absolute;width:{{ plan.iw }};left:{{ plan.il }};top:{{ plan.it }};max-width:none;opacity:.85;pointer-events:none"></sc-if>
+                  <sc-if value="{{ plan.isInt }}" hint-placeholder-val="{{ false }}"><img src="assets/plano-interlomas.png" alt="Plano sucursal Interlomas" style="position:absolute;width:{{ plan.iw }};left:{{ plan.il }};top:{{ plan.it }};max-width:none;opacity:.85;pointer-events:none"></sc-if>
+                  <sc-for list="{{ plan.blobs }}" as="b" hint-placeholder-count="0"><div style="position:absolute;left:{{ b.x }};top:{{ b.y }};width:{{ b.s }};aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:{{ b.bg }};mix-blend-mode:multiply;pointer-events:none;transition:width .35s,background .35s"></div></sc-for>
+                  <sc-for list="{{ plan.marks }}" as="m" hint-placeholder-count="0"><button onClick="{{ m.select }}" data-tip="{{ m.tip }}" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="position:absolute;left:{{ m.x }};top:{{ m.y }};transform:translate(-50%,-50%);display:flex;align-items:center;gap:4px;border:1px solid {{ m.bd }};background:{{ m.bg }};color:{{ m.fg }};border-radius:12px;padding:2px 7px 2px 4px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;white-space:nowrap;cursor:pointer;box-shadow:0 1px 4px rgba(0,74,173,.18);transition:background-color .2s,color .2s" style-hover="background-color:#E6ECF5;color:#004AAD"><span style="width:7px;height:7px;border-radius:50%;background:{{ m.dot }}"></span>{{ m.code }}</button></sc-for>
+                </div>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:12px;color:#4A5A70;flex-wrap:wrap">
+                <div style="display:flex;align-items:center;gap:12px">
+                  <span>{{ plan.metricLabel }}</span>
+                  <span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:12px;border-radius:50%;background:#8CC0E4"></span>Baja</span>
+                  <span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:12px;border-radius:50%;background:#FFBD7A"></span>Media</span>
+                  <span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:12px;border-radius:50%;background:#BE3030"></span>Alta</span>
+                </div>
+                <span>Ubicación de zonas aproximada · seleccione un marcador para ver su ficha</span>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:16px">
+              <div style="border:1px solid #D5DEEA;border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:14px">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+                  <div><div style="font-size:11px;color:#6B7A90;letter-spacing:.06em">FICHA OPERATIVA · <span style="font-family:'IBM Plex Mono',monospace">{{ plan.sel.code }}</span></div><div style="font-size:16px;font-weight:600;margin-top:2px;color:#004AAD">{{ plan.sel.label }}</div><div style="font-size:12px;color:#4A5A70">{{ plan.sel.typeTxt }} · promedio diario del periodo</div></div>
+                  <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;white-space:nowrap;padding:3px 10px 3px 5px;border-radius:14px;background:{{ plan.sel.stBg }};color:{{ plan.sel.stFg }}"><span style="width:12px;height:12px;border-radius:50%;background:{{ plan.sel.stDot }}"></span>{{ plan.sel.stLabel }}</span>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px">
+                  <sc-for list="{{ plan.sel.stats }}" as="st" hint-placeholder-count="6"><div><div style="font-family:'IBM Plex Mono',monospace;font-size:17px;font-weight:500">{{ st.v }}</div><div style="font-size:11px;color:#4A5A70;line-height:1.3">{{ st.l }}</div></div></sc-for>
+                </div>
+                <div>
+                  <div style="font-size:12px;color:#4A5A70;margin-bottom:6px">Afluencia por hora · personas</div>
+                  <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px;height:64px;align-items:end">
+                    <sc-for list="{{ plan.sel.hours }}" as="h" hint-placeholder-count="12"><div data-tip="{{ h.tip }}" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="height:{{ h.h }};min-height:2px;background:{{ h.bg }};border-radius:3px 3px 0 0;transition:filter .2s" style-hover="filter:brightness(.9)"></div></sc-for>
+                  </div>
+                  <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px;margin-top:4px"><sc-for list="{{ plan.sel.hours }}" as="h" hint-placeholder-count="12"><span style="text-align:center;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#4A5A70">{{ h.lab }}</span></sc-for></div>
+                </div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:2px">
+                <div style="font-size:12px;color:#4A5A70;margin-bottom:6px">Espacios con mayor {{ plan.metricWord }}</div>
+                <sc-for list="{{ plan.rank }}" as="r" hint-placeholder-count="6">
+                  <div onClick="{{ r.select }}" style="display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) 62px;gap:10px;align-items:center;padding:5px 8px;border-radius:6px;cursor:pointer;background:{{ r.bg }};transition:background-color .2s" style-hover="background-color:#EEF4FB">
+                    <span style="font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:{{ r.fw }}">{{ r.label }}</span>
+                    <div style="height:8px;background:#F4F7FB;border-radius:3px"><div style="height:100%;width:{{ r.w }};background:{{ r.c }};border-radius:3px"></div></div>
+                    <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;text-align:right">{{ r.v }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </div><div style="display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);gap:24px">
+          <div style="background:#FFFFFF;border-radius:24px;padding:24px">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:20px">
+              <div><div style="font-size:16px;font-weight:600">Alertas por día y hora</div><div style="font-size:12px;color:#4A5A70;margin-top:2px">Conteo de alertas de aglomeración · {{ heatScope }} · total <span style="font-family:'IBM Plex Mono',monospace;color:#13201F">{{ heatTotal }}</span></div></div>
+              <div style="display:flex;gap:3px;align-items:center;font-size:12px;color:#4A5A70">
+                <span style="margin-right:6px">Alertas</span>
+                <sc-for list="{{ heatLegend }}" as="l" hint-placeholder-count="5"><span data-tip="{{ l.tip }}" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="width:36px;height:22px;border-radius:4px;background:{{ l.bg }};color:{{ l.fg }};display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:11px">{{ l.label }}</span></sc-for>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;margin:-4px 0 18px;flex-wrap:wrap">
+              <span style="font-size:11px;color:#6B7A90;letter-spacing:.06em;margin-right:4px">MOSTRAR</span>
+              <sc-for list="{{ zoneChips }}" as="z" hint-placeholder-count="4">
+                <button onClick="{{ z.select }}" aria-pressed="{{ z.pressed }}" data-tip="{{ z.tip }}" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px 0 {{ z.pl }};border-radius:15px;border:1px solid {{ z.bd }};background:{{ z.bg }};color:{{ z.fg }};font-size:13px;font-weight:{{ z.fw }};cursor:pointer;white-space:nowrap;transition:background-color .2s,border-color .2s,color .2s" style-hover="border-color:#8CC0E4">
+                  <sc-if value="{{ z.on }}" hint-placeholder-val="{{ false }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>
+                  {{ z.label }}
+                </button>
+              </sc-for>
+            </div>
+            <div style="display:grid;grid-template-columns:40px minmax(0,1fr);gap:6px 10px">
+              <sc-for list="{{ heat }}" as="r" hint-placeholder-count="7">
+                <span style="font-size:12px;color:#4A5A70;display:flex;align-items:center">{{ r.day }}</span>
+                <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px">
+                  <sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="12">
+                    <div data-tip="{{ c.tip }}" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="height:34px;border-radius:6px;background:{{ c.bg }};color:{{ c.fg }};display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:12px;outline:2px solid transparent;outline-offset:1px;transition:outline-color .15s" style-hover="outline-color:#004AAD">{{ c.v }}</div>
+                  </sc-for>
+                </div>
+              </sc-for>
+              <span></span>
+              <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px"><sc-for list="{{ hourLabels }}" as="h" hint-placeholder-count="12"><span style="text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#4A5A70">{{ h }}</span></sc-for></div>
+            </div>
+          </div>
+          <div style="background:#FFFFFF;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:18px">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+              <div><div style="font-size:16px;font-weight:600">Alertas por zona</div><div style="font-size:12px;color:#4A5A70;margin-top:2px">Conteo por área · clic para activar o desactivar en el mapa</div></div>
+              <sc-if value="{{ zoneOn }}" hint-placeholder-val="{{ false }}"><button onClick="{{ clearZone }}" style="border:1px solid #D5DEEA;background:#FFFFFF;border-radius:14px;padding:3px 10px;font-size:12px;color:#004AAD;cursor:pointer;white-space:nowrap;transition:background-color .2s" style-hover="background-color:#EEF4FB">Todas las zonas</button></sc-if>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <sc-for list="{{ zones }}" as="z" hint-placeholder-count="3">
+                <div onClick="{{ z.select }}" data-tip="{{ z.tip }}" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="display:flex;flex-direction:column;gap:7px;padding:10px 12px;border-radius:10px;cursor:pointer;background:{{ z.bg }};transition:background-color .2s" style-hover="background-color:#FDF6E8">
+                  <div style="display:flex;justify-content:space-between;font-size:14px"><span style="font-weight:{{ z.fw }}">{{ z.name }}</span><span><span style="font-family:'IBM Plex Mono',monospace;font-weight:600">{{ z.v }}</span> <span style="color:#4A5A70;font-size:12px">· {{ z.pct }}</span></span></div>
+                  <div style="height:12px;background:#F4F7FB;border-radius:3px"><div style="height:100%;width:{{ z.w }};background:{{ z.bar }};border-radius:3px;transition:background-color .2s"></div></div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:#4A5A70"><span style="width:10px;height:10px;background:#FFBD7A"></span>Alertas de aglomeración<span style="width:10px;height:10px;background:#C97A20;margin-left:10px"></span>Zona activa</div>
+            <div style="margin-top:auto;background:#F4F7FB;border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:8px">
+              <div style="font-size:11px;color:#4A5A70;letter-spacing:.06em">PICO DE SATURACIÓN POR SUCURSAL</div>
+              <sc-for list="{{ peaks }}" as="pk" hint-placeholder-count="3">
+                <div style="display:grid;grid-template-columns:86px minmax(0,1fr) auto;gap:8px;align-items:baseline;font-size:13px"><span style="font-weight:600">{{ pk.name }}</span><span>{{ pk.when }}</span><span style="font-family:'IBM Plex Mono',monospace;font-weight:500">{{ pk.v }}</span></div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+        
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ v.consultorios }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Consultorios" style="display:flex;flex-direction:column;gap:24px">
+        <div style="background:#FFFFFF;border-radius:24px;padding:22px 28px">
+          <div style="display:flex;align-items:center;gap:12px;color:#8CC0E4"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"></path><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"></path><path d="M5 18v2"></path><path d="M19 18v2"></path></svg><h2 style="margin:0;font-size:28px;font-weight:600;color:#004AAD">Consultorios</h2></div>
+          <p style="margin:8px 0 0 40px;font-size:16px">Qué tanto se usa cada consultorio. Se considera ocupado con 2 o más personas dentro del área del consultorio.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(0,1.75fr) minmax(0,1fr);gap:24px">
+          <div style="background:#FFFFFF;border-radius:24px;padding:24px">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:18px">
+              <div><div style="font-size:16px;font-weight:600">Uso por hora</div><div style="font-size:12px;color:#4A5A70;margin-top:2px">Viernes 25 sep 2026 · minutos ocupados en cada hora · % del día</div></div>
+              <div style="display:flex;gap:3px;align-items:center;font-size:12px;color:#4A5A70">
+                <span style="margin-right:6px">Min / hora</span>
+                <sc-for list="{{ useLegend }}" as="l" hint-placeholder-count="4"><span style="height:20px;padding:0 8px;border-radius:4px;background:{{ l.bg }};display:flex;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#13201F">{{ l.label }}</span></sc-for>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:118px minmax(0,1fr) 44px;gap:5px 12px;align-items:center">
+              <sc-for list="{{ useRows }}" as="g" hint-placeholder-count="11">
+                <span onClick="{{ g.select }}" style="font-size:12px;white-space:nowrap;cursor:pointer;font-weight:{{ g.fw }};color:{{ g.fg }}">{{ g.label }}</span>
+                <div onClick="{{ g.select }}" style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px;cursor:pointer;padding:2px;border-radius:6px;outline:2px solid {{ g.bd }}">
+                  <sc-for list="{{ g.cells }}" as="c" hint-placeholder-count="12"><div data-tip="{{ c.tip }}" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="height:22px;border-radius:4px;background:{{ c.bg }};outline:1px solid transparent;transition:outline-color .15s" style-hover="outline-color:#004AAD"></div></sc-for>
+                </div>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;text-align:right">{{ g.pct }}</span>
+              </sc-for>
+              <span style="font-size:12px;font-weight:600;padding-top:8px">Vacíos por hora</span>
+              <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px;padding:10px 2px 0;border-top:1px solid #EEF2F8">
+                <sc-for list="{{ emptyByHour }}" as="e" hint-placeholder-count="12">
+                  <div data-tip="{{ e.tip }}" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="height:26px;border-radius:4px;background:{{ e.bg }};border:1px solid {{ e.bd }};display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:{{ e.fg }}">{{ e.v }}</div>
+                </sc-for>
+              </div>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;text-align:right;padding-top:8px">{{ emptyAvg }}</span>
+              <span></span>
+              <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px;padding:0 2px"><sc-for list="{{ hourLabels }}" as="h" hint-placeholder-count="12"><span style="text-align:center;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#4A5A70">{{ h }}</span></sc-for></div>
+              <span style="font-size:10px;color:#6B7A90;text-align:right">prom.</span>
+            </div>
+            <div style="display:flex;gap:16px;margin-top:14px;font-size:12px;color:#4A5A70">
+              <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;background:#FBEDCF;border:1px solid #C97A20"></span>Mitad o más de los consultorios vacíos</span>
+              <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:3px;outline:2px solid #004AAD"></span>Consultorio seleccionado</span>
+            </div>
+          </div>
+          <div style="background:#FFFFFF;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:16px">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+              <div><div style="font-size:16px;font-weight:600">Ranking de ocupación</div><div style="font-size:12px;color:#4A5A70;margin-top:2px">% semanal de tiempo ocupado · seleccione un consultorio</div></div>
+              <span style="display:flex;align-items:center;gap:6px;font-size:12px;color:#4A5A70;white-space:nowrap"><span style="height:12px;border-left:2px dashed #52B52A"></span>Ref. 65 %</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:1px">
+              <sc-for list="{{ ranking }}" as="r" hint-placeholder-count="11">
+                <div onClick="{{ r.select }}" data-tip="{{ r.tip }}" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="display:grid;grid-template-columns:78px minmax(0,1fr) 40px;gap:10px;align-items:center;cursor:pointer;padding:4px 8px;border-radius:6px;background:{{ r.rowBg }};transition:background-color .2s" style-hover="background-color:#EEF4FB">
+                  <span style="font-size:12px;white-space:nowrap;font-weight:{{ r.fw }}">{{ r.label }}</span>
+                  <div style="position:relative;height:10px;background:#F4F7FB;border-radius:3px"><div style="height:100%;width:{{ r.w }};background:{{ r.bg }};border-radius:3px"></div><div style="position:absolute;top:-3px;bottom:-3px;left:65%;border-left:2px dashed #52B52A"></div></div>
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;text-align:right">{{ r.v }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display:flex;gap:14px;font-size:12px;color:#4A5A70">
+              <span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:#5B9BD5"></span>≥ 65 % adecuado</span>
+              <span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:#B7D6EF"></span>&lt; 65 % subutilizado</span>
+            </div>
+            <div style="border:1px solid #D5DEEA;border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:14px">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+                <div><div style="font-size:11px;color:#6B7A90;letter-spacing:.06em">DETALLE</div><div style="font-size:16px;font-weight:600;margin-top:2px;color:#004AAD">{{ det.name }}</div><div style="font-size:12px;color:#4A5A70">{{ det.branch }}</div></div>
+                <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:3px 10px 3px 5px;border-radius:14px;background:{{ det.stBg }};color:{{ det.stFg }}"><span style="width:12px;height:12px;border-radius:50%;background:{{ det.stDot }}"></span>{{ det.stLabel }}</span>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">
+                <sc-for list="{{ det.stats }}" as="st" hint-placeholder-count="4"><div><div style="font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:500">{{ st.v }}</div><div style="font-size:11px;color:#4A5A70">{{ st.l }}</div></div></sc-for>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ v.cruces }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Espera – Ocupación" style="display:flex;flex-direction:column;gap:24px">
+        <div style="background:#FFFFFF;border-radius:24px;padding:22px 28px">
+          <div style="display:flex;align-items:center;gap:12px;color:#8CC0E4"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 4 7l4 4"></path><path d="M4 7h16"></path><path d="m16 21 4-4-4-4"></path><path d="M20 17H4"></path></svg><h2 style="margin:0;font-size:28px;font-weight:600;color:#004AAD">Espera – Ocupación</h2></div>
+          <p style="margin:8px 0 0 40px;font-size:16px">La espera explicada: ¿se debe a la saturación de la sala o a consultorios que no se liberan?</p>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px">
+          <div style="background:#FFFFFF;border-radius:24px;padding:24px;display:flex;flex-direction:column">
+            <div style="font-size:16px;font-weight:600">Espera vs. saturación</div>
+            <div style="font-size:12px;color:#4A5A70;margin-top:2px">Eje izq.: alertas de aglomeración (conteo) · Eje der.: espera promedio (min)</div>
+            <div style="display:flex;gap:16px;font-size:12px;color:#4A5A70;margin:14px 0 18px">
+              <span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:#FFBD7A"></span>Alertas de aglomeración</span>
+              <span style="display:flex;align-items:center;gap:6px"><span style="width:16px;border-top:2px solid #004AAD"></span>Espera promedio</span>
+            </div>
+            <div style="height:62px"></div>
+            <div style="display:grid;grid-template-columns:26px minmax(0,1fr) 26px;column-gap:10px;row-gap:8px">
+              <div style="position:relative;height:230px"><sc-for list="{{ c1.lTicks }}" as="t" hint-placeholder-count="5"><span style="position:absolute;right:0;bottom:{{ t.b }};transform:translateY(50%);font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B7A90">{{ t.v }}</span></sc-for></div>
+              <div style="position:relative;height:230px;border-bottom:1px solid #C9D3E0">
+                <sc-for list="{{ c1.lTicks }}" as="t" hint-placeholder-count="5"><div style="position:absolute;left:0;right:0;bottom:{{ t.b }};border-top:1px solid #EEF2F8"></div></sc-for>
+                <div style="position:absolute;inset:0;display:flex;gap:6px;align-items:flex-end"><sc-for list="{{ c1.bars }}" as="b" hint-placeholder-count="12"><div style="flex:1;height:100%;display:flex;align-items:flex-end;justify-content:center"><div style="width:58%;height:{{ b.h }};background:#FFBD7A;border-radius:3px 3px 0 0"></div></div></sc-for></div>
+                <svg viewBox="0 0 1000 100" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none"><polyline points="{{ c1.line }}" fill="none" stroke="#004AAD" stroke-width="2" vector-effect="non-scaling-stroke"></polyline></svg>
+                <sc-for list="{{ c1.dots }}" as="d" hint-placeholder-count="12"><div style="position:absolute;left:{{ d.l }};bottom:{{ d.b }};width:9px;height:9px;margin:0 0 -4.5px -4.5px;border-radius:50%;background:#FFFFFF;border:2px solid #004AAD;pointer-events:none"></div></sc-for>
+                <div style="position:absolute;inset:0;display:flex;gap:6px"><sc-for list="{{ c1.cols }}" as="c" hint-placeholder-count="12"><div data-tip="{{ c.tip }}" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="flex:1;border-radius:6px;transition:background-color .2s" style-hover="background-color:rgba(0,74,173,.07)"></div></sc-for></div>
+              </div>
+              <div style="position:relative;height:230px"><sc-for list="{{ c1.rTicks }}" as="t" hint-placeholder-count="6"><span style="position:absolute;left:0;bottom:{{ t.b }};transform:translateY(50%);font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B7A90">{{ t.v }}</span></sc-for></div>
+              <div></div>
+              <div style="display:flex;gap:6px"><sc-for list="{{ hourLabels }}" as="h" hint-placeholder-count="12"><span style="flex:1;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#4A5A70">{{ h }}</span></sc-for></div>
+              <div></div>
+            </div>
+            <div style="margin-top:18px;font-size:13px;line-height:1.55;text-wrap:pretty">{{ c1.summary }}</div>
+          </div>
+          <div style="background:#FFFFFF;border-radius:24px;padding:24px;display:flex;flex-direction:column">
+            <div style="font-size:16px;font-weight:600">Espera vs. ocupación</div>
+            <div style="font-size:12px;color:#4A5A70;margin-top:2px">Eje izq.: ocupación de consultorios (%) · Eje der.: espera promedio (min)</div>
+            <div style="display:flex;gap:16px;font-size:12px;color:#4A5A70;margin:14px 0 18px">
+              <span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:#B7D6EF"></span>Ocupación de consultorios</span>
+              <span style="display:flex;align-items:center;gap:6px"><span style="width:16px;border-top:2px solid #004AAD"></span>Espera promedio</span>
+              <span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:10px;background:#FBEDCF;border:1px dashed #C97A20"></span>Cuello de botella</span>
+            </div>
+            <div style="height:62px"></div>
+            <div style="display:grid;grid-template-columns:26px minmax(0,1fr) 26px;column-gap:10px;row-gap:8px">
+              <div style="position:relative;height:230px"><sc-for list="{{ c2.lTicks }}" as="t" hint-placeholder-count="5"><span style="position:absolute;right:0;bottom:{{ t.b }};transform:translateY(50%);font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B7A90">{{ t.v }}</span></sc-for></div>
+              <div style="position:relative;height:230px;border-bottom:1px solid #C9D3E0">
+                <sc-if value="{{ c2.hasBand }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;top:0;bottom:0;left:{{ c2.bandL }};width:{{ c2.bandW }};background:#FBEDCF;border-left:1px dashed #C97A20;border-right:1px dashed #C97A20"></div></sc-if>
+                <sc-for list="{{ c2.lTicks }}" as="t" hint-placeholder-count="5"><div style="position:absolute;left:0;right:0;bottom:{{ t.b }};border-top:1px solid #EEF2F8"></div></sc-for>
+                <div style="position:absolute;inset:0;display:flex;gap:6px;align-items:flex-end"><sc-for list="{{ c2.bars }}" as="b" hint-placeholder-count="12"><div style="flex:1;height:100%;display:flex;align-items:flex-end;justify-content:center"><div style="width:58%;height:{{ b.h }};background:#B7D6EF;border-radius:3px 3px 0 0"></div></div></sc-for></div>
+                <svg viewBox="0 0 1000 100" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none"><polyline points="{{ c2.line }}" fill="none" stroke="#004AAD" stroke-width="2" vector-effect="non-scaling-stroke"></polyline></svg>
+                <sc-for list="{{ c2.dots }}" as="d" hint-placeholder-count="12"><div style="position:absolute;left:{{ d.l }};bottom:{{ d.b }};width:9px;height:9px;margin:0 0 -4.5px -4.5px;border-radius:50%;background:#FFFFFF;border:2px solid #004AAD;pointer-events:none"></div></sc-for>
+                <div style="position:absolute;inset:0;display:flex;gap:6px"><sc-for list="{{ c2.cols }}" as="c" hint-placeholder-count="12"><div data-tip="{{ c.tip }}" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="flex:1;border-radius:6px;transition:background-color .2s" style-hover="background-color:rgba(0,74,173,.07)"></div></sc-for></div>
+                <sc-if value="{{ c2.hasBand }}" hint-placeholder-val="{{ true }}">
+                  <div style="position:absolute;top:-70px;right:{{ c2.noteR }};width:236px;background:#FFFFFF;border:1px solid #C97A20;border-radius:10px;padding:8px 12px;pointer-events:none">
+                    <div style="font-size:12px;font-weight:600;color:#8F5410">Cuello de botella en recepción</div>
+                    <div style="font-size:11px;margin-top:2px;line-height:1.4">{{ c2.note }}</div>
+                  </div>
+                </sc-if>
+              </div>
+              <div style="position:relative;height:230px"><sc-for list="{{ c1.rTicks }}" as="t" hint-placeholder-count="6"><span style="position:absolute;left:0;bottom:{{ t.b }};transform:translateY(50%);font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B7A90">{{ t.v }}</span></sc-for></div>
+              <div></div>
+              <div style="display:flex;gap:6px"><sc-for list="{{ hourLabels }}" as="h" hint-placeholder-count="12"><span style="flex:1;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#4A5A70">{{ h }}</span></sc-for></div>
+              <div></div>
+            </div>
+            <div style="margin-top:18px;font-size:13px;line-height:1.55;text-wrap:pretty">{{ c2.summary }}</div>
+          </div>
+        </div>
+        <div style="background:#FFFFFF;border-radius:16px;padding:14px 20px;display:flex;gap:12px;align-items:flex-start;font-size:13px;line-height:1.55">
+          <span style="font-size:11px;font-weight:600;color:#004AAD;background:#E6ECF5;padding:2px 8px;border-radius:10px;white-space:nowrap">Definición</span>
+          <span style="text-wrap:pretty"><strong style="font-weight:600">Tiempo de espera</strong>: minutos desde que el paciente cruza la línea de entrada hasta que ingresa al consultorio. Es la suma de los tramos entrada → recepción y recepción → operatorio, promediada por hora de entrada.</span>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ v.afluencia }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Afluencias" style="display:flex;flex-direction:column;gap:24px">
+        <div style="background:#FFFFFF;border-radius:24px;padding:22px 28px">
+          <div style="display:flex;align-items:center;gap:12px;color:#8CC0E4"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4h3a2 2 0 0 1 2 2v14"></path><path d="M2 20h3"></path><path d="M13 20h9"></path><path d="M10 12v.01"></path><path d="M13 4.562v16.157a1 1 0 0 1-1.242.97L5 20V5.562a2 2 0 0 1 1.515-1.94l4-1A2 2 0 0 1 13 4.561Z"></path></svg><h2 style="margin:0;font-size:28px;font-weight:600;color:#004AAD">Afluencias</h2></div>
+          <p style="margin:8px 0 0 40px;font-size:16px">Personas que cruzan la línea de entrada en recepción, día por día.</p>
+        </div>
+        <div style="background:#FFFFFF;border-radius:24px;padding:24px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:22px">
+            <div><div style="font-size:16px;font-weight:600">Entradas por día · {{ af.month }}</div><div style="font-size:12px;color:#4A5A70;margin-top:2px">Personas por día · total del mes <span style="font-family:'IBM Plex Mono',monospace;color:#13201F">{{ af.total }}</span> · promedio diario <span style="font-family:'IBM Plex Mono',monospace;color:#13201F">{{ af.avg }}</span></div></div>
+            <div style="display:flex;gap:14px;font-size:12px;color:#4A5A70">
+              <span style="display:flex;align-items:center;gap:6px"><span style="width:16px;border-top:2px solid #004AAD"></span>Entradas</span>
+              <span style="display:flex;align-items:center;gap:6px"><span style="height:12px;border-left:2px dashed #8C8C8C"></span>[Campaña]</span>
+              <sc-if value="{{ af.hasWeek }}" hint-placeholder-val="{{ true }}"><span style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:10px;background:#EEF4FB"></span>Semana seleccionada</span></sc-if>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:34px minmax(0,1fr);column-gap:10px;row-gap:8px">
+            <div style="position:relative;height:260px"><sc-for list="{{ af.ticks }}" as="t" hint-placeholder-count="5"><span style="position:absolute;right:0;bottom:{{ t.b }};transform:translateY(50%);font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B7A90">{{ t.v }}</span></sc-for></div>
+            <div style="position:relative;height:260px;border-bottom:1px solid #C9D3E0">
+              <sc-if value="{{ af.hasWeek }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;top:0;bottom:0;left:{{ af.weekL }};width:{{ af.weekW }};background:#EEF4FB"></div></sc-if>
+              <sc-for list="{{ af.ticks }}" as="t" hint-placeholder-count="5"><div style="position:absolute;left:0;right:0;bottom:{{ t.b }};border-top:1px solid #EEF2F8"></div></sc-for>
+              <sc-for list="{{ af.camps }}" as="c" hint-placeholder-count="2"><div style="position:absolute;top:0;bottom:0;left:{{ c.l }};border-left:2px dashed #8C8C8C"><span style="position:absolute;top:0;left:6px;font-size:11px;font-weight:500;color:#4A5A70;background:#FFFFFF;padding:1px 4px;white-space:nowrap">[Campaña] {{ c.d }}</span></div></sc-for>
+              <svg viewBox="0 0 1000 100" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none"><polyline points="{{ af.line }}" fill="none" stroke="#004AAD" stroke-width="2" vector-effect="non-scaling-stroke"></polyline></svg>
+              <sc-for list="{{ af.dots }}" as="d" hint-placeholder-count="28"><div data-tip="{{ d.tip }}" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="position:absolute;left:{{ d.l }};bottom:{{ d.b }};width:18px;height:18px;margin:0 0 -9px -9px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background-color .2s" style-hover="background-color:rgba(0,74,173,.16)"><span style="width:7px;height:7px;border-radius:50%;background:{{ d.c }}"></span></div></sc-for>
+            </div>
+            <div></div>
+            <div style="position:relative;height:16px"><sc-for list="{{ af.xl }}" as="x" hint-placeholder-count="5"><span style="position:absolute;left:{{ x.l }};transform:translateX(-50%);font-family:'IBM Plex Mono',monospace;font-size:11px;color:#4A5A70;white-space:nowrap">{{ x.v }}</span></sc-for></div>
+          </div>
+          <div style="margin-top:22px;display:flex;gap:10px;align-items:center;border-top:1px solid #EEF2F8;padding-top:14px;font-size:13px;color:#1B3A6B">
+            <span style="font-size:11px;font-weight:600;color:#8F5410;background:#FBEDCF;padding:2px 8px;border-radius:10px;white-space:nowrap">Pendiente</span>
+            <span>Tasa de captación pendiente: falta línea exterior de tráfico y calendario de campañas.</span>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ v.abandono }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Abandono" style="display:flex;flex-direction:column;gap:24px">
+        <div style="background:#FFFFFF;border-radius:24px;padding:22px 28px">
+          <div style="display:flex;align-items:center;gap:12px;color:#8CC0E4"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="8" x2="16" y1="15" y2="15"></line><line x1="9" x2="9.01" y1="9" y2="9"></line><line x1="15" x2="15.01" y1="9" y2="9"></line></svg><h2 style="margin:0;font-size:28px;font-weight:600;color:#004AAD">Abandono estimado</h2></div>
+          <p style="margin:8px 0 0 40px;font-size:16px">Pacientes que entran y salen sin pasar a consultorio, por franja horaria.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:24px">
+          <div style="background:#FFFFFF;border-radius:24px;padding:24px">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+              <div><div style="font-size:16px;font-weight:600">Abandono por franja horaria</div><div style="font-size:12px;color:#4A5A70;margin-top:2px">Eje izq.: % estimado · Eje der.: alertas de aglomeración</div></div>
+              <span style="font-size:11px;font-weight:500;color:#4A5A70;border:1px dashed #8C8C8C;border-radius:4px;padding:1px 6px">Estimado</span>
+            </div>
+            <div style="display:flex;gap:14px;font-size:12px;color:#4A5A70;margin:14px 0 22px">
+              <span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:#8CC0E4"></span>Abandono estimado</span>
+              <span style="display:flex;align-items:center;gap:6px"><span style="width:16px;border-top:2px solid #C97A20"></span>Alertas de saturación</span>
+            </div>
+            <div style="display:grid;grid-template-columns:32px minmax(0,1fr) 26px;column-gap:10px;row-gap:8px">
+              <div style="position:relative;height:240px"><sc-for list="{{ tap.lTicks }}" as="t" hint-placeholder-count="5"><span style="position:absolute;right:0;bottom:{{ t.b }};transform:translateY(50%);font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B7A90">{{ t.v }}</span></sc-for></div>
+              <div style="position:relative;height:240px;border-bottom:1px solid #C9D3E0">
+                <sc-for list="{{ tap.lTicks }}" as="t" hint-placeholder-count="5"><div style="position:absolute;left:0;right:0;bottom:{{ t.b }};border-top:1px solid #EEF2F8"></div></sc-for>
+                <div style="position:absolute;inset:0;display:flex;gap:10px;align-items:flex-end">
+                  <sc-for list="{{ tap.bars }}" as="b" hint-placeholder-count="6"><div data-tip="{{ b.tip }}" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;border-radius:8px 8px 0 0;transition:background-color .2s" style-hover="background-color:#EEF4FB"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;margin-bottom:4px;font-weight:500">{{ b.v }}</span><div style="width:52%;height:{{ b.h }};background:#8CC0E4;border-radius:3px 3px 0 0"></div></div></sc-for>
+                </div>
+                <svg viewBox="0 0 1000 100" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none"><polyline points="{{ tap.line }}" fill="none" stroke="#C97A20" stroke-width="2" vector-effect="non-scaling-stroke"></polyline></svg>
+                <sc-for list="{{ tap.dots }}" as="d" hint-placeholder-count="6"><div style="position:absolute;left:{{ d.l }};bottom:{{ d.b }};width:9px;height:9px;margin:0 0 -4.5px -4.5px;border-radius:50%;background:#FFFFFF;border:2px solid #C97A20;pointer-events:none"></div></sc-for>
+              </div>
+              <div style="position:relative;height:240px"><sc-for list="{{ tap.rTicks }}" as="t" hint-placeholder-count="5"><span style="position:absolute;left:0;bottom:{{ t.b }};transform:translateY(50%);font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B7A90">{{ t.v }}</span></sc-for></div>
+              <div></div>
+              <div style="display:flex;gap:10px"><sc-for list="{{ tap.bars }}" as="b" hint-placeholder-count="6"><span style="flex:1;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#4A5A70">{{ b.label }}</span></sc-for></div>
+              <div></div>
+            </div>
+            <div style="margin-top:20px;display:flex;gap:10px;align-items:center;border-top:1px solid #EEF2F8;padding-top:14px;font-size:13px;color:#1B3A6B">
+              <span style="font-size:11px;font-weight:600;color:#4A5A70;border:1px dashed #8C8C8C;padding:1px 8px;border-radius:10px;white-space:nowrap">Método</span>
+              <span>Estimación por balance de flujos; mejora con agenda de recepción.</span>
+            </div>
+          </div>
+          <div style="background:#FFFFFF;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:14px">
+            <div><div style="font-size:16px;font-weight:600">Niveles de estimación</div><div style="font-size:12px;color:#4A5A70;margin-top:2px">Cómo mejora la fidelidad del abandono según los datos disponibles</div></div>
+            <sc-for list="{{ levels }}" as="l" hint-placeholder-count="3">
+              <div style="display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;padding:14px;border-radius:14px;border:1px solid {{ l.bd }};background:{{ l.bg }};transition:border-color .2s" style-hover="border-color:#8CC0E4">
+                <span style="width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-weight:600;background:{{ l.nBg }};color:{{ l.nFg }}">{{ l.n }}</span>
+                <div style="display:flex;flex-direction:column;gap:4px">
+                  <div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><span style="font-size:14px;font-weight:600">{{ l.name }}</span><span style="font-size:11px;font-weight:600;color:{{ l.tFg }};white-space:nowrap">{{ l.tag }}</span></div>
+                  <span style="font-size:12px;line-height:1.45;color:#1B3A6B">{{ l.desc }}</span>
+                  <span style="font-size:11px;color:#4A5A70">Fidelidad: {{ l.fid }}</span>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ hasFoot }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="Fuente y condiciones" style="margin-top:28px;background:#FFFFFF;border-radius:24px;padding:22px 28px;border:1px solid #D5DEEA">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:16px">
+          <div style="display:flex;align-items:center;gap:10px;color:#004AAD"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg><span style="font-size:15px;font-weight:600">Fuente y condiciones</span></div>
+          <div style="display:flex;gap:8px;align-items:center"><span style="font-size:12px;color:#4A5A70">Veredicto</span><span style="font-size:12px;font-weight:600;padding:2px 10px;border-radius:12px;background:{{ foot.vBg }};color:{{ foot.vFg }}">{{ foot.ver }}</span></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;padding-bottom:16px;border-bottom:1px solid #EEF2F8;font-size:13px;line-height:1.5">
+          <div><div style="font-size:11px;color:#6B7A90;letter-spacing:.06em;margin-bottom:4px">FUENTE DE DATOS</div>{{ foot.fuente }}</div>
+          <div><div style="font-size:11px;color:#6B7A90;letter-spacing:.06em;margin-bottom:4px">PERIODICIDAD CSV</div>{{ foot.per }}</div>
+          <div><div style="font-size:11px;color:#6B7A90;letter-spacing:.06em;margin-bottom:4px">QUÉ SE GRAFICA</div>{{ foot.puede }}</div>
+          <div><div style="font-size:11px;color:#6B7A90;letter-spacing:.06em;margin-bottom:4px">DEPENDENCIA</div>{{ foot.falta }}</div>
+        </div>
+        <div style="padding-top:14px;display:grid;grid-template-columns:160px minmax(0,1fr);gap:16px">
+          <span style="font-size:11px;color:#6B7A90;letter-spacing:.06em;padding-top:2px">CONDICIONES</span>
+          <ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px;font-size:13px;line-height:1.5;color:#1B3A6B"><sc-for list="{{ foot.cond }}" as="c" hint-placeholder-count="2"><li>{{ c }}</li></sc-for></ul>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+
+  <sc-if value="{{ showFab }}" hint-placeholder-val="{{ true }}">
+    <div style="position:absolute;right:28px;bottom:22px;display:flex;gap:12px;z-index:40">
+      <button onClick="{{ toggleFs }}" data-tip="{{ fsTip }}" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="width:48px;height:48px;border-radius:50%;border:0;background:#FFFFFF;box-shadow:0 2px 12px rgba(0,74,173,.18);display:flex;align-items:center;justify-content:center;cursor:pointer;color:#004AAD;transition:background-color .2s" style-hover="background-color:#E6ECF5"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" x2="14" y1="3" y2="10"></line><line x1="3" x2="10" y1="21" y2="14"></line></svg></button>
+      <button onClick="{{ exportPdf }}" data-tip="Exportar como PDF" onMouseEnter="{{ tipOn }}" onMouseLeave="{{ tipOff }}" style="width:48px;height:48px;border-radius:50%;border:0;background:#FFFFFF;box-shadow:0 2px 12px rgba(0,74,173,.18);display:flex;align-items:center;justify-content:center;cursor:pointer;color:#004AAD;transition:background-color .2s" style-hover="background-color:#E6ECF5"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 17 20 12 15 7"></polyline><path d="M4 18v-2a4 4 0 0 1 4-4h12"></path></svg></button>
+    </div>
+  </sc-if>
+</div>
+
+<sc-if value="{{ tipOnFlag }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;left:{{ tip.x }};top:{{ tip.y }};transform:{{ tip.tf }};z-index:1000;pointer-events:none;background:#0B2A5B;color:#FFFFFF;border-radius:10px;padding:8px 12px;box-shadow:0 6px 18px rgba(11,42,91,.25);max-width:280px">
+    <div style="font-size:12px;font-weight:600;white-space:nowrap">{{ tip.title }}</div>
+    <sc-for list="{{ tip.lines }}" as="ln" hint-placeholder-count="0"><div style="font-size:12px;margin-top:3px;color:#DCE8F7;font-family:'IBM Plex Mono',monospace;white-space:nowrap">{{ ln }}</div></sc-for>
+  </div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;defaultBranch&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;todas&quot;,&quot;universidad&quot;,&quot;satelite&quot;,&quot;interlomas&quot;],&quot;default&quot;:&quot;todas&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;tpesMeta&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:15,&quot;min&quot;:10,&quot;max&quot;:25,&quot;unit&quot;:&quot;min&quot;,&quot;tsType&quot;:&quot;number&quot;},&quot;startCollapsed&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+const HOURS=[9,10,11,12,13,14,15,16,17,18,19,20];
+const BA=[3,4,6,7,6,4,3,4,6,7,5,3],BB=[7,8,10,11,9,7,6,7,10,12,8,6];
+const BOCC=[42,64,82,88,70,45,38,50,54,48,44,30];
+const BAL=[0,2,5,7,4,1,1,2,5,6,3,1];
+const DAYS=['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'],DAYN=['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'],DAYF=[.9,1,.95,1.05,1.2,1.3,.6];
+const BIDS=['universidad','satelite','interlomas'];
+const BR={
+  todas:{label:'Todas',name:'Todas las sucursales',w:1,share:1,occ:0,idx:0},
+  universidad:{label:'Universidad',name:'Universidad',w:1.12,share:.42,occ:8,idx:1,cons:4,pre:'UNI'},
+  satelite:{label:'Satélite',name:'Satélite',w:.88,share:.25,occ:-7,idx:2,cons:3,pre:'SAT'},
+  interlomas:{label:'Interlomas',name:'Interlomas',w:.97,share:.33,occ:-3,idx:3,cons:4,pre:'INT'}};
+const KPI={
+  todas:{semana:{tv:-1.2,tap:4.3,tapv:.6,ent:3412,entv:6.2,fasv:14,porc:58,porcv:3},mes:{tv:-.6,tap:4.1,tapv:.2,ent:14820,entv:4.8,fasv:9,porc:57,porcv:2}},
+  universidad:{semana:{tv:.9,tap:5.6,tapv:1.1,ent:1297,entv:8.1,fasv:21,porc:66,porcv:4},mes:{tv:.4,tap:5.2,tapv:.7,ent:5630,entv:5.9,fasv:12,porc:64,porcv:3}},
+  satelite:{semana:{tv:-2.3,tap:3.1,tapv:-.4,ent:1126,entv:4.0,fasv:-8,porc:51,porcv:1},mes:{tv:-1.4,tap:3.0,tapv:-.2,ent:4890,entv:3.1,fasv:-5,porc:50,porcv:1}},
+  interlomas:{semana:{tv:-.8,tap:4.0,tapv:.5,ent:989,entv:5.7,fasv:18,porc:55,porcv:4},mes:{tv:-.5,tap:3.9,tapv:.3,ent:4300,entv:4.4,fasv:10,porc:56,porcv:2}}};
+const DIST={todas:[71,19,10],universidad:[62,24,14],satelite:[80,14,6],interlomas:[73,18,9]};
+const RANKOFF=[9,3,-4,-10,7,-2,-12,11,2,-6,-15];
+const PICKS=[
+  {id:'s39',type:'semana',label:'Semana 39',range:'22–28 sep',cut:'28 SEP 2026 · 23:59',f:1,ws:22},
+  {id:'s38',type:'semana',label:'Semana 38',range:'15–21 sep',cut:'21 SEP 2026 · 23:59',f:1.04,ws:15},
+  {id:'s37',type:'semana',label:'Semana 37',range:'8–14 sep',cut:'14 SEP 2026 · 23:59',f:.96,ws:8},
+  {id:'s36',type:'semana',label:'Semana 36',range:'1–7 sep',cut:'7 SEP 2026 · 23:59',f:1.02,ws:1},
+  {id:'sep',type:'mes',label:'Septiembre 2026',range:'1–28 sep',cut:'28 SEP 2026 · 23:59',f:1},
+  {id:'ago',type:'mes',label:'Agosto 2026',range:'1–31 ago',cut:'31 AGO 2026 · 23:59',f:.97}];
+const ST={ok:{dot:'#52B52A',bg:'#E3F3DA',fg:'#2F7514'},warn:{dot:'#C97A20',bg:'#FBEDCF',fg:'#8F5410'},bad:{dot:'#BE3030',bg:'#F8DCDC',fg:'#A12424'}};
+const VER={'Realizable':{fg:'#2F7514',bg:'#E3F3DA'},'Refinamiento':{fg:'#004AAD',bg:'#E6ECF5'},'Refinamiento (baja)':{fg:'#8F5410',bg:'#FBEDCF'}};
+const FOOT={
+  espera:{ver:'Refinamiento',fuente:'person · presence · catálogo de lines y areas (sin dwell_time directo)',per:'Semanal',puede:'Espera por tramo y por hora; % de esperas > 15 y > 20 min; comparativo por sucursal.',falta:'Sin dwell_time directo: se calcula con timestamps de presence por área. Se recomienda medir ambos tramos por separado.',cond:['Cámaras: en cada sala de espera se requiere configurar un cruce de línea en los accesos a la sala y a los consultorios.','Analítica: sin pérdidas de tracking dentro de la sala.']},
+  saturacion:{ver:'Realizable',fuente:'Alertas type=crowd (6318) · opcional motion.alert_rule_ids',per:'Diaria / semanal',puede:'Alertas por zona, hora y sucursal; mapa de calor día × hora; duración de eventos.',falta:'Calibrar el umbral de personas por área.',cond:['Analítica de aglomeración activa en recepción, sala de espera y pasillo.','Contador periódico de personas por zona para alimentar el mapa de calor.','Plano operativo: un ROI por espacio sobre el plano arquitectónico de cada sucursal; la ubicación de las zonas es aproximada.']},
+  consultorios:{ver:'Refinamiento',fuente:'presence + ROIs de consultorio',per:'Semanal',puede:'% de ocupación por consultorio y día; timeline de uso; consultas iniciadas.',falta:'La fórmula pide ≥ 2 personas simultáneas; validar que presence permita contar simultaneidad.',cond:['Un ROI en cada sillón de cada consultorio, siempre que el doctor no lo cubra y genere falsas detecciones.']},
+  cruces:{ver:'Refinamiento',fuente:'Tiempo de espera × alertas de aglomeración × ocupación de consultorios',per:'Semanal',puede:'¿La espera sube cuando hay saturación? ¿Hay espera alta con consultorios libres?',falta:'Depende de validar los ROI de recepción, sala y consultorio.',cond:['Hereda las condiciones de Tiempo de espera y de Ocupación de consultorios.','La agenda o registro de recepción de Dentalia complementa el análisis.']},
+  afluencia:{ver:'Refinamiento (baja)',fuente:'Catálogo de lines · línea de entrada en recepción',per:'Mensual',puede:'Entradas por hora, día y mes (tendencia de afluencia).',falta:'Falta la línea exterior de tráfico general (denominador) y el calendario de campañas de marketing.',cond:['Instalar y configurar una línea exterior de tráfico general.','Dentalia comparte el calendario de campañas con fechas de inicio y fin.']},
+  abandono:{ver:'Refinamiento',fuente:'Misma base que tiempo de espera; no existe type=abandon',per:'Semanal',puede:'Estimado semanal por balance: personas en sala vs. sesiones iniciadas en consultorio.',falta:'Lógica derivada multicámara; distinguir personal y acompañantes. Ideal: agenda o registro de recepción.',cond:['Si el paciente entra con acompañantes y abandona, se contabiliza como abandono múltiple.','Si el paciente se atiende y sale con su acompañante, hay que identificar al acompañante para excluirlo de la tasa.','Quien entra, saca turno y se retira cuenta como abandono, salvo que se identifique la cantidad de turnos.']}};
+const FEAS=[
+  ['Tiempo de espera','Refinamiento','Semanal','Definir el tramo a medir; se calcula con timestamps de presence por área.'],
+  ['Alertas por saturación','Realizable','Diaria / semanal','Calibrar el umbral de personas por área.'],
+  ['Ocupación de consultorios','Refinamiento','Semanal','Validar que presence cuente ≥ 2 personas simultáneas.'],
+  ['Afluencia del periodo','Refinamiento (baja)','Mensual','Falta línea exterior de tráfico y calendario de campañas.'],
+  ['Abandono','Refinamiento','Semanal','Distinguir personal y acompañantes; ideal cruzar con agenda de recepción.']];
+const PLANS={
+  universidad:{src:'assets/plano-universidad.png',b:[650,320,650,1320],z:[['op1','Operatorio 1','cons',775,1470,150],['op2','Operatorio 2','cons',780,1060,150],['op3','Operatorio 3','cons',800,750,150],['op4','Operatorio 4','cons',1160,1110,150],['op5','Operatorio 5','cons',1185,730,150],['recep','Recepción','recep',1180,1400,140],['sala','Sala de espera / acceso','sala',1060,1585,150],['pasillo','Pasillo','pasillo',985,1010,170],['diag','Diagnóstico','otro',1190,450,110],['lab','Laboratorio','otro',790,530,100]]},
+  satelite:{src:'assets/plano-satelite.png',b:[330,525,1280,845],z:[[415,1],[560,2],[710,3],[860,4],[1010,5],[1160,6],[1375,7],[1525,8]].map(([x,n])=>['op'+n,'Operatorio '+n,'cons',x,650,120]).concat([['op9','Operatorio 9','cons',455,930,120],['pasillo','Pasillo','pasillo',960,815,240],['recep','Recepción / check-in','recep',960,1095,150],['sala','Sala de espera','sala',790,1265,190],['ninos','Estar niños','otro',1250,1265,110],['emb1','Embajador 01','otro',850,935,100],['emb2','Embajador 02','otro',1130,1115,90],['diag','Diagnóstico','otro',1125,935,90]])},
+  interlomas:{src:'assets/plano-interlomas.png',b:[330,375,1280,1075],z:[['op1','Operatorio 1','cons',787,465,150],['op2','Operatorio 2','cons',515,465,150],['ninos','Área dental niños','cons',1065,465,150],['op3','Operatorio 3','cons',450,675,140],['op4','Operatorio 4','cons',450,940,140],['op5','Operatorio 5','cons',450,1200,140],['op6','Operatorio 6','cons',697,1200,140],['recep','Recepción','recep',1290,710,130],['sala','Sala de espera / acceso','sala',1480,640,200],['pasillo','Pasillo central','pasillo',870,825,250],['emb','Oficina embajador','otro',900,705,120],['diag','Diagnóstico','otro',965,975,110],['aop','Área operativa','otro',990,1290,130]]}};
+const PTYPE={cons:{a:[16,26],p:[32,46],cap:4,txt:'Consultorio',code:'C'},recep:{a:[150,190],p:[3,6],cap:6,txt:'Recepción',code:'REC'},sala:{a:[120,170],p:[14,24],cap:16,txt:'Espera',code:'SAL'},pasillo:{a:[210,260],p:[1,2.5],cap:10,txt:'Circulación',code:'PAS'},otro:{a:[12,30],p:[6,15],cap:4,txt:'Apoyo',code:'AP'}};
+const heatRGB=t=>t<.34?'0,119,214':t<.67?'230,150,40':'190,48,48';
+const VIEWS=['inicio','espera','saturacion','consultorios','cruces','afluencia','abandono'];
+const rnd=s=>{const x=Math.sin(s*9301+49297)*233280;return x-Math.floor(x)};
+const pc=(v,m)=>Math.max(0,Math.min(100,v/m*100)).toFixed(2)+'%';
+const nice=v=>{const s=Math.max(v,1)/4,p=10**Math.floor(Math.log10(s)),n=s/p;return (n<=1?1:n<=2?2:n<=2.5?2.5:n<=5?5:10)*p*4};
+const ticks=(max,n=4)=>Array.from({length:n+1},(_,i)=>({v:+(max*i/n).toFixed(1),b:(i/n*100)+'%'}));
+const fmt=n=>Math.round(n).toLocaleString('es-MX');
+const line=(vals,max,c=true)=>vals.map((v,i)=>{const x=c?(i+.5)/vals.length*1000:i/(vals.length-1)*1000;return x.toFixed(1)+','+(100-Math.min(v/max,1)*100).toFixed(1)}).join(' ');
+const dots=(vals,max,c=true)=>vals.map((v,i)=>({l:(c?(i+.5)/vals.length*100:i/(vals.length-1)*100)+'%',b:pc(v,max)}));
+const mean=a=>a.reduce((s,v)=>s+v,0)/a.length;
+const ovl=(raw,h)=>raw.reduce((m,[a,b])=>m+Math.max(0,Math.min(b,h+1)-Math.max(a,h)),0);
+const hr=h=>h+':00';
+
+class Component extends DCLogic {
+  state={branch:null,pick:'s39',view:'inicio',collapsed:null,sel:null,zone:null,tip:null,user:false,picker:false,dark:false,printing:false,fs:false};
+  scrollRef=React.createRef();
+  componentDidMount(){
+    this._fs=()=>this.setState({fs:!!document.fullscreenElement});
+    this._ap=()=>this.setState({printing:false});
+    document.addEventListener('fullscreenchange',this._fs);
+    window.addEventListener('afterprint',this._ap);
+  }
+  componentWillUnmount(){document.removeEventListener('fullscreenchange',this._fs);window.removeEventListener('afterprint',this._ap)}
+  go(v){this.setState({view:v,tip:null,picker:false});const el=this.scrollRef.current;if(el)el.scrollTop=0}
+  tipOn=e=>{
+    const el=e.currentTarget,t=el.getAttribute('data-tip');if(!t)return;
+    if(el.getAttribute('data-nav')&&!this.isCollapsed())return;
+    const r=el.getBoundingClientRect(),right=el.getAttribute('data-side')==='right';
+    const parts=t.split('|');
+    this.setState({tip:{title:parts[0],lines:parts.slice(1),x:(right?r.right+10:r.left+r.width/2)+'px',y:(right?r.top+r.height/2:r.top-8)+'px',tf:right?'translate(0,-50%)':'translate(-50%,-100%)'}});
+  };
+  tipOff=()=>{if(this.state.tip)this.setState({tip:null})};
+  isCollapsed(){return this.state.collapsed??(this.props.startCollapsed??false)}
+  st(key,label){return{stLabel:label,stDot:ST[key].dot,stBg:ST[key].bg,stFg:ST[key].fg}}
+  vr(v,unit,lowerGood,dec=1){const good=lowerGood?v<0:v>0;return{varTxt:(v>0?'▲ ':v<0?'▼ ':'= ')+Math.abs(v).toFixed(dec)+unit+' '+(v===0?'sin cambio':good?'mejora':'empeora'),varColor:v===0?'#4A5A70':good?'#004AAD':'#8F5410'}}
+  renderVals(){
+    const s=this.state,p=this.props;
+    const br=s.branch||p.defaultBranch||'todas';
+    const pk=PICKS.find(x=>x.id===s.pick)||PICKS[0],pidx=PICKS.indexOf(pk),mes=pk.type==='mes',per=pk.type;
+    const B=BR[br],k0=KPI[br][per],f=pk.f,meta=p.tpesMeta??15;
+    const collapsed=this.isCollapsed();
+    const k={...k0,ent:Math.round(k0.ent*f),tap:+(k0.tap*f).toFixed(1)};
+    const mf=(mes?1.02:1)*f,wf=B.w*mf;
+    const A=BA.map(v=>v*wf),Bt=BB.map(v=>v*wf),tot=A.map((v,i)=>v+Bt[i]);
+    const avgA=mean(A),avgB=mean(Bt),tpes=avgA+avgB;
+    // saturación
+    const scaleOf=b=>.305*BR[b].share*(mes?4.3:1)*f;
+    const rawHeat=(b)=>DAYS.map((d,di)=>HOURS.map((h,hi)=>Math.round(BAL[hi]*DAYF[di]*scaleOf(b)*(.7+.6*rnd(di*31+hi*7+BR[b].idx*101+pidx*13)))));
+    const RH=rawHeat(br);
+    const colSum=HOURS.map((h,hi)=>RH.reduce((m,r)=>m+r[hi],0));
+    const fas=RH.flat().reduce((a,b)=>a+b,0);
+    const ZR=[['recepcion','Recepción',.48],['sala','Sala de espera',.37],['pasillo','Pasillo',.15]];
+    const ALLZ=ZR.map(z=>z[0]),zAct=s.zset||ALLZ,allOn=zAct.length===ALLZ.length;
+    const splitZ=(v,seed)=>{const ex=ZR.map((z,i)=>v*z[2]+(rnd(seed+i*17)-.5)*.6);const base=ex.map(Math.floor);let rem=v-base.reduce((a,b)=>a+b,0);ex.map((e,i)=>[e-base[i],i]).sort((a,b)=>b[0]-a[0]).forEach(([,i])=>{if(rem>0){base[i]++;rem--}});return base};
+    const ZP=RH.map((r,di)=>r.map((v,hi)=>splitZ(v,di*97+hi*13+pidx*5)));
+    const actIdx=ZR.map((z,i)=>zAct.includes(z[0])?i:-1).filter(i=>i>=0);
+    const zScope=allOn?'todas las zonas':ZR.filter(z=>zAct.includes(z[0])).map(z=>z[1]).join(' + ');
+    const toggleZ=id=>()=>{let a=zAct.includes(id)?zAct.filter(x=>x!==id):[...zAct,id];if(!a.length)a=ALLZ;this.setState({zset:ALLZ.filter(x=>a.includes(x))})};
+    const HC=[{bg:'#EEF2F8',fg:'#6B7A90'},{bg:'#FBEDCF',fg:'#13201F'},{bg:'#FFBD7A',fg:'#13201F'},{bg:'#C97A20',fg:'#13201F'},{bg:'#BE3030',fg:'#FFFFFF'}];
+    const LV=['Sin alertas','Bajo','Medio','Alto','Crítico'];
+    const hot=mes?[0,4,8,14,20]:[0,1,2,3,4];
+    const lvl=v=>v>=hot[4]?4:v>=hot[3]?3:v>=hot[2]?2:v>=hot[1]?1:0;
+    let heatTotal=0;
+    const heat=DAYS.map((d,di)=>({day:d,cells:HOURS.map((h,hi)=>{const v=actIdx.reduce((a,zi)=>a+ZP[di][hi][zi],0);heatTotal+=v;const l=lvl(v);return{v,...HC[l],tip:`${DAYN[di]} · ${h}:00–${h+1}:00|${v} alertas${allOn?'':' en '+zScope.toLowerCase()}|Nivel: ${LV[l]}`}})}));
+    const heatLegend=hot.map((v,i)=>({label:i===4?v+'+':(mes&&i>0?v+'–'+(hot[i+1]-1):String(v)),tip:`Nivel: ${LV[i]}`,...HC[i]}));
+    const zv=ZR.map((z,zi)=>ZP.flat().reduce((a,p)=>a+p[zi],0)),zmax=Math.max(...zv,1);
+    const zones=ZR.map((z,i)=>{const on=!allOn&&zAct.includes(z[0]);return{name:z[1],v:zv[i],pct:Math.round(zv[i]/Math.max(fas,1)*100)+' %',w:pc(zv[i],zmax),bar:on?'#C97A20':'#FFBD7A',bg:on?'#FDF6E8':'transparent',fw:on?'600':'400',tip:`${z[1]}|${zv[i]} alertas · ${Math.round(zv[i]/Math.max(fas,1)*100)} % del total|${zAct.includes(z[0])?'Clic para desactivar':'Clic para activar'}`,select:toggleZ(z[0])}});
+    const chip=(on,strong)=>({on,pressed:on?'true':'false',pl:on?'9px':'12px',bg:on?(strong?'#004AAD':'#E6ECF5'):'#FFFFFF',fg:on?(strong?'#FFFFFF':'#004AAD'):'#4A5A70',bd:on?'#004AAD':'#D5DEEA',fw:on?'600':'400'});
+    const zoneChips=[{label:'Todos',...chip(allOn,true),tip:allOn?'Todas las zonas activas':'Activar todas las zonas',select:()=>this.setState({zset:null})}].concat(ZR.map((z,i)=>({label:z[1],...chip(zAct.includes(z[0]),false),tip:`${z[1]}|${zv[i]} alertas|${zAct.includes(z[0])?'Clic para desactivar':'Clic para activar'}`,select:toggleZ(z[0])})));
+    const peaks=(br==='todas'?BIDS:[br]).map(id=>{const h=rawHeat(id);let m=[-1,0,0];h.forEach((r,di)=>r.forEach((v,hi)=>{if(v>m[0])m=[v,di,hi]}));return{name:BR[id].label,when:`${DAYN[m[1]]} ${m[2]+9}:00–${m[2]+10}:00`,v:m[0]+(m[0]===1?' alerta':' alertas')}});
+    const pBr=br==='todas'?(s.planBr||'universidad'):br,PL=PLANS[pBr],[bx,by,bw,bh]=PL.b,metric=s.planMetric||'afluencia';
+    let cN=0,aN=0;
+    const pz=PL.z.map(([id,label,type,x,y,r],zi)=>{const T=PTYPE[type],sd=BR[pBr].idx*211+zi*37+pidx*7;
+      const a=Math.round((T.a[0]+(T.a[1]-T.a[0])*rnd(sd))*BR[pBr].w*f),per=+((T.p[0]+(T.p[1]-T.p[0])*rnd(sd+3))*(type==='sala'?BR[pBr].w:1)).toFixed(1);
+      const raw=HOURS.map((h,hi)=>.45+BAL[hi]/7*.9+.35*rnd(sd+hi*5));const rs2=raw.reduce((m,v)=>m+v,0);const hrs=raw.map(v=>Math.round(v/rs2*a));
+      const pk2=hrs.indexOf(Math.max(...hrs));const maxSim=Math.max(1,Math.round(T.cap*(.45+.55*rnd(sd+9))));
+      const code=type==='cons'?'C'+String(++cN).padStart(2,'0'):type==='otro'?'AP'+(++aN):T.code;
+      return{id,label,type,code,x:(x-bx)/bw*100,y:(y-by)/bh*100,r,a,per,hrs,pk:pk2,maxSim,cap:T.cap,occ:Math.round(maxSim/T.cap*100),typeTxt:T.txt}});
+    const mv=z=>metric==='afluencia'?z.a:z.per,mmax=Math.max(...pz.map(mv));
+    const selZ=pz.find(z=>z.id===s.planZone)||pz.slice().sort((a2,b2)=>mv(b2)-mv(a2))[0];
+    const setPZ=id=>()=>this.setState({planZone:id});
+    const fmtM=z=>metric==='afluencia'?fmt(z.a)+' pers.':z.per.toFixed(1)+' min';
+    const crowdIdx={recep:0,sala:1,pasillo:2}[selZ.type];
+    const zDay=crowdIdx==null?'—':String(Math.round(zv[crowdIdx]*BR[pBr].share/(br==='todas'?1:BR[pBr].share)/(mes?30:7)*10)/10);
+    const sk=selZ.occ>=90?'bad':selZ.occ>=75?'warn':'ok';
+    const plan={name:BR[pBr].label,isUni:pBr==='universidad',isSat:pBr==='satelite',isInt:pBr==='interlomas',ar:(bw/bh).toFixed(3),mw:Math.round(500*bw/bh)+'px',iw:(1920/bw*100).toFixed(2)+'%',il:(-bx/bw*100).toFixed(2)+'%',it:(-by/bh*100).toFixed(2)+'%',
+      metricWord:metric==='afluencia'?'afluencia':'permanencia',metricLabel:metric==='afluencia'?'Afluencia':'Permanencia',unitTxt:metric==='afluencia'?'personas por día':'minutos promedio por visita',
+      showBr:br==='todas',brTabs:BIDS.map(id=>({label:BR[id].label,select:()=>this.setState({planBr:id,planZone:null}),bg:id===pBr?'#FFFFFF':'transparent',fg:id===pBr?'#004AAD':'#4A5A70',fw:id===pBr?'600':'400'})),
+      mTabs:[['afluencia','Afluencia','Personas que pasan por cada espacio'],['permanencia','Permanencia','Tiempo promedio dentro de cada espacio']].map(([id,l,t2])=>({label:l,tip:t2,select:()=>this.setState({planMetric:id}),bg:id===metric?'#004AAD':'#FFFFFF',fg:id===metric?'#FFFFFF':'#004AAD',fw:id===metric?'600':'400'})),
+      blobs:pz.map(z=>{const t=mv(z)/mmax,c=heatRGB(t),on=z.id===selZ.id;return{x:z.x+'%',y:z.y+'%',s:(z.r/bw*100*(.75+.6*t)*(on?1.1:1)).toFixed(2)+'%',bg:`radial-gradient(circle, rgba(${c},${(.3+.35*t).toFixed(2)}) 0%, rgba(${c},${(.14+.16*t).toFixed(2)}) 40%, rgba(${c},0) 70%)`}}),
+      marks:pz.map(z=>{const on=z.id===selZ.id,t=mv(z)/mmax;return{x:z.x+'%',y:z.y+'%',code:z.code,select:setPZ(z.id),bg:on?'#004AAD':'#FFFFFF',fg:on?'#FFFFFF':'#1B3A6B',bd:on?'#004AAD':'#D5DEEA',dot:t<.34?'#8CC0E4':t<.67?'#FFBD7A':'#BE3030',tip:`${z.code} · ${z.label}|Afluencia ${fmt(z.a)} personas/día|Permanencia ${z.per.toFixed(1)} min|Intensidad: ${t<.34?'baja':t<.67?'media':'alta'}`}}),
+      sel:{code:selZ.code,label:selZ.label,typeTxt:selZ.typeTxt,...this.st(sk,{ok:'Normal',warn:'Monitorear',bad:'Saturado'}[sk]),
+        stats:[{v:fmt(selZ.a),l:'Afluencia del día'},{v:selZ.per.toFixed(1)+' min',l:'Permanencia media'},{v:hr(HOURS[selZ.pk]),l:'Hora pico'},{v:selZ.occ+' %',l:'Ocupación máxima'},{v:selZ.maxSim+' / '+selZ.cap,l:'Máx. simultáneos'},{v:zDay,l:'Alertas por día'}],
+        hours:selZ.hrs.map((v2,i)=>({h:pc(v2,Math.max(...selZ.hrs)),bg:i===selZ.pk?'#004AAD':'#B7D6EF',lab:HOURS[i],tip:`${HOURS[i]}:00–${HOURS[i]+1}:00|${v2} personas${i===selZ.pk?'|Hora pico':''}`}))},
+      rank:pz.slice().sort((a2,b2)=>mv(b2)-mv(a2)).slice(0,6).map(z=>{const t=mv(z)/mmax,on=z.id===selZ.id;return{label:z.code+' · '+z.label,v:fmtM(z),w:(t*100).toFixed(1)+'%',c:t<.34?'#8CC0E4':t<.67?'#FFBD7A':'#BE3030',bg:on?'#EEF4FB':'transparent',fw:on?'600':'400',select:setPZ(z.id)}})};
+    // KPIs
+    const tpesKey=tpes<meta?'ok':tpes<meta+3?'warn':'bad';
+    const fasN=fas/(br==='todas'?3:1)/(mes?4.3:1);
+    const fasKey=fasN<20?'ok':fasN<32?'warn':'bad';
+    const tapKey=k.tap<3?'ok':k.tap<5?'warn':'bad';
+    const porcKey=k.porc>=65?'ok':k.porc>=60?'warn':'bad';
+    const goTo=v=>()=>this.go(v);
+    const kpis=[
+      {name:'Tiempo de espera',value:tpes.toFixed(1),unit:'min',split:true,noSplit:false,aW:pc(avgA,tpes),aVal:avgA.toFixed(1)+' min',bVal:avgB.toFixed(1)+' min',aTip:`Entrada → recepción|${avgA.toFixed(1)} min · ${Math.round(avgA/tpes*100)} % de la espera`,bTip:`Recepción → operatorio|${avgB.toFixed(1)} min · ${Math.round(avgB/tpes*100)} % de la espera`,metaTxt:`< ${meta} min por paciente`,...this.st(tpesKey,{ok:'En meta',warn:'Monitorear',bad:'Fuera de meta'}[tpesKey]),...this.vr(k.tv,' min',true),go:goTo('espera'),tipGo:'Ver espera del paciente'},
+      {name:'Alertas por saturación',value:fmt(fas),unit:'alertas',noSplit:true,sub:'Alertas de multitud en recepción, sala y pasillo',...this.st(fasKey,{ok:'Bajo',warn:'Monitorear',bad:'Alto'}[fasKey]),...this.vr(k.fasv,' %',true,0),go:goTo('saturacion'),tipGo:'Ver saturación'},
+      {name:'Ocupación de consultorios',value:String(k.porc),unit:'%',noSplit:true,sub:'Tiempo con ≥ 2 personas en consultorio',...this.st(porcKey,{ok:'Adecuado',warn:'Monitorear',bad:'Subutilizado'}[porcKey]),...this.vr(k.porcv,' pp',false,0),go:goTo('consultorios'),tipGo:'Ver consultorios'},
+      {name:'Afluencia del periodo',value:fmt(k.ent),unit:'personas',noSplit:true,sub:'Cruces de la línea de entrada en recepción',...this.st(k.entv>=0?'ok':'warn',k.entv>=0?'En aumento':'A la baja'),...this.vr(k.entv,' %',false),go:goTo('afluencia'),tipGo:'Ver afluencias'},
+      {name:'Abandono',value:k.tap.toFixed(1),unit:'%',noSplit:true,est:true,sub:'Entran y no llegan a consultorio',...this.st(tapKey,{ok:'Bajo',warn:'Monitorear',bad:'Alto'}[tapKey]),...this.vr(k.tapv,' pp',true),go:goTo('abandono'),tipGo:'Ver abandono estimado'}];
+    // espera
+    const WM=25;
+    const waitBars=HOURS.map((h,i)=>({label:hr(h),aH:pc(A[i],WM),bH:pc(Bt[i],WM),total:tot[i].toFixed(0),tc:tot[i]>=meta?'#A12424':'#13201F',tw:tot[i]>=meta?'600':'400',tip:`${h}:00 – ${h+1}:00|Entrada → recepción   ${A[i].toFixed(1)} min|Recepción → operatorio ${Bt[i].toFixed(1)} min|Total ${tot[i].toFixed(1)} min · ${tot[i]<meta?'en meta':'sobre meta'}`}));
+    const dv=DIST[br].map((v,i)=>v+(mes?[1,0,-1][i]:0));
+    const dist=[{label:`< ${meta} min`,tag:'En meta',tc:ST.ok.fg,bg:'#52B52A',fg:'#13201F'},{label:`${meta}–20 min`,tag:'Límite',tc:ST.warn.fg,bg:'#C97A20',fg:'#13201F'},{label:'> 20 min',tag:'Fuera de meta',tc:ST.bad.fg,bg:'#BE3030',fg:'#FFFFFF'}]
+      .map((d,i)=>({...d,w:dv[i]+'%',pct:dv[i]+' %',inLabel:dv[i]>=12?dv[i]+' %':'',tip:`${d.label} · ${d.tag}|${dv[i]} % de los pacientes|≈ ${fmt(k.ent*dv[i]/100)} personas`}));
+    const waitBranches=BIDS.map(id=>{const w=BR[id].w*mf,a=mean(BA)*w,b=mean(BB)*w,t=a+b,key=t<meta?'ok':t<meta+3?'warn':'bad',on=br===id;return{name:BR[id].label,aW:pc(a,WM),bW:pc(b,WM),total:t.toFixed(1)+' min',fw:on?'600':'400',bg:on?'#EEF4FB':'transparent',...this.st(key,{ok:'En meta',warn:'Monitorear',bad:'Fuera de meta'}[key]),tip:`${BR[id].name}|Entrada → recepción ${a.toFixed(1)} min|Recepción → operatorio ${b.toFixed(1)} min|${on?'Clic para ver todas':'Clic para filtrar'}`,select:()=>this.setState({branch:on?'todas':id,sel:null})}});
+    // consultorios
+    const rows=br==='todas'?BIDS.flatMap(b=>Array.from({length:BR[b].cons},(_,i)=>({b,i}))):Array.from({length:B.cons},(_,i)=>({b:br,i}));
+    const multi=br==='todas';
+    const gantt=rows.map(r=>{
+      const t=(58+BR[r.b].occ)/100,seed=BR[r.b].idx*50+r.i*7+pidx*3;
+      let x=9+rnd(seed)*.6,raw=[],occH=0,j=0;
+      while(x<20.6){const len=Math.min(.5+rnd(seed+j*3+1)*1.3,21-x);raw.push([x,x+len]);occH+=len;x+=len+(.15+rnd(seed+j*3+2)*.9)*(1.5-t)*1.1;j++}
+      return{key:r.b+'-'+r.i,b:r.b,i:r.i,label:multi?`${BR[r.b].pre} · Consultorio ${r.i+1}`:`Consultorio ${r.i+1}`,short:multi?`${BR[r.b].pre} · C${r.i+1}`:`Consultorio ${r.i+1}`,raw,occH};
+    });
+    const ranking=gantt.map(g=>{const gi=BIDS.indexOf(g.b);const off=RANKOFF[[0,4,7][gi]+g.i]??0;const v=Math.max(20,Math.min(95,KPI[g.b][per].porc+off));return{key:g.key,label:g.short,v:v+' %',n:v,w:v+'%',bg:v>=65?'#5B9BD5':'#B7D6EF'}}).sort((a,b)=>b.n-a.n);
+    const selKey=ranking.some(r=>r.key===s.sel)?s.sel:ranking[0].key;
+    const setSel=key=>()=>this.setState({sel:key});
+    ranking.forEach(r=>{const on=r.key===selKey;Object.assign(r,{select:setSel(r.key),rowBg:on?'#EEF4FB':'transparent',fw:on?'600':'400',tip:`${r.label}|Ocupación semanal ${r.v}|${r.n>=65?'Adecuado':'Por debajo de la referencia de 65 %'}`})});
+    const UC=['#F4F7FB','#DCEAF7','#B7D6EF','#8CC0E4'];
+    const useRows=gantt.map(g=>{const on=g.key===selKey;return{label:g.short,pct:Math.round(g.occH/12*100)+' %',fw:on?'600':'400',fg:on?'#004AAD':'#13201F',bd:on?'#004AAD':'transparent',select:setSel(g.key),cells:HOURS.map(h=>{const m=Math.round(ovl(g.raw,h)*60);const l=m<5?0:m<20?1:m<40?2:3;return{bg:UC[l],tip:`${g.label}|${h}:00–${h+1}:00|${m} min ocupado · ${m<30?'mayormente libre':'mayormente ocupado'}`}})}});
+    const useLegend=[['0–5',0],['5–20',1],['20–40',2],['40–60',3]].map(([label,i])=>({label,bg:UC[i]}));
+    const N=gantt.length;
+    const emptyByHour=HOURS.map(h=>{const v=gantt.filter(g=>ovl(g.raw,h)<.5).length,half=v>=N/2;return{v,bg:half?'#FBEDCF':'#F4F7FB',bd:half?'#C97A20':'#E6ECF5',fg:half?'#8F5410':'#13201F',tip:`${h}:00–${h+1}:00|${v} de ${N} consultorios vacíos|${half?'Mitad o más libres':'Menos de la mitad libres'}`}});
+    const emptyAvg=(emptyByHour.reduce((m,e)=>m+e.v,0)/12).toFixed(1);
+    const sg=gantt.find(g=>g.key===selKey),sr=ranking.find(r=>r.key===selKey);
+    let gap=0,prev=9;sg.raw.forEach(([a,b])=>{gap=Math.max(gap,a-prev);prev=b});gap=Math.max(gap,21-prev);
+    const dk=sr.n>=65?'ok':sr.n>=55?'warn':'bad';
+    const det={name:'Consultorio '+(sg.i+1),branch:'Sucursal '+BR[sg.b].name,...this.st(dk,{ok:'Adecuado',warn:'Monitorear',bad:'Subutilizado'}[dk]),
+      stats:[{v:sr.v,l:'Ocupación semanal'},{v:Math.round(sg.occH/12*100)+' %',l:'Ocupación del día'},{v:String(sg.raw.length),l:'Bloques de atención'},{v:Math.round(gap*60)+' min',l:'Mayor tiempo libre continuo'}]};
+    // cruces
+    const alMax=nice(Math.max(...colSum));
+    const occ=BOCC.map(v=>Math.max(5,Math.min(98,v+B.occ+(mes?-1:0))));
+    const c1={lTicks:ticks(alMax),rTicks:ticks(WM,5),bars:colSum.map(v=>({h:pc(v,alMax)})),line:line(tot,WM),dots:dots(tot,WM),
+      cols:HOURS.map((h,i)=>({tip:`${h}:00 – ${h+1}:00|Espera promedio ${tot[i].toFixed(1)} min|Alertas ${colSum[i]}`}))};
+    const pkH=colSum.indexOf(Math.max(...colSum));
+    c1.summary=`La hora con más alertas (${hr(HOURS[pkH])}) coincide con una espera de ${tot[pkH].toFixed(0)} min: cuando la sala se llena, el flujo se frena.`;
+    const flag=tot.map((t,i)=>t>=meta&&occ[i]<60);
+    let best=null,cur=null;flag.forEach((fl,i)=>{if(fl){cur=cur?[cur[0],i]:[i,i];if(!best||cur[1]-cur[0]>best[1]-best[0])best=cur.slice()}else cur=null});
+    const c2={lTicks:ticks(100).map(t=>({...t,v:t.v})),bars:occ.map(v=>({h:pc(v,100)})),line:line(tot,WM),dots:dots(tot,WM),hasBand:!!best,
+      cols:HOURS.map((h,i)=>({tip:`${h}:00 – ${h+1}:00|Espera promedio ${tot[i].toFixed(1)} min|Ocupación ${occ[i]} %${flag[i]?'|Cuello de botella en recepción':''}`}))};
+    if(best){
+      const [a,e]=best,n=HOURS.length;
+      c2.bandL=(a/n*100)+'%';c2.bandW=((e-a+1)/n*100)+'%';c2.noteR=Math.max(0,(n-e-1)/n*100)+'%';
+      const rng=(arr,u)=>{const lo=Math.round(Math.min(...arr)),hi=Math.round(Math.max(...arr));return lo===hi?lo+u:lo+'–'+hi+u};
+      c2.note=`${HOURS[a]}:00–${HOURS[e]+1}:00 · espera ${rng(tot.slice(a,e+1),' min')} con consultorios al ${rng(occ.slice(a,e+1),' %')}.`;
+      c2.summary=`De ${HOURS[a]}:00 a ${HOURS[e]+1}:00 la espera supera la meta aunque hay consultorios libres: el freno está en recepción, no en la capacidad clínica.`;
+    } else c2.summary='Sin franjas con espera alta y consultorios libres en este periodo.';
+    // afluencia
+    const isAgo=pk.id==='ago',ND=isAgo?31:28,mon=isAgo?'ago':'sep';
+    const monthTotal=Math.round(KPI[br].mes.ent*(isAgo?.97:1));
+    const DOWF=[1,1.02,.98,1.05,1.12,1.18,.55],CAMP=[8,22];
+    const rawE=Array.from({length:ND},(_,i)=>{const d=i+1;let fct=DOWF[(d+(isAgo?4:0))%7]*(.9+.2*rnd(d*13+B.idx+(isAgo?7:0)));CAMP.forEach(c=>{const o=d-c;if(o>=0&&o<3)fct*=[1.2,1.13,1.06][o]});return fct});
+    const rs=rawE.reduce((a,b)=>a+b,0),ent=rawE.map(v=>v/rs*monthTotal);
+    const afMax=nice(Math.max(...ent)*1.05),inWeek=d=>!mes&&d>=pk.ws&&d<pk.ws+7;
+    const af={month:isAgo?'agosto 2026':'septiembre 2026',total:fmt(monthTotal),avg:fmt(monthTotal/ND),ticks:ticks(afMax).map(t=>({...t,v:fmt(t.v)})),line:line(ent,afMax,false),
+      dots:ent.map((v,i)=>({l:(i/(ND-1)*100)+'%',b:pc(v,afMax),c:inWeek(i+1)?'#004AAD':'#5B9BD5',tip:`${i+1} ${mon}|${fmt(v)} entradas${CAMP.includes(i+1)?'|Inicio de [Campaña]':''}`})),
+      camps:CAMP.map(d=>({l:((d-1)/(ND-1)*100)+'%',d:d+' '+mon})),xl:[1,8,15,22,ND].map(d=>({l:((d-1)/(ND-1)*100)+'%',v:d+' '+mon})),
+      hasWeek:!mes,weekL:pc(pk.ws-1.5,ND-1),weekW:pc(7,ND-1)};
+    // abandono
+    const FR=[[0,2,'9–11'],[2,4,'11–13'],[4,6,'13–15'],[6,8,'15–17'],[8,10,'17–19'],[10,12,'19–21']];
+    const TB=[2.1,5.8,3.0,2.4,6.9,3.2],tr=k.tap/4.3;
+    const tv=TB.map(v=>v*tr),ta=FR.map(fr=>colSum.slice(fr[0],fr[1]).reduce((a,b)=>a+b,0));
+    const tMax=nice(Math.max(...tv)*1.1),taMax=nice(Math.max(...ta));
+    const tap={lTicks:ticks(tMax).map(t=>({...t,v:t.v+'%'})),rTicks:ticks(taMax),line:line(ta,taMax),dots:dots(ta,taMax),
+      bars:tv.map((v,i)=>({v:v.toFixed(1)+' %',h:pc(v,tMax),label:FR[i][2],tip:`${FR[i][2]} h|Abandono estimado ${v.toFixed(1)} %|≈ ${fmt(k.ent/6*v/100)} personas|Alertas ${ta[i]}`}))};
+    const levels=[
+      {n:'1',name:'Balance agregado',tag:'Nivel actual',desc:'(Personas en sala − personal) − sesiones iniciadas en consultorio.',fid:'baja · solo tendencia semanal',bd:'#004AAD',bg:'#F4F8FD',nBg:'#004AAD',nFg:'#FFFFFF',tFg:'#004AAD'},
+      {n:'2',name:'Lógica multicámara',tag:'Siguiente',desc:'Persona detectada en sala que sale por la línea de entrada sin pasar por consultorio. Requiere reidentificación entre áreas.',fid:'media',bd:'#E6ECF5',bg:'#FFFFFF',nBg:'#E6ECF5',nFg:'#004AAD',tFg:'#4A5A70'},
+      {n:'3',name:'Cruce con agenda',tag:'Requiere Dentalia',desc:'Separa paciente que no llegó, atendido y abandono real con la agenda o registro de recepción.',fid:'alta',bd:'#E6ECF5',bg:'#FFFFFF',nBg:'#E6ECF5',nFg:'#004AAD',tFg:'#8F5410'}];
+    // navegación y controles
+    const view=s.view,v={},nav={},go={};
+    VIEWS.forEach(id=>{v[id]=view===id;nav[id]={fg:view===id?'#0077D6':'#1B3A6B',bd:view===id?'#0091FF':'transparent',fw:view===id?'600':'400'};go[id]=goTo(id)});
+    const fb=FOOT[view];
+    const foot=fb?{...fb,vBg:VER[fb.ver].bg,vFg:VER[fb.ver].fg}:{cond:[]};
+    const activeCustom=!['s39','sep'].includes(pk.id);
+    const pill=on=>({bg:on?'#004AAD':'transparent',fg:on?'#FFFFFF':'#004AAD',fw:on?'600':'400'});
+    const tip=s.tip;
+    return {
+      rootH:s.printing?'auto':'100vh',mainH:s.printing?'auto':'100%',mainOv:s.printing?'visible':'auto',scrollRef:this.scrollRef,
+      sideW:collapsed?'84px':'252px',lblOp:collapsed?0:1,markOp:collapsed?1:0,sideRot:collapsed?'rotate(180deg)':'none',sideTip:collapsed?'Expandir menú':'Contraer menú',
+      toggleSide:()=>this.setState({collapsed:!collapsed,tip:null}),
+      v,nav,go,
+      userOpen:s.user,userOn:()=>this.setState({user:true,tip:null}),userOff:()=>this.setState({user:false}),logout:()=>this.setState({user:false}),
+      toggleDark:()=>this.setState({dark:!s.dark}),darkTip:s.dark?'Modo claro':'Modo oscuro',swBg:s.dark?'#0091FF':'#C9D3E0',swL:s.dark?'23px':'3px',
+      branches:Object.keys(BR).map(id=>({label:BR[id].label,select:()=>this.setState({branch:id,sel:null}),...pill(id===br)})),
+      periods:[['s39','Semana'],['sep','Mes']].map(([id,l])=>({label:l,select:()=>this.setState({pick:id,picker:false}),...pill(pk.id===id)})).concat([{label:activeCustom?pk.label:'Elegir…',select:()=>this.setState({picker:!s.picker}),...pill(activeCustom)}]),
+      pickerOpen:s.picker,pickList:PICKS.filter(x=>!['s39','sep'].includes(x.id)).map(x=>({label:x.label,range:x.range,bg:x.id===pk.id?'#EEF4FB':'transparent',select:()=>this.setState({pick:x.id,picker:false})})),
+      cut:pk.cut,periodRange:mes?pk.label+' · '+pk.range:pk.label+' · '+pk.range,varRef:mes?'vs. mes anterior':'vs. semana anterior',
+      plan,kpis,feas:FEAS.map(([name,ver,per2,dep])=>({name,ver,per:per2,dep,vBg:VER[ver].bg,vFg:VER[ver].fg})),
+      meta,waitBars,waitTicks:ticks(WM,5),metaB:pc(meta,WM),metaW:pc(meta,WM),dist,bShare:Math.round(avgB/tpes*100)+' %',waitBranches,
+      heat,heatLegend,heatTotal:fmt(heatTotal),heatScope:zScope,hourLabels:HOURS.map(hr),zones,zoneChips,zoneOn:!allOn,clearZone:()=>this.setState({zset:null}),peaks,
+      useRows,useLegend,emptyByHour,emptyAvg,ranking,det,c1,c2,af,tap,levels,
+      hasFoot:!!fb,foot,
+      showFab:!s.printing,fsTip:s.fs?'Salir de pantalla completa':'Pantalla completa',
+      toggleFs:()=>{if(document.fullscreenElement)document.exitFullscreen();else if(document.documentElement.requestFullscreen)document.documentElement.requestFullscreen().catch(()=>{})},
+      exportPdf:()=>this.setState({printing:true,tip:null,picker:false},()=>setTimeout(()=>window.print(),300)),
+      tipOn:this.tipOn,tipOff:this.tipOff,tipOnFlag:!!tip,tip:tip||{lines:[]}
+    };
+  }
+}
+</script>
+</body>
+</html>

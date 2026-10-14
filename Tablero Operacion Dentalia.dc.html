@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/seguritech-design-system-019dda45-6e51-7e57-833f-1447d7a2049e/colors_and_type.css">
+<script src="_ds/seguritech-design-system-019dda45-6e51-7e57-833f-1447d7a2049e/_ds_bundle.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F5F7F7;color:#13201F;font-family:'IBM Plex Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#1B4F8F}a:hover{color:#13201F}
+*{box-sizing:border-box}
+</style>
+</helmet>
+<div style="width:1440px;margin:0 auto;background:#F5F7F7;color:#13201F;font-family:'IBM Plex Sans',system-ui,sans-serif;padding:0 0 48px">
+
+<header data-screen-label="Encabezado" style="background:#FFFFFF;border-bottom:1px solid #E2E7E6;padding:20px 56px;display:flex;align-items:center;justify-content:space-between;gap:32px">
+  <div style="display:flex;align-items:center;gap:20px;flex:none">
+    <div style="width:150px;height:62px;overflow:hidden;flex:none">
+      <img src="assets/dentalia-logo.png" alt="Dentalia" style="width:156px;display:block;margin:-40px 0 0 -4px">
+    </div>
+    <div style="width:1px;height:48px;background:#E2E7E6"></div>
+    <div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <h1 style="margin:0;font-size:26px;font-weight:600;letter-spacing:-0.01em;white-space:nowrap">Operación de sucursales</h1>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#8A5A0B;background:#FBF0DC;border:1px dashed #C99A4A;padding:3px 8px;border-radius:3px;white-space:nowrap">Datos de ejemplo</span>
+      </div>
+      <div style="margin-top:4px;font-size:13px;color:#55615F">SaimonVision · Videoanalítica FocusAI · {{ branchName }}</div>
+    </div>
+  </div>
+  <div style="display:flex;align-items:flex-end;gap:16px;min-width:0">
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <span style="font-size:11px;color:#55615F;letter-spacing:.06em;text-transform:uppercase">Sucursal</span>
+      <div style="display:flex;border:1px solid #CBD3D1;border-radius:4px;overflow:hidden">
+        <sc-for list="{{ branches }}" as="b" hint-placeholder-count="4">
+          <button onClick="{{ b.select }}" style="border:0;border-right:1px solid #E2E7E6;padding:8px 14px;font:500 13px 'IBM Plex Sans',sans-serif;cursor:pointer;background:{{ b.bg }};color:{{ b.fg }}">{{ b.label }}</button>
+        </sc-for>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <span style="font-size:11px;color:#55615F;letter-spacing:.06em;text-transform:uppercase">Periodo</span>
+      <div style="display:flex;border:1px solid #CBD3D1;border-radius:4px;overflow:hidden">
+        <sc-for list="{{ periods }}" as="b" hint-placeholder-count="2">
+          <button onClick="{{ b.select }}" style="border:0;border-right:1px solid #E2E7E6;padding:8px 14px;font:500 13px 'IBM Plex Sans',sans-serif;cursor:pointer;background:{{ b.bg }};color:{{ b.fg }}">{{ b.label }}</button>
+        </sc-for>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:4px;padding-left:16px;border-left:1px solid #E2E7E6;white-space:nowrap">
+      <span style="font-size:11px;color:#55615F;letter-spacing:.06em;text-transform:uppercase">Fecha de corte</span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:500">28 sep 2026 · 23:59</span>
+      <span style="font-size:12px;color:#55615F">{{ periodRange }}</span>
+    </div>
+  </div>
+</header>
+
+<main style="padding:36px 56px 0;display:flex;flex-direction:column;gap:56px">
+
+<section data-screen-label="KPIs">
+  <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px">
+    <sc-for list="{{ kpis }}" as="k" hint-placeholder-count="5">
+      <div style="background:#FFFFFF;border:1px solid #E2E7E6;border-radius:6px;padding:20px;display:flex;flex-direction:column;gap:12px">
+        
+        <div style="font-size:14px;color:#55615F;margin-top:-6px">{{ k.name }}</div>
+        <div style="display:flex;align-items:baseline;gap:6px">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:36px;font-weight:500;letter-spacing:-0.02em;line-height:1">{{ k.value }}</span>
+          <span style="font-size:14px;color:#55615F">{{ k.unit }}</span>
+        </div>
+        <sc-if value="{{ k.split }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;height:6px;border-radius:2px;overflow:hidden;gap:2px">
+              <div style="width:{{ k.aW }};background:#8CC0E4"></div>
+              <div style="flex:1;background:#1B4F8F"></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;color:#55615F">
+              <span>Tramo A <span style="font-family:'IBM Plex Mono',monospace;color:#13201F">{{ k.aVal }}</span></span>
+              <span>Tramo B <span style="font-family:'IBM Plex Mono',monospace;color:#13201F">{{ k.bVal }}</span></span>
+            </div>
+          </div>
+        </sc-if>
+        <div style="font-size:12px;color:#55615F;line-height:1.4;text-wrap:pretty">{{ k.sub }}</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
+          <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:3px 8px;border-radius:3px;background:{{ k.stBg }};color:{{ k.stColor }}"><span style="width:8px;height:8px;border-radius:50%;background:{{ k.stColor }}"></span>{{ k.stLabel }}</span>
+          <span style="font-size:12px;color:{{ k.varColor }};font-family:'IBM Plex Mono',monospace">{{ k.varTxt }} <span style="font-family:'IBM Plex Sans',sans-serif">{{ k.varWord }}</span></span>
+        </div>
+        <div style="font-size:11px;color:#8A9492;margin-top:-6px">{{ varRef }}</div>
+        <sc-if value="{{ showVerdicts }}" hint-placeholder-val="{{ true }}">
+          
+        </sc-if>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section data-screen-label="Espera del paciente">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:20px">
+    <div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#55615F;letter-spacing:.06em">01 · TPES</div>
+      <h2 style="margin:4px 0 0;font-size:22px;font-weight:600">Espera del paciente</h2>
+      <p style="margin:6px 0 0;font-size:14px;color:#55615F">Cuánto espera un paciente desde que entra hasta que pasa a consultorio, por hora del día.</p>
+    </div>
+    <div style="font-size:12px;color:#8A9492">Fuente: person · presence · lines · areas — CSV semanal</div>
+  </div>
+  <div style="display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);gap:16px">
+    <div style="background:#FFFFFF;border:1px solid #E2E7E6;border-radius:6px;padding:24px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px">
+        <div><div style="font-size:15px;font-weight:600">Tiempo de espera por hora</div><div style="font-size:12px;color:#55615F;margin-top:2px">Minutos promedio · hora de entrada</div></div>
+        <div style="display:flex;gap:16px;font-size:12px;color:#55615F">
+          <div style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:#8CC0E4"></span>Tramo A · entrada → recepción</div>
+          <div style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:#1B4F8F"></span>Tramo B · recepción → consultorio</div>
+          <div style="display:flex;align-items:center;gap:6px"><span style="width:16px;border-top:2px dashed #B0232A"></span>Meta {{ meta }} min</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:32px minmax(0,1fr);column-gap:10px;row-gap:8px">
+        <div style="position:relative;height:240px">
+          <sc-for list="{{ waitTicks }}" as="t" hint-placeholder-count="6"><span style="position:absolute;right:0;bottom:{{ t.b }};transform:translateY(50%);font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8A9492">{{ t.v }}</span></sc-for>
+        </div>
+        <div style="position:relative;height:240px;border-bottom:1px solid #C9D1CF">
+          <sc-for list="{{ waitTicks }}" as="t" hint-placeholder-count="6"><div style="position:absolute;left:0;right:0;bottom:{{ t.b }};border-top:1px solid #EFF2F1"></div></sc-for>
+          <div style="position:absolute;inset:0;display:flex;gap:10px;align-items:flex-end">
+            <sc-for list="{{ waitBars }}" as="w" hint-placeholder-count="12">
+              <div style="flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center">
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;margin-bottom:4px;color:{{ w.tc }};font-weight:{{ w.tw }}">{{ w.total }}</span>
+                <div style="width:68%;height:{{ w.bH }};background:#1B4F8F;border-radius:2px 2px 0 0"></div>
+                <div style="width:68%;height:{{ w.aH }};background:#8CC0E4;border-top:1px solid #FFFFFF"></div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="position:absolute;left:0;right:0;bottom:{{ metaB }};border-top:2px dashed #B0232A;pointer-events:none"><span style="position:absolute;right:0;top:-20px;font-size:11px;font-weight:600;color:#B0232A;background:#FFFFFF;padding:0 4px">Meta &lt; {{ meta }} min</span></div>
+        </div>
+        <div></div>
+        <div style="display:flex;gap:10px">
+          <sc-for list="{{ waitBars }}" as="w" hint-placeholder-count="12"><span style="flex:1;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#55615F">{{ w.label }}</span></sc-for>
+        </div>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #E2E7E6;border-radius:6px;padding:24px;display:flex;flex-direction:column;gap:24px">
+      <div>
+        <div style="font-size:15px;font-weight:600">Distribución de esperas</div>
+        <div style="font-size:12px;color:#55615F;margin-top:2px">% de pacientes del periodo por rango de espera total</div>
+      </div>
+      <div style="display:flex;height:36px;border-radius:3px;overflow:hidden;gap:2px">
+        <sc-for list="{{ dist }}" as="d" hint-placeholder-count="3">
+          <div style="width:{{ d.w }};background:{{ d.bg }};color:{{ d.fg }};display:flex;align-items:center;padding-left:8px;white-space:nowrap;overflow:hidden;font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500">{{ d.inLabel }}</div>
+        </sc-for>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <sc-for list="{{ dist }}" as="d" hint-placeholder-count="3">
+          <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px;border-bottom:1px solid #EFF2F1;padding-bottom:10px">
+            <span style="display:flex;align-items:center;gap:8px"><span style="width:10px;height:10px;background:{{ d.bg }}"></span>{{ d.label }}</span>
+            <span style="display:flex;gap:12px;align-items:center"><span style="font-size:12px;color:{{ d.tc }};font-weight:500">{{ d.tag }}</span><span style="font-family:'IBM Plex Mono',monospace;font-weight:500;min-width:44px;text-align:right">{{ d.pct }}</span></span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top:auto;background:#F5F7F7;border-radius:4px;padding:14px 16px;font-size:13px;line-height:1.5;color:#13201F;text-wrap:pretty">
+        El Tramo B concentra <span style="font-family:'IBM Plex Mono',monospace;font-weight:600">{{ bShare }}</span> de la espera: el paciente ya fue atendido en recepción pero aún no pasa a consultorio.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Saturación">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:20px">
+    <div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#55615F;letter-spacing:.06em">02 · FAS</div>
+      <h2 style="margin:4px 0 0;font-size:22px;font-weight:600">Saturación</h2>
+      <p style="margin:6px 0 0;font-size:14px;color:#55615F">Cuándo y dónde se disparan las alertas de aglomeración (type = crowd).</p>
+    </div>
+    <div style="font-size:12px;color:#8A9492">Fuente: alertas crowd · areas (ROI) — CSV diario / semanal</div>
+  </div>
+  <div style="display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);gap:16px">
+    <div style="background:#FFFFFF;border:1px solid #E2E7E6;border-radius:6px;padding:24px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px">
+        <div><div style="font-size:15px;font-weight:600">Alertas por día y hora</div><div style="font-size:12px;color:#55615F;margin-top:2px">Conteo de alertas crowd · total {{ fasTotal }} en el periodo</div></div>
+        <div style="display:flex;gap:4px;align-items:center;font-size:12px;color:#55615F">
+          <span style="margin-right:6px">Alertas</span>
+          <sc-for list="{{ heatLegend }}" as="l" hint-placeholder-count="5"><span style="width:34px;height:20px;background:{{ l.bg }};color:{{ l.fg }};display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:11px">{{ l.label }}</span></sc-for>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:40px minmax(0,1fr);gap:8px 10px">
+        <sc-for list="{{ heat }}" as="r" hint-placeholder-count="7">
+          <span style="font-size:12px;color:#55615F;display:flex;align-items:center">{{ r.day }}</span>
+          <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px">
+            <sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="12">
+              <div style="height:30px;border-radius:2px;background:{{ c.bg }};color:{{ c.fg }};display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:12px">{{ c.v }}</div>
+            </sc-for>
+          </div>
+        </sc-for>
+        <span></span>
+        <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px">
+          <sc-for list="{{ hourLabels }}" as="h" hint-placeholder-count="12"><span style="text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#55615F">{{ h }}</span></sc-for>
+        </div>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #E2E7E6;border-radius:6px;padding:24px;display:flex;flex-direction:column;gap:22px">
+      <div>
+        <div style="font-size:15px;font-weight:600">Alertas por zona</div>
+        <div style="font-size:12px;color:#55615F;margin-top:2px">Conteo de alertas crowd por ROI</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <sc-for list="{{ zones }}" as="z" hint-placeholder-count="3">
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;justify-content:space-between;font-size:13px"><span>{{ z.name }}</span><span><span style="font-family:'IBM Plex Mono',monospace;font-weight:500">{{ z.v }}</span> <span style="color:#55615F;font-size:12px">· {{ z.pct }}</span></span></div>
+            <div style="height:14px;background:#F0F3F2;border-radius:2px"><div style="height:100%;width:{{ z.w }};background:#C8553D;border-radius:2px"></div></div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:#55615F"><span style="width:10px;height:10px;background:#C8553D"></span>Alertas crowd</div>
+      <div style="margin-top:auto;background:#F5F7F7;border-radius:4px;padding:14px 16px;display:flex;flex-direction:column;gap:8px">
+        <div style="font-size:11px;color:#55615F;text-transform:uppercase;letter-spacing:.06em">Pico de saturación por sucursal</div>
+        <sc-for list="{{ peaks }}" as="pk" hint-placeholder-count="3">
+          <div style="display:grid;grid-template-columns:90px minmax(0,1fr) auto;gap:8px;align-items:baseline;font-size:13px">
+            <span style="font-weight:600">{{ pk.name }}</span>
+            <span>{{ pk.when }}</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-weight:500">{{ pk.v }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Consultorios">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:20px">
+    <div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#55615F;letter-spacing:.06em">03 · PORC</div>
+      <h2 style="margin:4px 0 0;font-size:22px;font-weight:600">Consultorios</h2>
+      <p style="margin:6px 0 0;font-size:14px;color:#55615F">Qué tanto se usa cada consultorio. Se considera ocupado con 2 o más personas dentro del ROI.</p>
+    </div>
+    <div style="font-size:12px;color:#8A9492">Fuente: presence · areas (ROI consultorio) — CSV semanal</div>
+  </div>
+  <div style="display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);gap:16px">
+    <div style="background:#FFFFFF;border:1px solid #E2E7E6;border-radius:6px;padding:24px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px">
+        <div><div style="font-size:15px;font-weight:600">Ocupación a lo largo del día</div><div style="font-size:12px;color:#55615F;margin-top:2px">Viernes 25 sep 2026 · 9:00–21:00 · % del día ocupado</div></div>
+        <div style="display:flex;gap:16px;font-size:12px;color:#55615F">
+          <div style="display:flex;align-items:center;gap:6px"><span style="width:14px;height:10px;background:#1B4F8F"></span>Ocupado (≥ 2 personas)</div>
+          <div style="display:flex;align-items:center;gap:6px"><span style="width:14px;height:10px;background:#F0F3F2;border:1px solid #E2E7E6"></span>Libre</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:110px minmax(0,1fr) 48px;gap:6px 12px;align-items:center">
+        <sc-for list="{{ gantt }}" as="g" hint-placeholder-count="4">
+          <span onClick="{{ g.select }}" style="font-size:12px;color:#13201F;white-space:nowrap;cursor:pointer;font-weight:{{ g.fw }}">{{ g.label }}</span>
+          <div onClick="{{ g.select }}" style="position:relative;height:22px;background:#F0F3F2;border-radius:2px;cursor:pointer;outline:2px solid {{ g.bd }};outline-offset:2px">
+            <sc-for list="{{ g.blocks }}" as="bl" hint-placeholder-count="4">
+              <div title="{{ bl.t }}" style="position:absolute;top:0;bottom:0;left:{{ bl.l }};width:{{ bl.w }};background:#1B4F8F;border-radius:2px"></div>
+            </sc-for>
+          </div>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;text-align:right">{{ g.pct }}</span>
+        </sc-for>
+        <span></span>
+        <div style="position:relative;height:16px">
+          <sc-for list="{{ ganttTicks }}" as="t" hint-placeholder-count="7"><span style="position:absolute;left:{{ t.l }};transform:translateX(-50%);font-family:'IBM Plex Mono',monospace;font-size:11px;color:#55615F">{{ t.v }}</span></sc-for>
+        </div>
+        <span></span>
+      </div>
+      <div style="margin-top:22px;border-top:1px solid #EFF2F1;padding-top:16px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+          <div><div style="font-size:14px;font-weight:600">Ocupación por hora: consultorios vacíos</div><div style="font-size:12px;color:#55615F;margin-top:2px">Consultorios libres ≥ 30 min de cada hora · de {{ consTotal }} disponibles</div></div>
+          <div style="display:flex;gap:14px;font-size:12px;color:#55615F">
+            <div style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:10px;background:#F0F3F2;border:1px solid #E2E7E6"></span>Menos de la mitad libre</div>
+            <div style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:10px;background:#FBF0DC;border:1px solid #C99A4A"></span>Mitad o más libre</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:110px minmax(0,1fr) 48px;gap:6px 12px;align-items:center">
+          <span style="font-size:12px">Vacíos</span>
+          <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px">
+            <sc-for list="{{ emptyByHour }}" as="e" hint-placeholder-count="12">
+              <div title="{{ e.t }}" style="height:40px;border-radius:2px;background:{{ e.bg }};border:1px solid {{ e.bd }};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px">
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:500;color:#13201F">{{ e.v }}</span>
+                <span style="font-size:10px;color:{{ e.tc }}">{{ e.tag }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;text-align:right" title="Promedio por hora">{{ emptyAvg }}</span>
+          <span></span>
+          <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px">
+            <sc-for list="{{ hourLabels }}" as="h" hint-placeholder-count="12"><span style="text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#55615F">{{ h }}</span></sc-for>
+          </div>
+          <span style="font-size:11px;color:#8A9492;text-align:right">prom.</span>
+        </div>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #E2E7E6;border-radius:6px;padding:24px;display:flex;flex-direction:column;gap:18px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div><div style="font-size:15px;font-weight:600">Ranking de ocupación</div><div style="font-size:12px;color:#55615F;margin-top:2px">% semanal de tiempo ocupado · seleccione un consultorio para ver el detalle</div></div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:#55615F"><span style="width:12px;border-top:2px dashed #1F6B45"></span>Referencia 65 %</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:2px">
+        <sc-for list="{{ ranking }}" as="r" hint-placeholder-count="4">
+          <div onClick="{{ r.select }}" title="Ver detalle de {{ r.label }}" style="display:grid;grid-template-columns:96px minmax(0,1fr) 40px;gap:10px;align-items:center;cursor:pointer;padding:5px 8px;margin:0 -8px;border-radius:4px;background:{{ r.rowBg }};outline:1px solid {{ r.rowBd }}" style-hover="background:#F0F3F2">
+            <span style="font-size:12px;white-space:nowrap;font-weight:{{ r.fw }}">{{ r.label }}</span>
+            <div style="position:relative;height:14px;background:#F0F3F2;border-radius:2px">
+              <div style="height:100%;width:{{ r.w }};background:{{ r.bg }};border-radius:2px"></div>
+              <div style="position:absolute;top:-3px;bottom:-3px;left:65%;border-left:2px dashed #1F6B45"></div>
+            </div>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;text-align:right">{{ r.v }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="border:1px solid #E2E7E6;border-radius:4px;padding:16px;display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+          <div><div style="font-size:11px;color:#55615F;text-transform:uppercase;letter-spacing:.06em">Detalle</div><div style="font-size:15px;font-weight:600;margin-top:2px">{{ det.name }}</div><div style="font-size:12px;color:#55615F">{{ det.branch }}</div></div>
+          <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:3px 8px;border-radius:3px;background:{{ det.stBg }};color:{{ det.stColor }}"><span style="width:8px;height:8px;border-radius:50%;background:{{ det.stColor }}"></span>{{ det.stLabel }}</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px">
+          <sc-for list="{{ det.stats }}" as="st" hint-placeholder-count="4">
+            <div><div style="font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:500">{{ st.v }}</div><div style="font-size:11px;color:#55615F;line-height:1.3">{{ st.l }}</div></div>
+          </sc-for>
+        </div>
+        <div>
+          <div style="font-size:12px;color:#55615F;margin-bottom:6px">Minutos ocupados por hora · viernes 25 sep</div>
+          <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px;height:48px;align-items:end">
+            <sc-for list="{{ det.hours }}" as="h" hint-placeholder-count="12"><div title="{{ h.t }}" style="height:{{ h.h }};min-height:2px;background:{{ h.bg }};border-radius:2px 2px 0 0"></div></sc-for>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px;margin-top:4px">
+            <sc-for list="{{ det.hours }}" as="h" hint-placeholder-count="12"><span style="text-align:center;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#55615F">{{ h.lab }}</span></sc-for>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;gap:16px;font-size:12px;color:#55615F;margin-top:auto">
+        <div style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:#1B4F8F"></span>≥ 65 % adecuado</div>
+        <div style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:#8CC0E4"></span>&lt; 65 % subutilizado</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Cruces">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:20px">
+    <div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#55615F;letter-spacing:.06em">04 · CRUCES</div>
+      <h2 style="margin:4px 0 0;font-size:22px;font-weight:600">Cruces</h2>
+      <p style="margin:6px 0 0;font-size:14px;color:#55615F">La espera explicada: ¿se debe a la saturación de la sala o a consultorios que no se liberan?</p>
+    </div>
+    <div style="font-size:12px;color:#8A9492">Promedio por hora del periodo seleccionado</div>
+  </div>
+  <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px">
+    <div style="background:#FFFFFF;border:1px solid #E2E7E6;border-radius:6px;padding:24px">
+      <div style="margin-bottom:14px"><div style="font-size:15px;font-weight:600">Espera vs. saturación</div><div style="font-size:12px;color:#55615F;margin-top:2px">Eje izq.: alertas crowd (conteo) · Eje der.: espera promedio (min)</div></div>
+      <div style="display:flex;gap:16px;font-size:12px;color:#55615F;margin-bottom:18px">
+        <div style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:#E4A596"></span>Alertas crowd</div>
+        <div style="display:flex;align-items:center;gap:6px"><span style="width:16px;border-top:2px solid #13201F"></span>Espera promedio</div>
+      </div>
+      <div style="display:grid;grid-template-columns:28px minmax(0,1fr) 28px;column-gap:10px;row-gap:8px">
+        <div style="position:relative;height:220px"><sc-for list="{{ c1.lTicks }}" as="t" hint-placeholder-count="5"><span style="position:absolute;right:0;bottom:{{ t.b }};transform:translateY(50%);font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8A9492">{{ t.v }}</span></sc-for></div>
+        <div style="position:relative;height:220px;border-bottom:1px solid #C9D1CF">
+          <sc-for list="{{ c1.lTicks }}" as="t" hint-placeholder-count="5"><div style="position:absolute;left:0;right:0;bottom:{{ t.b }};border-top:1px solid #EFF2F1"></div></sc-for>
+          <div style="position:absolute;inset:0;display:flex;gap:6px;align-items:flex-end">
+            <sc-for list="{{ c1.bars }}" as="b" hint-placeholder-count="12"><div style="flex:1;height:100%;display:flex;align-items:flex-end;justify-content:center"><div style="width:60%;height:{{ b.h }};background:#E4A596;border-radius:2px 2px 0 0"></div></div></sc-for>
+          </div>
+          <svg viewBox="0 0 1000 100" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible"><polyline points="{{ c1.line }}" fill="none" stroke="#13201F" stroke-width="2" vector-effect="non-scaling-stroke"></polyline></svg>
+          <sc-for list="{{ c1.dots }}" as="d" hint-placeholder-count="12"><div style="position:absolute;left:{{ d.l }};bottom:{{ d.b }};width:8px;height:8px;margin:0 0 -4px -4px;border-radius:50%;background:#FFFFFF;border:2px solid #13201F"></div></sc-for>
+        </div>
+        <div style="position:relative;height:220px"><sc-for list="{{ c1.rTicks }}" as="t" hint-placeholder-count="6"><span style="position:absolute;left:0;bottom:{{ t.b }};transform:translateY(50%);font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8A9492">{{ t.v }}</span></sc-for></div>
+        <div></div>
+        <div style="display:flex;gap:6px"><sc-for list="{{ hourLabels }}" as="h" hint-placeholder-count="12"><span style="flex:1;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#55615F">{{ h }}</span></sc-for></div>
+        <div></div>
+      </div>
+      <div style="margin-top:18px;font-size:13px;color:#13201F;line-height:1.5;text-wrap:pretty">A mediodía la espera sube junto con las alertas: la sala se llena y el flujo se frena.</div>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #E2E7E6;border-radius:6px;padding:24px">
+      <div style="margin-bottom:14px"><div style="font-size:15px;font-weight:600">Espera vs. ocupación</div><div style="font-size:12px;color:#55615F;margin-top:2px">Eje izq.: ocupación de consultorios (%) · Eje der.: espera promedio (min)</div></div>
+      <div style="display:flex;gap:16px;font-size:12px;color:#55615F;margin-bottom:18px">
+        <div style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:#B7D6EC"></span>Ocupación consultorios</div>
+        <div style="display:flex;align-items:center;gap:6px"><span style="width:16px;border-top:2px solid #13201F"></span>Espera promedio</div>
+        <div style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:10px;background:#FBE7E6;border:1px solid #B0232A"></span>Cuello de botella</div>
+      </div>
+      <div style="height:62px"></div>
+      <div style="display:grid;grid-template-columns:28px minmax(0,1fr) 28px;column-gap:10px;row-gap:8px">
+        <div style="position:relative;height:220px"><sc-for list="{{ c2.lTicks }}" as="t" hint-placeholder-count="5"><span style="position:absolute;right:0;bottom:{{ t.b }};transform:translateY(50%);font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8A9492">{{ t.v }}</span></sc-for></div>
+        <div style="position:relative;height:220px;border-bottom:1px solid #C9D1CF">
+          <sc-if value="{{ c2.hasBand }}" hint-placeholder-val="{{ true }}">
+            <div style="position:absolute;top:0;bottom:0;left:{{ c2.bandL }};width:{{ c2.bandW }};background:#FBE7E6;border-left:1px dashed #B0232A;border-right:1px dashed #B0232A"></div>
+          </sc-if>
+          <sc-for list="{{ c2.lTicks }}" as="t" hint-placeholder-count="5"><div style="position:absolute;left:0;right:0;bottom:{{ t.b }};border-top:1px solid #EFF2F1;opacity:.8"></div></sc-for>
+          <div style="position:absolute;inset:0;display:flex;gap:6px;align-items:flex-end">
+            <sc-for list="{{ c2.bars }}" as="b" hint-placeholder-count="12"><div style="flex:1;height:100%;display:flex;align-items:flex-end;justify-content:center"><div style="width:60%;height:{{ b.h }};background:#B7D6EC;border-radius:2px 2px 0 0"></div></div></sc-for>
+          </div>
+          <svg viewBox="0 0 1000 100" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible"><polyline points="{{ c2.line }}" fill="none" stroke="#13201F" stroke-width="2" vector-effect="non-scaling-stroke"></polyline></svg>
+          <sc-for list="{{ c2.dots }}" as="d" hint-placeholder-count="12"><div style="position:absolute;left:{{ d.l }};bottom:{{ d.b }};width:8px;height:8px;margin:0 0 -4px -4px;border-radius:50%;background:#FFFFFF;border:2px solid #13201F"></div></sc-for>
+          <sc-if value="{{ c2.hasBand }}" hint-placeholder-val="{{ true }}">
+            <div style="position:absolute;top:-68px;right:{{ c2.noteR }};width:230px;background:#FFFFFF;border:1px solid #B0232A;border-radius:4px;padding:8px 10px">
+              <div style="font-size:12px;font-weight:600;color:#B0232A">Cuello de botella en recepción</div>
+              <div style="font-size:11px;color:#13201F;margin-top:2px;line-height:1.4">{{ c2.note }}</div>
+            </div>
+          </sc-if>
+        </div>
+        <div style="position:relative;height:220px"><sc-for list="{{ c1.rTicks }}" as="t" hint-placeholder-count="6"><span style="position:absolute;left:0;bottom:{{ t.b }};transform:translateY(50%);font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8A9492">{{ t.v }}</span></sc-for></div>
+        <div></div>
+        <div style="display:flex;gap:6px"><sc-for list="{{ hourLabels }}" as="h" hint-placeholder-count="12"><span style="flex:1;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#55615F">{{ h }}</span></sc-for></div>
+        <div></div>
+      </div>
+      <div style="margin-top:18px;font-size:13px;color:#13201F;line-height:1.5;text-wrap:pretty">{{ c2.summary }}</div>
+      <div style="margin-top:14px;border-top:1px solid #EFF2F1;padding-top:12px;display:flex;gap:10px;align-items:flex-start;font-size:12px;color:#55615F;line-height:1.5">
+        <span style="font-size:11px;font-weight:600;color:#13201F;border:1px solid #CBD3D1;padding:1px 6px;border-radius:3px;white-space:nowrap">Definición</span>
+        <span style="text-wrap:pretty"><strong style="font-weight:600;color:#13201F">Tiempo de espera</strong>: minutos desde que el paciente cruza la línea de entrada hasta que ingresa al ROI de consultorio. Es la suma del Tramo A (entrada → recepción) y el Tramo B (recepción → consultorio), promediada por hora de entrada.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px">
+<section data-screen-label="Afluencia">
+  <div style="margin-bottom:20px">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#55615F;letter-spacing:.06em">05 · ENTRADAS</div>
+    <h2 style="margin:4px 0 0;font-size:22px;font-weight:600">Afluencia</h2>
+    <p style="margin:6px 0 0;font-size:14px;color:#55615F">Personas que cruzan la línea de entrada en recepción, día por día.</p>
+  </div>
+  <div style="background:#FFFFFF;border:1px solid #E2E7E6;border-radius:6px;padding:24px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px">
+      <div><div style="font-size:15px;font-weight:600">Entradas por día · septiembre 2026</div><div style="font-size:12px;color:#55615F;margin-top:2px">Personas / día · total mes {{ monthTotal }} · CSV mensual</div></div>
+      <div style="display:flex;gap:14px;font-size:12px;color:#55615F">
+        <div style="display:flex;align-items:center;gap:6px"><span style="width:16px;border-top:2px solid #1B4F8F"></span>Entradas</div>
+        <div style="display:flex;align-items:center;gap:6px"><span style="height:12px;border-left:2px dashed #8A9492"></span>[Campaña]</div>
+        <sc-if value="{{ isWeek }}" hint-placeholder-val="{{ true }}"><div style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:10px;background:#EEF4FA"></span>Semana seleccionada</div></sc-if>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:32px minmax(0,1fr);column-gap:10px;row-gap:8px">
+      <div style="position:relative;height:200px"><sc-for list="{{ af.ticks }}" as="t" hint-placeholder-count="5"><span style="position:absolute;right:0;bottom:{{ t.b }};transform:translateY(50%);font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8A9492">{{ t.v }}</span></sc-for></div>
+      <div style="position:relative;height:200px;border-bottom:1px solid #C9D1CF">
+        <sc-if value="{{ isWeek }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;top:0;bottom:0;left:{{ af.weekL }};right:0;background:#EEF4FA"></div></sc-if>
+        <sc-for list="{{ af.ticks }}" as="t" hint-placeholder-count="5"><div style="position:absolute;left:0;right:0;bottom:{{ t.b }};border-top:1px solid #EFF2F1"></div></sc-for>
+        <sc-for list="{{ af.camps }}" as="c" hint-placeholder-count="2">
+          <div style="position:absolute;top:0;bottom:0;left:{{ c.l }};border-left:2px dashed #8A9492"><span style="position:absolute;top:0;left:6px;font-size:11px;font-weight:500;color:#55615F;background:#FFFFFF;padding:1px 4px;white-space:nowrap">[Campaña] {{ c.d }}</span></div>
+        </sc-for>
+        <svg viewBox="0 0 1000 100" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible"><polyline points="{{ af.line }}" fill="none" stroke="#1B4F8F" stroke-width="2" vector-effect="non-scaling-stroke"></polyline></svg>
+        <sc-for list="{{ af.dots }}" as="d" hint-placeholder-count="28"><div title="{{ d.t }}" style="position:absolute;left:{{ d.l }};bottom:{{ d.b }};width:6px;height:6px;margin:0 0 -3px -3px;border-radius:50%;background:#1B4F8F"></div></sc-for>
+      </div>
+      <div></div>
+      <div style="position:relative;height:16px"><sc-for list="{{ af.xl }}" as="x" hint-placeholder-count="5"><span style="position:absolute;left:{{ x.l }};transform:translateX(-50%);font-family:'IBM Plex Mono',monospace;font-size:11px;color:#55615F;white-space:nowrap">{{ x.v }}</span></sc-for></div>
+    </div>
+    <div style="margin-top:22px;display:flex;gap:10px;align-items:flex-start;border-top:1px solid #EFF2F1;padding-top:14px;font-size:13px;color:#55615F">
+      <span style="font-size:11px;font-weight:600;color:#8A5A0B;background:#FBF0DC;padding:2px 6px;border-radius:3px;white-space:nowrap">Pendiente</span>
+      <span>Tasa de captación pendiente: falta línea exterior de tráfico y calendario de campañas.</span>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Abandono estimado">
+  <div style="margin-bottom:20px">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#55615F;letter-spacing:.06em">06 · TAP</div>
+    <h2 style="margin:4px 0 0;font-size:22px;font-weight:600">Abandono estimado</h2>
+    <p style="margin:6px 0 0;font-size:14px;color:#55615F">Pacientes que entran y salen sin pasar a consultorio, por franja.</p>
+  </div>
+  <div style="background:#FFFFFF;border:1px solid #E2E7E6;border-radius:6px;padding:24px">
+    <div style="margin-bottom:14px;display:flex;justify-content:space-between;align-items:flex-start">
+      <div><div style="font-size:15px;font-weight:600">Abandono por franja horaria</div><div style="font-size:12px;color:#55615F;margin-top:2px">Eje izq.: % estimado · Eje der.: alertas crowd</div></div>
+      <span style="font-size:11px;font-weight:500;color:#55615F;border:1px dashed #9AA4A2;border-radius:3px;padding:1px 6px">Estimado</span>
+    </div>
+    <div style="display:flex;gap:14px;font-size:12px;color:#55615F;margin-bottom:22px">
+      <div style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:#5E7D9E"></span>Abandono estimado</div>
+      <div style="display:flex;align-items:center;gap:6px"><span style="width:16px;border-top:2px solid #C8553D"></span>Alertas de saturación</div>
+    </div>
+    <div style="display:grid;grid-template-columns:32px minmax(0,1fr) 28px;column-gap:10px;row-gap:8px">
+      <div style="position:relative;height:200px"><sc-for list="{{ tap.lTicks }}" as="t" hint-placeholder-count="5"><span style="position:absolute;right:0;bottom:{{ t.b }};transform:translateY(50%);font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8A9492">{{ t.v }}</span></sc-for></div>
+      <div style="position:relative;height:200px;border-bottom:1px solid #C9D1CF">
+        <sc-for list="{{ tap.lTicks }}" as="t" hint-placeholder-count="5"><div style="position:absolute;left:0;right:0;bottom:{{ t.b }};border-top:1px solid #EFF2F1"></div></sc-for>
+        <div style="position:absolute;inset:0;display:flex;gap:10px;align-items:flex-end">
+          <sc-for list="{{ tap.bars }}" as="b" hint-placeholder-count="6"><div style="flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;margin-bottom:4px">{{ b.v }}</span><div style="width:56%;height:{{ b.h }};background:#5E7D9E;border-radius:2px 2px 0 0"></div></div></sc-for>
+        </div>
+        <svg viewBox="0 0 1000 100" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible"><polyline points="{{ tap.line }}" fill="none" stroke="#C8553D" stroke-width="2" vector-effect="non-scaling-stroke"></polyline></svg>
+        <sc-for list="{{ tap.dots }}" as="d" hint-placeholder-count="6"><div style="position:absolute;left:{{ d.l }};bottom:{{ d.b }};width:8px;height:8px;margin:0 0 -4px -4px;border-radius:50%;background:#FFFFFF;border:2px solid #C8553D"></div></sc-for>
+      </div>
+      <div style="position:relative;height:200px"><sc-for list="{{ tap.rTicks }}" as="t" hint-placeholder-count="5"><span style="position:absolute;left:0;bottom:{{ t.b }};transform:translateY(50%);font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8A9492">{{ t.v }}</span></sc-for></div>
+      <div></div>
+      <div style="display:flex;gap:10px"><sc-for list="{{ tap.bars }}" as="b" hint-placeholder-count="6"><span style="flex:1;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#55615F">{{ b.label }}</span></sc-for></div>
+      <div></div>
+    </div>
+    <div style="margin-top:22px;display:flex;gap:10px;align-items:flex-start;border-top:1px solid #EFF2F1;padding-top:14px;font-size:13px;color:#55615F">
+      <span style="font-size:11px;font-weight:600;color:#55615F;border:1px dashed #9AA4A2;padding:1px 6px;border-radius:3px;white-space:nowrap">Método</span>
+      <span>Estimación por balance de flujos; mejora con agenda de recepción.</span>
+    </div>
+  </div>
+</section>
+</div>
+
+<footer data-screen-label="Fuera de alcance" style="border-top:1px solid #E2E7E6;padding-top:20px;display:grid;grid-template-columns:220px minmax(0,1fr) minmax(0,1fr) auto;gap:32px;font-size:12px;color:#55615F;line-height:1.5">
+  <div style="font-weight:600;color:#13201F;text-transform:uppercase;letter-spacing:.06em;font-size:11px">Fuera de alcance del tablero</div>
+  <div><span style="font-family:'IBM Plex Mono',monospace;font-weight:600;color:#13201F">IIME</span> · Manejo de efectivo. Sin detección disponible en el ETL.</div>
+  <div><span style="font-family:'IBM Plex Mono',monospace;font-weight:600;color:#13201F">ICPV</span> · Protocolo verbal. El audio aún no está integrado a Mongo.</div>
+  <div style="text-align:right">SaimonVision · Datos de ejemplo</div>
+</footer>
+
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440},&quot;defaultBranch&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;todas&quot;,&quot;universidad&quot;,&quot;satelite&quot;,&quot;interlomas&quot;],&quot;default&quot;:&quot;todas&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;tpesMeta&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:15,&quot;min&quot;:10,&quot;max&quot;:25,&quot;unit&quot;:&quot;min&quot;,&quot;tsType&quot;:&quot;number&quot;},&quot;showVerdicts&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+const HOURS=[9,10,11,12,13,14,15,16,17,18,19,20];
+const BA=[3,4,6,7,6,4,3,4,6,7,5,3], BB=[7,8,10,11,9,7,6,7,10,12,8,6];
+const BOCC=[42,64,82,88,70,45,38,50,54,48,44,30];
+const BAL=[0,2,5,7,4,1,1,2,5,6,3,1];
+const DAYS=['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'], DAYF=[.9,1,.95,1.05,1.2,1.3,.6];
+const BR={
+  todas:{label:'Todas',name:'Todas las sucursales',w:1,share:1,occ:0,idx:0},
+  universidad:{label:'Universidad',name:'Sucursal Universidad',w:1.12,share:.42,occ:8,idx:1,cons:4,pre:'UNI'},
+  satelite:{label:'Satélite',name:'Sucursal Satélite',w:.88,share:.25,occ:-7,idx:2,cons:3,pre:'SAT'},
+  interlomas:{label:'Interlomas',name:'Sucursal Interlomas',w:.97,share:.33,occ:-3,idx:3,cons:4,pre:'INT'}
+};
+const KPI={
+  todas:{semana:{tv:-1.2,tap:4.3,tapv:.6,ent:3412,entv:6.2,fasv:14,porc:58,porcv:3},mes:{tv:-.6,tap:4.1,tapv:.2,ent:14820,entv:4.8,fasv:9,porc:57,porcv:2}},
+  universidad:{semana:{tv:.9,tap:5.6,tapv:1.1,ent:1297,entv:8.1,fasv:21,porc:66,porcv:4},mes:{tv:.4,tap:5.2,tapv:.7,ent:5630,entv:5.9,fasv:12,porc:64,porcv:3}},
+  satelite:{semana:{tv:-2.3,tap:3.1,tapv:-.4,ent:1126,entv:4.0,fasv:-8,porc:51,porcv:1},mes:{tv:-1.4,tap:3.0,tapv:-.2,ent:4890,entv:3.1,fasv:-5,porc:50,porcv:1}},
+  interlomas:{semana:{tv:-.8,tap:4.0,tapv:.5,ent:989,entv:5.7,fasv:18,porc:55,porcv:4},mes:{tv:-.5,tap:3.9,tapv:.3,ent:4300,entv:4.4,fasv:10,porc:56,porcv:2}}
+};
+const DIST={todas:[71,19,10],universidad:[62,24,14],satelite:[80,14,6],interlomas:[73,18,9]};
+const RANKOFF=[9,3,-4,-10,7,-2,-12,11,2,-6,-15];
+const ST={ok:{c:'#1F6B45',bg:'#E6F2EB'},warn:{c:'#8A5A0B',bg:'#FBF0DC'},bad:{c:'#B0232A',bg:'#FBE7E6'}};
+const rnd=s=>{const x=Math.sin(s*9301+49297)*233280;return x-Math.floor(x)};
+const pc=(v,m)=>Math.max(0,Math.min(100,v/m*100)).toFixed(2)+'%';
+const nice=v=>{const s=Math.max(v,1)/4,p=10**Math.floor(Math.log10(s)),n=s/p;return (n<=1?1:n<=2?2:n<=2.5?2.5:n<=5?5:10)*p*4};
+const ticks=(max,n=4)=>Array.from({length:n+1},(_,i)=>({v:+(max*i/n).toFixed(1),b:(i/n*100)+'%'}));
+const fmt=n=>Math.round(n).toLocaleString('es-MX');
+const line=(vals,max,centered=true)=>vals.map((v,i)=>{const x=centered?(i+.5)/vals.length*1000:i/(vals.length-1)*1000;return x.toFixed(1)+','+(100-Math.min(v/max,1)*100).toFixed(1)}).join(' ');
+const dots=(vals,max,centered=true)=>vals.map((v,i)=>({l:(centered?(i+.5)/vals.length*100:i/(vals.length-1)*100)+'%',b:pc(v,max)}));
+const mean=a=>a.reduce((s,v)=>s+v,0)/a.length;
+
+class Component extends DCLogic {
+  state={branch:null,period:'semana'};
+  varOf(v,unit,lowerGood,dec=1){
+    const good=lowerGood?v<0:v>0;
+    return {varTxt:(v>0?'▲ ':v<0?'▼ ':'= ')+Math.abs(v).toFixed(dec)+unit,varWord:v===0?'sin cambio':good?'mejora':'empeora',varColor:v===0?'#55615F':good?ST.ok.c:ST.bad.c};
+  }
+  verdict(t){
+    if(t==='Realizable')return{verdict:t,vColor:'#1F6B45',vBorder:'solid'};
+    if(t==='Parcial')return{verdict:t,vColor:'#8A5A0B',vBorder:'solid'};
+    return{verdict:t,vColor:'#8A5A0B',vBorder:'dashed'};
+  }
+  st(key,label){return{stLabel:label,stColor:ST[key].c,stBg:ST[key].bg}}
+  renderVals(){
+    const p=this.props, br=this.state.branch||p.defaultBranch||'todas', per=this.state.period, mes=per==='mes';
+    const B=BR[br], k=KPI[br][per], meta=p.tpesMeta??15;
+    const wf=B.w*(mes?1.02:1);
+    const A=BA.map(v=>v*wf), Bt=BB.map(v=>v*wf), tot=A.map((v,i)=>v+Bt[i]);
+    const avgA=mean(A), avgB=mean(Bt), tpes=avgA+avgB;
+    // heatmap
+    const scale=.305*B.share*(mes?4.3:1);
+    const HC=[{bg:'#F0F3F2',fg:'#8A9492'},{bg:'#F6DDD6',fg:'#13201F'},{bg:'#EDB3A5',fg:'#13201F'},{bg:'#DE7F6A',fg:'#13201F'},{bg:'#B8472F',fg:'#FFFFFF'}];
+    const hot=mes?[0,4,8,14,20]:[0,1,2,3,4];
+    const lvl=v=>v>=hot[4]?4:v>=hot[3]?3:v>=hot[2]?2:v>=hot[1]?1:0;
+    const colSum=HOURS.map(()=>0); let fas=0;
+    const heat=DAYS.map((d,di)=>({day:d,cells:HOURS.map((h,hi)=>{const v=Math.round(BAL[hi]*DAYF[di]*scale*(.7+.6*rnd(di*31+hi*7+B.idx*101)));colSum[hi]+=v;fas+=v;return{v,...HC[lvl(v)]}})}));
+    const heatLegend=hot.map((v,i)=>({label:i===4?v+'+':(mes&&i>0?v+'–'+(hot[i+1]-1):String(v)),...HC[i]}));
+    let pk=[0,0,0];heat.forEach((r,di)=>r.cells.forEach((c,hi)=>{if(c.v>pk[0])pk=[c.v,di,hi]}));
+    const peakTxt=`${['lunes','martes','miércoles','jueves','viernes','sábado','domingo'][pk[1]]} ${HOURS[pk[2]]}:00–${HOURS[pk[2]]+1}:00, ${pk[0]} alertas`;
+    const DN=['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
+    const peaks=(br==='todas'?['universidad','satelite','interlomas']:[br]).map(id=>{const b=BR[id],sc=.305*b.share*(mes?4.3:1);let m=[-1,0,0];DAYS.forEach((d,di)=>HOURS.forEach((h,hi)=>{const v=Math.round(BAL[hi]*DAYF[di]*sc*(.7+.6*rnd(di*31+hi*7+b.idx*101)));if(v>m[0])m=[v,di,hi]}));return{name:b.label,when:DN[m[1]]+' '+HOURS[m[2]]+':00–'+(HOURS[m[2]]+1)+':00',v:m[0]+(m[0]===1?' alerta':' alertas')}});
+    const zr=[['Recepción',.48],['Sala de espera',.37],['Pasillo',.15]];
+    const zv=zr.map(z=>Math.round(fas*z[1])); const zmax=Math.max(...zv,1);
+    const zones=zr.map((z,i)=>({name:z[0],v:zv[i],pct:Math.round(z[1]*100)+' %',w:pc(zv[i],zmax)}));
+    // KPIs
+    const tpesKey=tpes<meta?'ok':tpes<meta+3?'warn':'bad';
+    const fasN=fas/(br==='todas'?3:1)/(mes?4.3:1);
+    const fasKey=fasN<20?'ok':fasN<30?'warn':'bad';
+    const tapKey=k.tap<3?'ok':k.tap<5?'warn':'bad';
+    const porcKey=k.porc>=65?'ok':k.porc>=50?'warn':'bad';
+    const kpis=[
+      {code:'TPES',name:'Tiempo de espera',value:tpes.toFixed(1),unit:'min',split:true,aW:pc(avgA,tpes),aVal:avgA.toFixed(1)+' min',bVal:avgB.toFixed(1)+' min',sub:`Meta < ${meta} min por paciente`,...this.st(tpesKey,{ok:'En meta',warn:'Cerca del límite',bad:'Fuera de meta'}[tpesKey]),...this.varOf(k.tv,' min',true),...this.verdict('Realizable')},
+      {code:'TAP',name:'Abandono',value:k.tap.toFixed(1),unit:'%',estimado:true,sub:'Entran y no llegan a consultorio',...this.st(tapKey,{ok:'Bajo',warn:'Vigilar',bad:'Alto'}[tapKey]),...this.varOf(k.tapv,' pp',true),...this.verdict('Parcial – estimado')},
+      {code:'ENTRADAS',name:'Afluencia del periodo',value:fmt(k.ent),unit:'personas',sub:'Cruces de la línea de entrada en recepción',...this.st(k.entv>=0?'ok':'bad',k.entv>=0?'Al alza':'A la baja'),...this.varOf(k.entv,' %',false),...this.verdict('Realizable')},
+      {code:'FAS',name:'Alertas por saturación',value:fmt(fas),unit:'alertas',sub:'Alertas crowd en recepción, sala y pasillo',...this.st(fasKey,{ok:'Bajo',warn:'Medio',bad:'Alto'}[fasKey]),...this.varOf(k.fasv,' %',true,0),...this.verdict('Realizable')},
+      {code:'PORC',name:'Ocupación de consultorios',value:String(k.porc),unit:'%',sub:'Tiempo con ≥ 2 personas en consultorio',...this.st(porcKey,{ok:'Adecuado',warn:'Medio',bad:'Bajo'}[porcKey]),...this.varOf(k.porcv,' pp',false,0),...this.verdict('Parcial')}
+    ];
+    // wait bars
+    const WM=25;
+    const waitBars=HOURS.map((h,i)=>({label:h+':00',aH:pc(A[i],WM),bH:pc(Bt[i],WM),total:tot[i].toFixed(0),tc:tot[i]>=meta?'#B0232A':'#13201F',tw:tot[i]>=meta?'600':'400'}));
+    const dv=DIST[br].map((v,i)=>v+(mes?[1,0,-1][i]:0));
+    const dist=[
+      {label:`< ${meta} min`,tag:'En meta',tc:ST.ok.c,bg:'#1F6B45',fg:'#FFFFFF'},
+      {label:`${meta}–20 min`,tag:'Límite',tc:ST.warn.c,bg:'#D9A441',fg:'#13201F'},
+      {label:'> 20 min',tag:'Fuera de meta',tc:ST.bad.c,bg:'#B0232A',fg:'#FFFFFF'}
+    ].map((d,i)=>({...d,w:dv[i]+'%',pct:dv[i]+' %',inLabel:dv[i]>=12?dv[i]+' %':''}));
+    // cruces
+    const alMax=nice(Math.max(...colSum));
+    const c1={lTicks:ticks(alMax),rTicks:ticks(WM,5),bars:colSum.map(v=>({h:pc(v,alMax)})),line:line(tot,WM),dots:dots(tot,WM)};
+    const occ=BOCC.map(v=>Math.max(5,Math.min(98,v+B.occ+(mes?-1:0))));
+    const flag=tot.map((t,i)=>t>=meta&&occ[i]<60);
+    let best=null,cur=null;flag.forEach((f,i)=>{if(f){cur=cur?[cur[0],i]:[i,i];if(!best||cur[1]-cur[0]>best[1]-best[0])best=cur.slice()}else cur=null});
+    const c2={lTicks:ticks(100),bars:occ.map(v=>({h:pc(v,100)})),line:line(tot,WM),dots:dots(tot,WM),hasBand:!!best};
+    if(best){
+      const s=best[0],e=best[1],n=HOURS.length;
+      c2.bandL=(s/n*100)+'%';c2.bandW=((e-s+1)/n*100)+'%';
+      c2.noteR=Math.max(0,(n-e-1)/n*100)+'%';
+      const ws=tot.slice(s,e+1),os=occ.slice(s,e+1);
+      const rng=(a,u)=>{const lo=Math.round(Math.min(...a)),hi=Math.round(Math.max(...a));return lo===hi?lo+u:lo+'–'+hi+u};
+      c2.note=`${HOURS[s]}:00–${HOURS[e]+1}:00 · espera ${rng(ws,' min')} con consultorios al ${rng(os,' %')}.`;
+      c2.summary=`De ${HOURS[s]}:00 a ${HOURS[e]+1}:00 la espera supera la meta aunque hay consultorios libres: el freno está en recepción, no en la capacidad clínica.`;
+    } else c2.summary='Sin franjas con espera alta y consultorios libres en este periodo.';
+    // gantt
+    const rows=br==='todas'?['universidad','satelite','interlomas'].flatMap(b=>Array.from({length:BR[b].cons},(_,i)=>({b,i}))):Array.from({length:B.cons},(_,i)=>({b:br,i}));
+    const multi=br==='todas';
+    const gantt=rows.map((r,ri)=>{
+      const t=(58+BR[r.b].occ)/100, seed=BR[r.b].idx*50+r.i*7;
+      let x=9+rnd(seed)*.6,blocks=[],occH=0,j=0,raw=[];
+      while(x<20.6){const len=Math.min(.5+rnd(seed+j*3+1)*1.3,21-x);const s=x;raw.push([s,s+len]);blocks.push({l:pc(s-9,12),w:pc(len,12),t:`${Math.floor(s)}:${String(Math.round((s%1)*60)).padStart(2,'0')} · ${Math.round(len*60)} min`});occH+=len;x+=len+(.15+rnd(seed+j*3+2)*.9)*(1.5-t)*1.1;j++}
+      return{key:r.b+'-'+r.i,b:r.b,i:r.i,label:multi?`${BR[r.b].pre} · Consultorio ${r.i+1}`:`Consultorio ${r.i+1}`,blocks,occH,pct:Math.round(occH/12*100)+' %',raw};
+    });
+    const N=gantt.length;
+    const emptyByHour=HOURS.map(h=>{const v=gantt.filter(g=>g.raw.reduce((m,[a,b])=>m+Math.max(0,Math.min(b,h+1)-Math.max(a,h)),0)<.5).length;const half=v>=N/2;return{v,tag:half?'mitad o más':'libres',t:h+':00 · '+v+' de '+N+' consultorios vacíos',bg:half?'#FBF0DC':'#F0F3F2',bd:half?'#C99A4A':'#E2E7E6',tc:half?'#8A5A0B':'#55615F'}});
+    const emptyAvg=(emptyByHour.reduce((m,e)=>m+e.v,0)/12).toFixed(1);
+    const ganttTicks=[9,11,13,15,17,19,21].map(h=>({v:h+':00',l:pc(h-9,12)}));
+    const ranking=rows.map((r,ri)=>{const gi=['universidad','satelite','interlomas'].indexOf(r.b);const off=RANKOFF[[0,4,7][gi]+r.i]??0;const v=Math.max(20,Math.min(95,KPI[r.b][per].porc+off));return{key:r.b+'-'+r.i,label:multi?`${BR[r.b].pre} · C${r.i+1}`:`Consultorio ${r.i+1}`,v:v+' %',n:v,w:v+'%',bg:v>=65?'#1B4F8F':'#8CC0E4'}}).sort((a,b)=>b.n-a.n);
+    const selKey=ranking.some(r=>r.key===this.state.sel)?this.state.sel:ranking[0].key;
+    const setSel=key=>()=>this.setState({sel:key});
+    ranking.forEach(r=>{const on=r.key===selKey;Object.assign(r,{select:setSel(r.key),rowBg:on?'#EEF4FA':'transparent',rowBd:on?'#1B4F8F':'transparent',fw:on?'600':'400'})});
+    gantt.forEach(g=>{const on=g.key===selKey;Object.assign(g,{select:setSel(g.key),bd:on?'#1B4F8F':'transparent',fw:on?'600':'400'})});
+    const sg=gantt.find(g=>g.key===selKey), sr=ranking.find(r=>r.key===selKey);
+    const hrs=HOURS.map(h=>Math.round(sg.raw.reduce((m,[a,b])=>m+Math.max(0,Math.min(b,h+1)-Math.max(a,h)),0)*60));
+    let gap=0;const sorted=sg.raw.slice().sort((a,b)=>a[0]-b[0]);let prev=9;sorted.forEach(([a,b])=>{gap=Math.max(gap,a-prev);prev=b});gap=Math.max(gap,21-prev);
+    const dk=sr.n>=65?'ok':sr.n>=50?'warn':'bad';
+    const det={name:'Consultorio '+(sg.i+1),branch:BR[sg.b].name,...this.st(dk,{ok:'Adecuado',warn:'Subutilizado',bad:'Bajo'}[dk]),
+      stats:[{v:sr.v,l:'Ocupación semanal'},{v:sg.pct,l:'Ocupación del día'},{v:String(sg.raw.length),l:'Bloques de atención'},{v:Math.round(sg.occH*60/sg.raw.length)+' min',l:'Duración promedio'}],
+      hours:hrs.map((m,i)=>({h:pc(m,60),bg:m>=30?'#1B4F8F':'#8CC0E4',lab:HOURS[i],t:HOURS[i]+':00 · '+m+' min ocupado'+(m<30?' (vacío)':'')}))};
+    det.stats[3].l+=' · hueco máx. '+Math.round(gap*60)+' min';
+    // afluencia
+    const monthTotal=KPI[br].mes.ent, ND=28, DOWF=[1,1.02,.98,1.05,1.12,1.18,.55], CAMP=[8,22];
+    const raw=Array.from({length:ND},(_,i)=>{const d=i+1,dow=(d)%7;let f=DOWF[dow]*(.9+.2*rnd(d*13+B.idx));CAMP.forEach(c=>{const o=d-c;if(o>=0&&o<3)f*=[1.2,1.13,1.06][o]});return f});
+    const rs=raw.reduce((s,v)=>s+v,0), ent=raw.map(v=>v/rs*monthTotal);
+    const afMax=nice(Math.max(...ent)*1.05);
+    const af={ticks:ticks(afMax).map(t=>({...t,v:fmt(t.v)})),line:line(ent,afMax,false),dots:ent.map((v,i)=>({l:(i/(ND-1)*100)+'%',b:pc(v,afMax),t:`${i+1} sep · ${fmt(v)} entradas`})),
+      camps:CAMP.map(d=>({l:((d-1)/(ND-1)*100)+'%',d:d+' sep'})),xl:[1,7,14,21,28].map(d=>({l:((d-1)/(ND-1)*100)+'%',v:d+' sep'})),weekL:((21-.5)/(ND-1)*100)+'%'};
+    // tap
+    const FR=[[0,2,'9–11'],[2,4,'11–13'],[4,6,'13–15'],[6,8,'15–17'],[8,10,'17–19'],[10,12,'19–21']];
+    const TB=[2.1,5.8,3.0,2.4,6.9,3.2], tr=k.tap/4.3;
+    const tv=TB.map(v=>v*tr), ta=FR.map(f=>colSum.slice(f[0],f[1]).reduce((s,v)=>s+v,0));
+    const tMax=nice(Math.max(...tv)*1.1), taMax=nice(Math.max(...ta));
+    const tap={lTicks:ticks(tMax).map(t=>({...t,v:t.v+'%'})),rTicks:ticks(taMax),bars:tv.map((v,i)=>({v:v.toFixed(1)+' %',h:pc(v,tMax),label:FR[i][2]})),line:line(ta,taMax),dots:dots(ta,taMax)};
+    const setB=id=>()=>this.setState({branch:id}), setP=id=>()=>this.setState({period:id});
+    return {
+      branchName:B.name,
+      branches:Object.keys(BR).map(id=>({label:BR[id].label,select:setB(id),bg:id===br?'#13201F':'#FFFFFF',fg:id===br?'#FFFFFF':'#13201F'})),
+      periods:[['semana','Semana'],['mes','Mes']].map(([id,l])=>({label:l,select:setP(id),bg:id===per?'#13201F':'#FFFFFF',fg:id===per?'#FFFFFF':'#13201F'})),
+      periodRange:mes?'Septiembre 2026 · 1–28 sep':'Semana 39 · 22–28 sep',
+      varRef:mes?'vs. mes anterior':'vs. semana anterior',
+      showVerdicts:p.showVerdicts??true,
+      kpis,meta,waitBars,waitTicks:ticks(WM,5),metaB:pc(meta,WM),dist,bShare:Math.round(avgB/tpes*100)+' %',
+      heat,heatLegend,hourLabels:HOURS.map(h=>h+':00'),fasTotal:fmt(fas),zones,peakTxt,peaks,
+      gantt,ganttTicks,det,emptyByHour,emptyAvg,consTotal:gantt.length,ranking,c1,c2,af,monthTotal:fmt(monthTotal),isWeek:!mes,tap
+    };
+  }
+}
+</script>
+</body>
+</html>
