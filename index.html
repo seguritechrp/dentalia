@@ -19,6 +19,542 @@ a{color:#004AAD}a:hover{color:#0077D6}
 button{font-family:'IBM Plex Sans',sans-serif}
 </style>
 </helmet>
+<sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+
+<div data-screen-label="Versión móvil" onClick="{{ clearTip }}" style="max-width:480px;margin:0 auto;min-height:100vh;background:#E6ECF5;color:#13201F;font-family:'IBM Plex Sans',system-ui,sans-serif;padding-bottom:96px;position:relative">
+  <header style="position:sticky;top:0;z-index:50;background:#FFFFFF;border-radius:0 0 22px 22px;box-shadow:0 2px 12px rgba(0,74,173,.08);padding:10px 14px">
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="width:44px;height:16px;overflow:hidden;flex:none"><img src="assets/dentalia-logo.png" alt="Dentalia" style="width:110px;display:block;margin:-30px 0 0 -61px"></div>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:14px;font-weight:700;color:#004AAD;letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">OPERACIÓN DE SUCURSALES</div>
+        <div style="display:flex;align-items:center;gap:6px;margin-top:2px"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#8F5410;background:#FBEDCF;border:1px dashed #C97A20;padding:0 5px;border-radius:3px">Datos de ejemplo</span><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#4A5A70;white-space:nowrap">Corte {{ cut }}</span></div>
+      </div>
+      <button onClick="{{ openUser }}" aria-label="Cuenta" style="flex:none;width:44px;height:44px;border-radius:50%;border:0;background:transparent;color:#004AAD;display:flex;align-items:center;justify-content:center;cursor:pointer" style-active="background-color:#E6ECF5">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="10" r="3"></circle><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"></path></svg>
+      </button>
+    </div>
+    <div style="display:flex;gap:6px;overflow-x:auto;margin:8px -14px 0;padding:0 14px 2px;scrollbar-width:none">
+      <sc-for list="{{ mBranches }}" as="b" hint-placeholder-count="4"><button onClick="{{ b.select }}" style="flex:none;border:1px solid {{ b.mbd }};border-radius:18px;height:34px;padding:0 14px;font-size:13px;font-weight:{{ b.fw }};background:{{ b.bg }};color:{{ b.fg }};white-space:nowrap;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;transition:background-color .2s">{{ b.label }}</button></sc-for>
+      <span style="flex:none;width:1px;background:#D5DEEA;margin:4px 2px"></span>
+      <sc-for list="{{ mPeriods }}" as="b" hint-placeholder-count="3"><button onClick="{{ b.select }}" style="flex:none;border:1px solid {{ b.mbd }};border-radius:18px;height:34px;padding:0 14px;font-size:13px;font-weight:{{ b.fw }};background:{{ b.bg }};color:{{ b.fg }};white-space:nowrap;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;transition:background-color .2s">{{ b.label }}</button></sc-for>
+    </div>
+    <div style="font-size:11px;color:#4A5A70;margin-top:6px;padding-left:2px">{{ periodRange }} · {{ varRef }}</div>
+  </header>
+
+  <main style="padding:18px 12px 0;display:flex;flex-direction:column;gap:14px">
+    <sc-if value="{{ v.inicio }}" hint-placeholder-val="{{ true }}">
+      <section data-screen-label="Móvil · Inicio" style="display:flex;flex-direction:column;gap:12px">
+        
+      <div style="padding:4px 4px 0">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#4A5A70;letter-spacing:.06em">RESUMEN</div>
+        <h2 style="margin:2px 0 0;font-size:22px;font-weight:600;color:#004AAD">Cómo operan las sucursales</h2>
+        <p style="margin:4px 0 0;font-size:14px;line-height:1.45;color:#13201F;text-wrap:pretty">Cinco indicadores clave. Toque una tarjeta para ver su sección.</p>
+      </div>
+        <sc-for list="{{ kpis }}" as="k" hint-placeholder-count="5">
+          <button onClick="{{ k.go }}" style="text-align:left;border:1px solid #FFFFFF;background:#FFFFFF;border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:10px;cursor:pointer;color:#13201F;font-family:'IBM Plex Sans',sans-serif;transition:border-color .2s,background-color .2s" style-active="background-color:#F4F8FD;border-color:#B7D6EF">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%">
+              <span style="display:flex;align-items:center;gap:8px;font-size:15px;font-weight:500;color:#004AAD">{{ k.name }}<sc-if value="{{ k.est }}" hint-placeholder-val="{{ false }}"><span style="font-size:10px;font-weight:500;color:#4A5A70;border:1px dashed #8C8C8C;border-radius:4px;padding:0 5px">Estimado</span></sc-if></span>
+              <svg style="flex:none;color:#1B3A6B" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:10px;width:100%">
+              <div style="display:flex;align-items:baseline;gap:8px"><span style="font-family:'IBM Plex Mono',monospace;font-size:40px;font-weight:500;letter-spacing:-0.03em;line-height:1;color:#004AAD">{{ k.value }}</span><span style="font-size:16px;font-weight:600;color:#5B9BD5">{{ k.unit }}</span></div>
+              <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;white-space:nowrap;padding:3px 10px 3px 5px;border-radius:14px;background:{{ k.stBg }};color:{{ k.stFg }}"><span style="width:12px;height:12px;border-radius:50%;background:{{ k.stDot }}"></span>{{ k.stLabel }}</span>
+            </div>
+            <sc-if value="{{ k.split }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-direction:column;gap:6px;width:100%">
+                <div style="display:flex;height:6px;gap:2px"><div style="width:{{ k.aW }};background:#8CC0E4;border-radius:3px 0 0 3px"></div><div style="flex:1;background:#004AAD;border-radius:0 3px 3px 0"></div></div>
+                <div style="display:flex;justify-content:space-between;gap:8px;font-size:12px;color:#4A5A70"><span>Entrada → recepción <strong style="font-family:'IBM Plex Mono',monospace;color:#3F86C8;font-weight:600">{{ k.aVal }}</strong></span><span>Recepción → operatorio <strong style="font-family:'IBM Plex Mono',monospace;color:#004AAD;font-weight:600">{{ k.bVal }}</strong></span></div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ k.noSplit }}" hint-placeholder-val="{{ true }}"><div style="font-size:13px;color:#1B3A6B">{{ k.sub }}</div></sc-if>
+            <div style="display:flex;justify-content:space-between;gap:8px;width:100%;border-top:1px solid #EEF2F8;padding-top:8px;font-size:12px">
+              <span style="color:{{ k.varColor }}">{{ k.varTxt }}</span>
+              <sc-if value="{{ k.split }}" hint-placeholder-val="{{ false }}"><span style="color:#4A5A70">Meta {{ k.metaTxt }}</span></sc-if>
+            </div>
+          </button>
+        </sc-for>
+        <div style="background:#FFFFFF;border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;align-items:center;gap:8px;color:#004AAD"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg><span style="font-size:14px;font-weight:600">Fuente y factibilidad</span></div>
+          <sc-for list="{{ feas }}" as="f" hint-placeholder-count="5">
+            <div style="border-top:1px solid #EEF2F8;padding-top:10px;display:flex;flex-direction:column;gap:4px">
+              <div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><span style="font-size:13px;font-weight:600">{{ f.name }}</span><span style="font-size:11px;font-weight:600;padding:1px 8px;border-radius:10px;white-space:nowrap;background:{{ f.vBg }};color:{{ f.vFg }}">{{ f.ver }}</span></div>
+              <span style="font-size:12px;color:#4A5A70;line-height:1.45">{{ f.per }} · {{ f.dep }}</span>
+            </div>
+          </sc-for>
+          <div style="border-top:1px solid #D5DEEA;padding-top:10px;font-size:12px;line-height:1.5;color:#4A5A70"><strong style="color:#13201F;font-weight:600">Fuera de alcance:</strong> incidencias por manejo de efectivo (sin detección en el ETL) y cumplimiento de protocolo verbal (audio aún no integrado a Mongo).</div>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ v.espera }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Móvil · Espera" style="display:flex;flex-direction:column;gap:12px">
+        
+      <div style="padding:4px 4px 0">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#4A5A70;letter-spacing:.06em">01</div>
+        <h2 style="margin:2px 0 0;font-size:22px;font-weight:600;color:#004AAD">Espera del paciente</h2>
+        <p style="margin:4px 0 0;font-size:14px;line-height:1.45;color:#13201F;text-wrap:pretty">Cuánto espera un paciente desde que entra hasta que pasa a consultorio.</p>
+      </div>
+        
+      <div data-screen-label="Tiempo de espera por hora" style="position:{{ F.espera.pos }};inset:{{ F.espera.inset }};z-index:{{ F.espera.z }};border-radius:{{ F.espera.r }};overflow:{{ F.espera.ov }};padding:{{ F.espera.pad }};background:#FFFFFF;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+          <div style="min-width:0"><div style="font-size:15px;font-weight:600">Tiempo de espera por hora</div><div style="font-size:12px;color:#4A5A70;margin-top:2px;line-height:1.4">Minutos promedio · hora de entrada</div></div>
+          <button onClick="{{ F.espera.toggle }}" aria-label="{{ F.espera.label }}" style="flex:none;width:44px;height:44px;margin:-6px -6px 0 0;border-radius:50%;border:0;background:#FFFFFF;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#004AAD;transition:background-color .2s" style-hover="background-color:#E6ECF5" style-active="background-color:#D5DEEA">
+            <sc-if value="{{ F.espera.off }}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" x2="14" y1="3" y2="10"></line><line x1="3" x2="10" y1="21" y2="14"></line></svg></sc-if>
+            <sc-if value="{{ F.espera.on }}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></sc-if>
+          </button>
+        </div>
+        <div style="display:flex;gap:6px 12px;flex-wrap:wrap;font-size:11px;color:#4A5A70"><span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;background:#8CC0E4"></span>Entrada → recepción</span><span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;background:#004AAD"></span>Recepción → operatorio</span><span style="display:flex;align-items:center;gap:5px"><span style="width:14px;border-top:2px dashed #BE3030"></span>Meta {{ meta }} min</span></div>
+        
+        <div style="display:grid;grid-template-columns:22px minmax(0,1fr);column-gap:6px;row-gap:6px">
+          <div style="position:relative;height:{{ F.espera.ch }}"><sc-for list="{{ waitTicks }}" as="t" hint-placeholder-count="5"><span style="position:absolute;right:0;bottom:{{ t.b }};transform:translateY(50%);font-family:'IBM Plex Mono',monospace;font-size:10px;color:#6B7A90">{{ t.v }}</span></sc-for></div>
+          <div style="position:relative;height:{{ F.espera.ch }};border-bottom:1px solid #C9D3E0">
+            <sc-for list="{{ waitTicks }}" as="t" hint-placeholder-count="5"><div style="position:absolute;left:0;right:0;bottom:{{ t.b }};border-top:1px solid #EEF2F8"></div></sc-for>
+            <div style="position:absolute;inset:0;display:flex;gap:3px;align-items:flex-end">
+              <sc-for list="{{ waitBars }}" as="w" hint-placeholder-count="12">
+                <div onClick="{{ tapTip }}" data-tip="{{ w.tip }}" style="flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;border-radius:6px 6px 0 0;cursor:pointer" style-active="background-color:#EEF4FB">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;margin-bottom:2px;color:{{ w.tc }};font-weight:{{ w.tw }}">{{ w.total }}</span>
+                  <div style="width:70%;height:{{ w.bH }};background:#004AAD;border-radius:2px 2px 0 0"></div>
+                  <div style="width:70%;height:{{ w.aH }};background:#8CC0E4;border-top:1px solid #FFFFFF"></div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="position:absolute;left:0;right:0;bottom:{{ metaB }};border-top:2px dashed #BE3030;pointer-events:none"></div>
+          </div>
+          <div></div><div style="display:flex;gap:3px"><sc-for list="{{ hourShort }}" as="h" hint-placeholder-count="12"><span style="flex:1;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:9px;color:#4A5A70">{{ h }}</span></sc-for></div>
+        </div>
+        <sc-if value="{{ F.espera.on }}" hint-placeholder-val="{{ false }}"><div style="margin-top:auto;font-size:11px;color:#6B7A90;text-align:center">Gire el dispositivo para ver más detalle · toque los elementos para ver cifras</div></sc-if>
+      </div>
+        
+      <div data-screen-label="Distribución de esperas" style="position:{{ F.dist.pos }};inset:{{ F.dist.inset }};z-index:{{ F.dist.z }};border-radius:{{ F.dist.r }};overflow:{{ F.dist.ov }};padding:{{ F.dist.pad }};background:#FFFFFF;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+          <div style="min-width:0"><div style="font-size:15px;font-weight:600">Distribución de esperas</div><div style="font-size:12px;color:#4A5A70;margin-top:2px;line-height:1.4">% de pacientes del periodo por rango de espera total</div></div>
+          <button onClick="{{ F.dist.toggle }}" aria-label="{{ F.dist.label }}" style="flex:none;width:44px;height:44px;margin:-6px -6px 0 0;border-radius:50%;border:0;background:#FFFFFF;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#004AAD;transition:background-color .2s" style-hover="background-color:#E6ECF5" style-active="background-color:#D5DEEA">
+            <sc-if value="{{ F.dist.off }}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" x2="14" y1="3" y2="10"></line><line x1="3" x2="10" y1="21" y2="14"></line></svg></sc-if>
+            <sc-if value="{{ F.dist.on }}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></sc-if>
+          </button>
+        </div>
+        <div style="display:flex;gap:6px 12px;flex-wrap:wrap;font-size:11px;color:#4A5A70"></div>
+        
+        <div style="display:flex;height:34px;border-radius:6px;overflow:hidden;gap:2px">
+          <sc-for list="{{ dist }}" as="d" hint-placeholder-count="3"><div onClick="{{ tapTip }}" data-tip="{{ d.tip }}" style="width:{{ d.w }};background:{{ d.bg }};color:{{ d.fg }};display:flex;align-items:center;padding-left:8px;white-space:nowrap;overflow:hidden;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;cursor:pointer">{{ d.inLabel }}</div></sc-for>
+        </div>
+        <div style="display:flex;flex-direction:column">
+          <sc-for list="{{ dist }}" as="d" hint-placeholder-count="3">
+            <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px;border-bottom:1px solid #EEF2F8;padding:9px 0">
+              <span style="display:flex;align-items:center;gap:8px"><span style="width:10px;height:10px;background:{{ d.bg }}"></span>{{ d.label }}</span>
+              <span style="display:flex;gap:10px;align-items:center"><span style="font-size:11px;color:{{ d.tc }};font-weight:600">{{ d.tag }}</span><span style="font-family:'IBM Plex Mono',monospace;font-weight:600;min-width:38px;text-align:right">{{ d.pct }}</span></span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="background:#F4F7FB;border-radius:10px;padding:12px;font-size:13px;line-height:1.5">El tramo recepción → operatorio concentra <strong style="font-family:'IBM Plex Mono',monospace">{{ bShare }}</strong> de la espera.</div>
+        <sc-if value="{{ F.dist.on }}" hint-placeholder-val="{{ false }}"><div style="margin-top:auto;font-size:11px;color:#6B7A90;text-align:center">Gire el dispositivo para ver más detalle · toque los elementos para ver cifras</div></sc-if>
+      </div>
+        
+      <div data-screen-label="Espera por sucursal" style="position:{{ F.wbr.pos }};inset:{{ F.wbr.inset }};z-index:{{ F.wbr.z }};border-radius:{{ F.wbr.r }};overflow:{{ F.wbr.ov }};padding:{{ F.wbr.pad }};background:#FFFFFF;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+          <div style="min-width:0"><div style="font-size:15px;font-weight:600">Espera por sucursal</div><div style="font-size:12px;color:#4A5A70;margin-top:2px;line-height:1.4">Minutos promedio por tramo · toque para filtrar el tablero</div></div>
+          <button onClick="{{ F.wbr.toggle }}" aria-label="{{ F.wbr.label }}" style="flex:none;width:44px;height:44px;margin:-6px -6px 0 0;border-radius:50%;border:0;background:#FFFFFF;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#004AAD;transition:background-color .2s" style-hover="background-color:#E6ECF5" style-active="background-color:#D5DEEA">
+            <sc-if value="{{ F.wbr.off }}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" x2="14" y1="3" y2="10"></line><line x1="3" x2="10" y1="21" y2="14"></line></svg></sc-if>
+            <sc-if value="{{ F.wbr.on }}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></sc-if>
+          </button>
+        </div>
+        <div style="display:flex;gap:6px 12px;flex-wrap:wrap;font-size:11px;color:#4A5A70"><span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;background:#8CC0E4"></span>Entrada → recepción</span><span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;background:#004AAD"></span>Recepción → operatorio</span><span style="display:flex;align-items:center;gap:5px"><span style="width:14px;border-top:2px dashed #BE3030"></span>Meta</span></div>
+        
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <sc-for list="{{ waitBranches }}" as="r" hint-placeholder-count="3">
+            <button onClick="{{ r.select }}" style="border:0;text-align:left;display:flex;flex-direction:column;gap:6px;padding:10px;border-radius:10px;cursor:pointer;background:{{ r.bg }};font-family:'IBM Plex Sans',sans-serif;color:#13201F" style-active="background-color:#EEF4FB">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%"><span style="font-size:14px;font-weight:{{ r.fw }}">{{ r.name }}</span><span style="display:flex;align-items:center;gap:8px"><span style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600">{{ r.total }}</span><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:2px 8px 2px 4px;border-radius:12px;background:{{ r.stBg }};color:{{ r.stFg }}"><span style="width:10px;height:10px;border-radius:50%;background:{{ r.stDot }}"></span>{{ r.stLabel }}</span></span></div>
+              <div style="position:relative;height:12px;background:#F4F7FB;border-radius:3px;display:flex;gap:2px;width:100%"><div style="width:{{ r.aW }};background:#8CC0E4;border-radius:3px 0 0 3px"></div><div style="width:{{ r.bW }};background:#004AAD;border-radius:0 3px 3px 0"></div><div style="position:absolute;top:-3px;bottom:-3px;left:{{ metaW }};border-left:2px dashed #BE3030"></div></div>
+            </button>
+          </sc-for>
+        </div>
+        <sc-if value="{{ F.wbr.on }}" hint-placeholder-val="{{ false }}"><div style="margin-top:auto;font-size:11px;color:#6B7A90;text-align:center">Gire el dispositivo para ver más detalle · toque los elementos para ver cifras</div></sc-if>
+      </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ v.saturacion }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Móvil · Saturación" style="display:flex;flex-direction:column;gap:12px">
+        
+      <div style="padding:4px 4px 0">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#4A5A70;letter-spacing:.06em">02</div>
+        <h2 style="margin:2px 0 0;font-size:22px;font-weight:600;color:#004AAD">Saturación</h2>
+        <p style="margin:4px 0 0;font-size:14px;line-height:1.45;color:#13201F;text-wrap:pretty">Cuándo y dónde se disparan las alertas de aglomeración.</p>
+      </div>
+        <div style="display:flex;gap:6px;overflow-x:auto;margin:0 -12px;padding:0 12px;scrollbar-width:none">
+          <sc-for list="{{ zoneChips }}" as="z" hint-placeholder-count="4">
+            <button onClick="{{ z.select }}" aria-pressed="{{ z.pressed }}" style="flex:none;display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 14px 0 {{ z.pl }};border-radius:18px;border:1px solid {{ z.bd }};background:{{ z.bg }};color:{{ z.fg }};font-size:13px;font-weight:{{ z.fw }};cursor:pointer;white-space:nowrap;font-family:'IBM Plex Sans',sans-serif;transition:background-color .2s,border-color .2s,color .2s">
+              <sc-if value="{{ z.on }}" hint-placeholder-val="{{ false }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>
+              {{ z.label }}
+            </button>
+          </sc-for>
+        </div>
+        
+      <div data-screen-label="Alertas por día y hora" style="position:{{ F.heat.pos }};inset:{{ F.heat.inset }};z-index:{{ F.heat.z }};border-radius:{{ F.heat.r }};overflow:{{ F.heat.ov }};padding:{{ F.heat.pad }};background:#FFFFFF;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+          <div style="min-width:0"><div style="font-size:15px;font-weight:600">Alertas por día y hora</div><div style="font-size:12px;color:#4A5A70;margin-top:2px;line-height:1.4">Conteo de alertas · {{ heatScope }} · total <span style="font-family:'IBM Plex Mono',monospace;color:#13201F">{{ heatTotal }}</span></div></div>
+          <button onClick="{{ F.heat.toggle }}" aria-label="{{ F.heat.label }}" style="flex:none;width:44px;height:44px;margin:-6px -6px 0 0;border-radius:50%;border:0;background:#FFFFFF;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#004AAD;transition:background-color .2s" style-hover="background-color:#E6ECF5" style-active="background-color:#D5DEEA">
+            <sc-if value="{{ F.heat.off }}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" x2="14" y1="3" y2="10"></line><line x1="3" x2="10" y1="21" y2="14"></line></svg></sc-if>
+            <sc-if value="{{ F.heat.on }}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></sc-if>
+          </button>
+        </div>
+        <div style="display:flex;gap:6px 12px;flex-wrap:wrap;font-size:11px;color:#4A5A70"><span>Nivel</span><sc-for list="{{ heatLegend }}" as="l" hint-placeholder-count="5"><span style="min-width:26px;height:18px;padding:0 4px;border-radius:3px;background:{{ l.bg }};color:{{ l.fg }};display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:10px">{{ l.label }}</span></sc-for></div>
+        
+        <div style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:3px 6px">
+          <sc-for list="{{ heat }}" as="r" hint-placeholder-count="7">
+            <span style="font-size:11px;color:#4A5A70;display:flex;align-items:center">{{ r.day }}</span>
+            <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:2px">
+              <sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="12"><div onClick="{{ tapTip }}" data-tip="{{ c.tip }}" style="height:{{ F.heat.cell }};border-radius:4px;background:{{ c.bg }};color:{{ c.fg }};display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:10px;cursor:pointer">{{ c.v }}</div></sc-for>
+            </div>
+          </sc-for>
+          <span></span>
+          <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:2px"><sc-for list="{{ hourShort }}" as="h" hint-placeholder-count="12"><span style="text-align:center;font-family:'IBM Plex Mono',monospace;font-size:9px;color:#4A5A70">{{ h }}</span></sc-for></div>
+        </div>
+        <sc-if value="{{ F.heat.on }}" hint-placeholder-val="{{ false }}"><div style="margin-top:auto;font-size:11px;color:#6B7A90;text-align:center">Gire el dispositivo para ver más detalle · toque los elementos para ver cifras</div></sc-if>
+      </div>
+        
+      <div data-screen-label="Alertas por zona" style="position:{{ F.zonas.pos }};inset:{{ F.zonas.inset }};z-index:{{ F.zonas.z }};border-radius:{{ F.zonas.r }};overflow:{{ F.zonas.ov }};padding:{{ F.zonas.pad }};background:#FFFFFF;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+          <div style="min-width:0"><div style="font-size:15px;font-weight:600">Alertas por zona</div><div style="font-size:12px;color:#4A5A70;margin-top:2px;line-height:1.4">Conteo por área · toque para activar o desactivar</div></div>
+          <button onClick="{{ F.zonas.toggle }}" aria-label="{{ F.zonas.label }}" style="flex:none;width:44px;height:44px;margin:-6px -6px 0 0;border-radius:50%;border:0;background:#FFFFFF;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#004AAD;transition:background-color .2s" style-hover="background-color:#E6ECF5" style-active="background-color:#D5DEEA">
+            <sc-if value="{{ F.zonas.off }}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" x2="14" y1="3" y2="10"></line><line x1="3" x2="10" y1="21" y2="14"></line></svg></sc-if>
+            <sc-if value="{{ F.zonas.on }}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></sc-if>
+          </button>
+        </div>
+        <div style="display:flex;gap:6px 12px;flex-wrap:wrap;font-size:11px;color:#4A5A70"><span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;background:#FFBD7A"></span>Alertas</span><span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;background:#C97A20"></span>Zona seleccionada</span></div>
+        
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <sc-for list="{{ zones }}" as="z" hint-placeholder-count="3">
+            <button onClick="{{ z.select }}" style="border:0;text-align:left;display:flex;flex-direction:column;gap:6px;padding:10px;border-radius:10px;cursor:pointer;background:{{ z.bg }};font-family:'IBM Plex Sans',sans-serif;color:#13201F">
+              <div style="display:flex;justify-content:space-between;font-size:14px;width:100%"><span style="font-weight:{{ z.fw }}">{{ z.name }}</span><span><span style="font-family:'IBM Plex Mono',monospace;font-weight:600">{{ z.v }}</span> <span style="color:#4A5A70;font-size:12px">· {{ z.pct }}</span></span></div>
+              <div style="height:10px;background:#F4F7FB;border-radius:3px;width:100%"><div style="height:100%;width:{{ z.w }};background:{{ z.bar }};border-radius:3px"></div></div>
+            </button>
+          </sc-for>
+        </div>
+        <div style="background:#F4F7FB;border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:6px">
+          <div style="font-size:11px;color:#4A5A70;letter-spacing:.06em">PICO POR SUCURSAL</div>
+          <sc-for list="{{ peaks }}" as="pk" hint-placeholder-count="3"><div style="display:flex;justify-content:space-between;gap:8px;font-size:12px"><span><strong style="font-weight:600">{{ pk.name }}</strong> · {{ pk.when }}</span><span style="font-family:'IBM Plex Mono',monospace;font-weight:500;white-space:nowrap">{{ pk.v }}</span></div></sc-for>
+        </div>
+        <sc-if value="{{ F.zonas.on }}" hint-placeholder-val="{{ false }}"><div style="margin-top:auto;font-size:11px;color:#6B7A90;text-align:center">Gire el dispositivo para ver más detalle · toque los elementos para ver cifras</div></sc-if>
+      </div>
+        
+      <div data-screen-label="Plano operativo · {{ plan.name }}" style="position:{{ F.plano.pos }};inset:{{ F.plano.inset }};z-index:{{ F.plano.z }};border-radius:{{ F.plano.r }};overflow:{{ F.plano.ov }};padding:{{ F.plano.pad }};background:#FFFFFF;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+          <div style="min-width:0"><div style="font-size:15px;font-weight:600">Plano operativo · {{ plan.name }}</div><div style="font-size:12px;color:#4A5A70;margin-top:2px;line-height:1.4">Mapa de calor por espacio · {{ plan.unitTxt }}</div></div>
+          <button onClick="{{ F.plano.toggle }}" aria-label="{{ F.plano.label }}" style="flex:none;width:44px;height:44px;margin:-6px -6px 0 0;border-radius:50%;border:0;background:#FFFFFF;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#004AAD;transition:background-color .2s" style-hover="background-color:#E6ECF5" style-active="background-color:#D5DEEA">
+            <sc-if value="{{ F.plano.off }}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" x2="14" y1="3" y2="10"></line><line x1="3" x2="10" y1="21" y2="14"></line></svg></sc-if>
+            <sc-if value="{{ F.plano.on }}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></sc-if>
+          </button>
+        </div>
+        <div style="display:flex;gap:6px 12px;flex-wrap:wrap;font-size:11px;color:#4A5A70"><span>{{ plan.metricLabel }}</span><span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:50%;background:#8CC0E4"></span>Baja</span><span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:50%;background:#FFBD7A"></span>Media</span><span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:50%;background:#BE3030"></span>Alta</span></div>
+        
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <sc-if value="{{ plan.showBr }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;gap:2px;background:#F4F7FB;border-radius:20px;padding:3px">
+              <sc-for list="{{ plan.brTabs }}" as="t" hint-placeholder-count="3"><button onClick="{{ t.select }}" style="flex:1;border:0;border-radius:18px;height:34px;font-size:13px;font-weight:{{ t.fw }};background:{{ t.bg }};color:{{ t.fg }};cursor:pointer;font-family:'IBM Plex Sans',sans-serif">{{ t.label }}</button></sc-for>
+            </div>
+          </sc-if>
+          <div style="display:flex;border:1px solid #004AAD;border-radius:20px;overflow:hidden">
+            <sc-for list="{{ plan.mTabs }}" as="t" hint-placeholder-count="2"><button onClick="{{ t.select }}" style="flex:1;border:0;height:34px;font-size:13px;font-weight:{{ t.fw }};background:{{ t.bg }};color:{{ t.fg }};cursor:pointer;font-family:'IBM Plex Sans',sans-serif">{{ t.label }}</button></sc-for>
+          </div>
+        </div>
+        <div style="background:#F4F7FB;border-radius:14px;padding:8px;display:flex;justify-content:center">
+          <div style="position:relative;width:100%;max-width:{{ F.plano.planMw }};aspect-ratio:{{ plan.ar }};overflow:hidden;border-radius:6px;background:#FFFFFF">
+            <sc-if value="{{ plan.isUni }}" hint-placeholder-val="{{ false }}"><img src="assets/plano-universidad.png" alt="Plano sucursal Universidad" style="position:absolute;width:{{ plan.iw }};left:{{ plan.il }};top:{{ plan.it }};max-width:none;opacity:.85;pointer-events:none"></sc-if>
+            <sc-if value="{{ plan.isSat }}" hint-placeholder-val="{{ false }}"><img src="assets/plano-satelite.png" alt="Plano sucursal Satélite" style="position:absolute;width:{{ plan.iw }};left:{{ plan.il }};top:{{ plan.it }};max-width:none;opacity:.85;pointer-events:none"></sc-if>
+            <sc-if value="{{ plan.isInt }}" hint-placeholder-val="{{ false }}"><img src="assets/plano-interlomas.png" alt="Plano sucursal Interlomas" style="position:absolute;width:{{ plan.iw }};left:{{ plan.il }};top:{{ plan.it }};max-width:none;opacity:.85;pointer-events:none"></sc-if>
+            <sc-for list="{{ plan.blobs }}" as="b" hint-placeholder-count="0"><div style="position:absolute;left:{{ b.x }};top:{{ b.y }};width:{{ b.s }};aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:{{ b.bg }};mix-blend-mode:multiply;pointer-events:none"></div></sc-for>
+            <sc-for list="{{ plan.marks }}" as="m" hint-placeholder-count="0"><button onClick="{{ m.select }}" style="position:absolute;left:{{ m.x }};top:{{ m.y }};transform:translate(-50%,-50%);display:flex;align-items:center;gap:3px;border:1px solid {{ m.bd }};background:{{ m.bg }};color:{{ m.fg }};border-radius:10px;padding:1px 5px 1px 3px;font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;white-space:nowrap;cursor:pointer;box-shadow:0 1px 3px rgba(0,74,173,.18)"><span style="width:6px;height:6px;border-radius:50%;background:{{ m.dot }}"></span>{{ m.code }}</button></sc-for>
+          </div>
+        </div>
+        <div style="border:1px solid #D5DEEA;border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+            <div><div style="font-size:10px;color:#6B7A90;letter-spacing:.06em">FICHA · <span style="font-family:'IBM Plex Mono',monospace">{{ plan.sel.code }}</span></div><div style="font-size:15px;font-weight:600;color:#004AAD">{{ plan.sel.label }}</div><div style="font-size:11px;color:#4A5A70">{{ plan.sel.typeTxt }} · promedio diario</div></div>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;white-space:nowrap;padding:2px 8px 2px 4px;border-radius:12px;background:{{ plan.sel.stBg }};color:{{ plan.sel.stFg }}"><span style="width:10px;height:10px;border-radius:50%;background:{{ plan.sel.stDot }}"></span>{{ plan.sel.stLabel }}</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px">
+            <sc-for list="{{ plan.sel.stats }}" as="st" hint-placeholder-count="6"><div><div style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:500">{{ st.v }}</div><div style="font-size:10px;color:#4A5A70;line-height:1.3">{{ st.l }}</div></div></sc-for>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:2px;height:48px;align-items:end">
+            <sc-for list="{{ plan.sel.hours }}" as="h" hint-placeholder-count="12"><div onClick="{{ tapTip }}" data-tip="{{ h.tip }}" style="height:{{ h.h }};min-height:2px;background:{{ h.bg }};border-radius:2px 2px 0 0;cursor:pointer"></div></sc-for>
+          </div>
+          <div style="display:flex;gap:2px"><sc-for list="{{ hourShort }}" as="h" hint-placeholder-count="12"><span style="flex:1;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:9px;color:#4A5A70">{{ h }}</span></sc-for></div>
+        </div>
+        <sc-if value="{{ F.plano.on }}" hint-placeholder-val="{{ false }}"><div style="margin-top:auto;font-size:11px;color:#6B7A90;text-align:center">Gire el dispositivo para ver más detalle · toque los elementos para ver cifras</div></sc-if>
+      </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ v.consultorios }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Móvil · Consultorios" style="display:flex;flex-direction:column;gap:12px">
+        
+      <div style="padding:4px 4px 0">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#4A5A70;letter-spacing:.06em">03</div>
+        <h2 style="margin:2px 0 0;font-size:22px;font-weight:600;color:#004AAD">Consultorios</h2>
+        <p style="margin:4px 0 0;font-size:14px;line-height:1.45;color:#13201F;text-wrap:pretty">Ocupado con 2 o más personas dentro del área del consultorio.</p>
+      </div>
+        
+      <div data-screen-label="Uso por hora" style="position:{{ F.uso.pos }};inset:{{ F.uso.inset }};z-index:{{ F.uso.z }};border-radius:{{ F.uso.r }};overflow:{{ F.uso.ov }};padding:{{ F.uso.pad }};background:#FFFFFF;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+          <div style="min-width:0"><div style="font-size:15px;font-weight:600">Uso por hora</div><div style="font-size:12px;color:#4A5A70;margin-top:2px;line-height:1.4">Viernes 25 sep · minutos ocupados por hora · toque una fila</div></div>
+          <button onClick="{{ F.uso.toggle }}" aria-label="{{ F.uso.label }}" style="flex:none;width:44px;height:44px;margin:-6px -6px 0 0;border-radius:50%;border:0;background:#FFFFFF;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#004AAD;transition:background-color .2s" style-hover="background-color:#E6ECF5" style-active="background-color:#D5DEEA">
+            <sc-if value="{{ F.uso.off }}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" x2="14" y1="3" y2="10"></line><line x1="3" x2="10" y1="21" y2="14"></line></svg></sc-if>
+            <sc-if value="{{ F.uso.on }}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></sc-if>
+          </button>
+        </div>
+        <div style="display:flex;gap:6px 12px;flex-wrap:wrap;font-size:11px;color:#4A5A70"><span>Min / hora</span><sc-for list="{{ useLegend }}" as="l" hint-placeholder-count="4"><span style="height:16px;padding:0 5px;border-radius:3px;background:{{ l.bg }};display:flex;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#13201F">{{ l.label }}</span></sc-for></div>
+        
+        <div style="display:grid;grid-template-columns:62px minmax(0,1fr) 34px;gap:3px 6px;align-items:center">
+          <sc-for list="{{ mUseRows }}" as="g" hint-placeholder-count="11">
+            <span onClick="{{ g.select }}" style="font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;font-weight:{{ g.fw }};color:{{ g.fg }}">{{ g.mlabel }}</span>
+            <div onClick="{{ g.select }}" style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:2px;cursor:pointer;padding:1px;border-radius:4px;outline:2px solid {{ g.bd }}">
+              <sc-for list="{{ g.cells }}" as="c" hint-placeholder-count="12"><div style="height:{{ F.uso.ucell }};border-radius:3px;background:{{ c.bg }}"></div></sc-for>
+            </div>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;text-align:right">{{ g.pct }}</span>
+          </sc-for>
+          <span style="font-size:11px;font-weight:600;padding-top:6px">Vacíos</span>
+          <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:2px;padding:8px 1px 0;border-top:1px solid #EEF2F8">
+            <sc-for list="{{ emptyByHour }}" as="e" hint-placeholder-count="12"><div onClick="{{ tapTip }}" data-tip="{{ e.tip }}" style="height:22px;border-radius:3px;background:{{ e.bg }};border:1px solid {{ e.bd }};display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:{{ e.fg }};cursor:pointer">{{ e.v }}</div></sc-for>
+          </div>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;text-align:right;padding-top:6px">{{ emptyAvg }}</span>
+          <span></span><div style="display:flex;gap:2px"><sc-for list="{{ hourShort }}" as="h" hint-placeholder-count="12"><span style="flex:1;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:9px;color:#4A5A70">{{ h }}</span></sc-for></div><span style="font-size:9px;color:#6B7A90;text-align:right">prom.</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#4A5A70"><span style="width:10px;height:10px;border-radius:2px;background:#FBEDCF;border:1px solid #C97A20"></span>Mitad o más de los consultorios vacíos</div>
+        <sc-if value="{{ F.uso.on }}" hint-placeholder-val="{{ false }}"><div style="margin-top:auto;font-size:11px;color:#6B7A90;text-align:center">Gire el dispositivo para ver más detalle · toque los elementos para ver cifras</div></sc-if>
+      </div>
+        <div style="background:#FFFFFF;border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+            <div><div style="font-size:10px;color:#6B7A90;letter-spacing:.06em">DETALLE</div><div style="font-size:16px;font-weight:600;color:#004AAD">{{ det.name }}</div><div style="font-size:12px;color:#4A5A70">{{ det.branch }}</div></div>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;white-space:nowrap;padding:2px 8px 2px 4px;border-radius:12px;background:{{ det.stBg }};color:{{ det.stFg }}"><span style="width:10px;height:10px;border-radius:50%;background:{{ det.stDot }}"></span>{{ det.stLabel }}</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px">
+            <sc-for list="{{ det.stats }}" as="st" hint-placeholder-count="4"><div><div style="font-family:'IBM Plex Mono',monospace;font-size:17px;font-weight:500">{{ st.v }}</div><div style="font-size:11px;color:#4A5A70">{{ st.l }}</div></div></sc-for>
+          </div>
+        </div>
+        
+      <div data-screen-label="Ranking de ocupación" style="position:{{ F.rank.pos }};inset:{{ F.rank.inset }};z-index:{{ F.rank.z }};border-radius:{{ F.rank.r }};overflow:{{ F.rank.ov }};padding:{{ F.rank.pad }};background:#FFFFFF;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+          <div style="min-width:0"><div style="font-size:15px;font-weight:600">Ranking de ocupación</div><div style="font-size:12px;color:#4A5A70;margin-top:2px;line-height:1.4">% semanal de tiempo ocupado · toque para ver detalle</div></div>
+          <button onClick="{{ F.rank.toggle }}" aria-label="{{ F.rank.label }}" style="flex:none;width:44px;height:44px;margin:-6px -6px 0 0;border-radius:50%;border:0;background:#FFFFFF;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#004AAD;transition:background-color .2s" style-hover="background-color:#E6ECF5" style-active="background-color:#D5DEEA">
+            <sc-if value="{{ F.rank.off }}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" x2="14" y1="3" y2="10"></line><line x1="3" x2="10" y1="21" y2="14"></line></svg></sc-if>
+            <sc-if value="{{ F.rank.on }}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></sc-if>
+          </button>
+        </div>
+        <div style="display:flex;gap:6px 12px;flex-wrap:wrap;font-size:11px;color:#4A5A70"><span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;background:#5B9BD5"></span>≥ 65 % adecuado</span><span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;background:#B7D6EF"></span>< 65 % subutilizado</span><span style="display:flex;align-items:center;gap:5px"><span style="width:14px;border-top:2px dashed #52B52A"></span>Ref. 65 %</span></div>
+        
+        <div style="display:flex;flex-direction:column;gap:1px">
+          <sc-for list="{{ ranking }}" as="r" hint-placeholder-count="11">
+            <button onClick="{{ r.select }}" style="border:0;display:grid;grid-template-columns:72px minmax(0,1fr) 38px;gap:8px;align-items:center;cursor:pointer;padding:0 8px;height:34px;border-radius:6px;background:{{ r.rowBg }};font-family:'IBM Plex Sans',sans-serif;color:#13201F;text-align:left">
+              <span style="font-size:12px;white-space:nowrap;font-weight:{{ r.fw }}">{{ r.label }}</span>
+              <div style="position:relative;height:10px;background:#F4F7FB;border-radius:3px"><div style="height:100%;width:{{ r.w }};background:{{ r.bg }};border-radius:3px"></div><div style="position:absolute;top:-3px;bottom:-3px;left:65%;border-left:2px dashed #52B52A"></div></div>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;text-align:right">{{ r.v }}</span>
+            </button>
+          </sc-for>
+        </div>
+        <sc-if value="{{ F.rank.on }}" hint-placeholder-val="{{ false }}"><div style="margin-top:auto;font-size:11px;color:#6B7A90;text-align:center">Gire el dispositivo para ver más detalle · toque los elementos para ver cifras</div></sc-if>
+      </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ v.cruces }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Móvil · Espera – Ocupación" style="display:flex;flex-direction:column;gap:12px">
+        
+      <div style="padding:4px 4px 0">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#4A5A70;letter-spacing:.06em">04</div>
+        <h2 style="margin:2px 0 0;font-size:22px;font-weight:600;color:#004AAD">Espera – Ocupación</h2>
+        <p style="margin:4px 0 0;font-size:14px;line-height:1.45;color:#13201F;text-wrap:pretty">¿La espera se debe a la saturación de la sala o a consultorios que no se liberan?</p>
+      </div>
+        
+      <div data-screen-label="Espera vs. saturación" style="position:{{ F.c1.pos }};inset:{{ F.c1.inset }};z-index:{{ F.c1.z }};border-radius:{{ F.c1.r }};overflow:{{ F.c1.ov }};padding:{{ F.c1.pad }};background:#FFFFFF;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+          <div style="min-width:0"><div style="font-size:15px;font-weight:600">Espera vs. saturación</div><div style="font-size:12px;color:#4A5A70;margin-top:2px;line-height:1.4">Izq.: alertas (conteo) · Der.: espera (min)</div></div>
+          <button onClick="{{ F.c1.toggle }}" aria-label="{{ F.c1.label }}" style="flex:none;width:44px;height:44px;margin:-6px -6px 0 0;border-radius:50%;border:0;background:#FFFFFF;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#004AAD;transition:background-color .2s" style-hover="background-color:#E6ECF5" style-active="background-color:#D5DEEA">
+            <sc-if value="{{ F.c1.off }}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" x2="14" y1="3" y2="10"></line><line x1="3" x2="10" y1="21" y2="14"></line></svg></sc-if>
+            <sc-if value="{{ F.c1.on }}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></sc-if>
+          </button>
+        </div>
+        <div style="display:flex;gap:6px 12px;flex-wrap:wrap;font-size:11px;color:#4A5A70"><span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;background:#FFBD7A"></span>Alertas de aglomeración</span><span style="display:flex;align-items:center;gap:5px"><span style="width:14px;border-top:2px solid #004AAD"></span>Espera promedio</span></div>
+        
+        <div style="display:grid;grid-template-columns:20px minmax(0,1fr) 20px;column-gap:6px;row-gap:6px">
+          <div style="position:relative;height:{{ F.c1.ch }}"><sc-for list="{{ c1.lTicks }}" as="t" hint-placeholder-count="5"><span style="position:absolute;right:0;bottom:{{ t.b }};transform:translateY(50%);font-family:'IBM Plex Mono',monospace;font-size:10px;color:#6B7A90">{{ t.v }}</span></sc-for></div>
+          <div style="position:relative;height:{{ F.c1.ch }};border-bottom:1px solid #C9D3E0">
+            <sc-for list="{{ c1.lTicks }}" as="t" hint-placeholder-count="5"><div style="position:absolute;left:0;right:0;bottom:{{ t.b }};border-top:1px solid #EEF2F8"></div></sc-for>
+            <div style="position:absolute;inset:0;display:flex;gap:3px;align-items:flex-end"><sc-for list="{{ c1.bars }}" as="b" hint-placeholder-count="12"><div style="flex:1;height:100%;display:flex;align-items:flex-end;justify-content:center"><div style="width:64%;height:{{ b.h }};background:#FFBD7A;border-radius:2px 2px 0 0"></div></div></sc-for></div>
+            <svg viewBox="0 0 1000 100" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none"><polyline points="{{ c1.line }}" fill="none" stroke="#004AAD" stroke-width="2" vector-effect="non-scaling-stroke"></polyline></svg>
+            <sc-for list="{{ c1.dots }}" as="d" hint-placeholder-count="12"><div style="position:absolute;left:{{ d.l }};bottom:{{ d.b }};width:7px;height:7px;margin:0 0 -3.5px -3.5px;border-radius:50%;background:#FFFFFF;border:2px solid #004AAD;pointer-events:none"></div></sc-for>
+            <div style="position:absolute;inset:0;display:flex;gap:3px"><sc-for list="{{ c1.cols }}" as="c" hint-placeholder-count="12"><div onClick="{{ tapTip }}" data-tip="{{ c.tip }}" style="flex:1;border-radius:4px;cursor:pointer" style-active="background-color:rgba(0,74,173,.08)"></div></sc-for></div>
+          </div>
+          <div style="position:relative;height:{{ F.c1.ch }}"><sc-for list="{{ c1.rTicks }}" as="t" hint-placeholder-count="5"><span style="position:absolute;left:0;bottom:{{ t.b }};transform:translateY(50%);font-family:'IBM Plex Mono',monospace;font-size:10px;color:#6B7A90">{{ t.v }}</span></sc-for></div>
+          <div></div><div style="display:flex;gap:3px"><sc-for list="{{ hourShort }}" as="h" hint-placeholder-count="12"><span style="flex:1;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:9px;color:#4A5A70">{{ h }}</span></sc-for></div><div></div>
+        </div>
+        <div style="font-size:13px;line-height:1.5">{{ c1.summary }}</div>
+        <sc-if value="{{ F.c1.on }}" hint-placeholder-val="{{ false }}"><div style="margin-top:auto;font-size:11px;color:#6B7A90;text-align:center">Gire el dispositivo para ver más detalle · toque los elementos para ver cifras</div></sc-if>
+      </div>
+        
+      <div data-screen-label="Espera vs. ocupación" style="position:{{ F.c2.pos }};inset:{{ F.c2.inset }};z-index:{{ F.c2.z }};border-radius:{{ F.c2.r }};overflow:{{ F.c2.ov }};padding:{{ F.c2.pad }};background:#FFFFFF;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+          <div style="min-width:0"><div style="font-size:15px;font-weight:600">Espera vs. ocupación</div><div style="font-size:12px;color:#4A5A70;margin-top:2px;line-height:1.4">Izq.: ocupación (%) · Der.: espera (min)</div></div>
+          <button onClick="{{ F.c2.toggle }}" aria-label="{{ F.c2.label }}" style="flex:none;width:44px;height:44px;margin:-6px -6px 0 0;border-radius:50%;border:0;background:#FFFFFF;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#004AAD;transition:background-color .2s" style-hover="background-color:#E6ECF5" style-active="background-color:#D5DEEA">
+            <sc-if value="{{ F.c2.off }}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" x2="14" y1="3" y2="10"></line><line x1="3" x2="10" y1="21" y2="14"></line></svg></sc-if>
+            <sc-if value="{{ F.c2.on }}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></sc-if>
+          </button>
+        </div>
+        <div style="display:flex;gap:6px 12px;flex-wrap:wrap;font-size:11px;color:#4A5A70"><span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;background:#B7D6EF"></span>Ocupación de consultorios</span><span style="display:flex;align-items:center;gap:5px"><span style="width:14px;border-top:2px solid #004AAD"></span>Espera promedio</span><span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;background:#FBEDCF"></span>Cuello de botella</span></div>
+        
+        <div style="display:grid;grid-template-columns:24px minmax(0,1fr) 20px;column-gap:6px;row-gap:6px">
+          <div style="position:relative;height:{{ F.c2.ch }}"><sc-for list="{{ c2.lTicks }}" as="t" hint-placeholder-count="5"><span style="position:absolute;right:0;bottom:{{ t.b }};transform:translateY(50%);font-family:'IBM Plex Mono',monospace;font-size:10px;color:#6B7A90">{{ t.v }}</span></sc-for></div>
+          <div style="position:relative;height:{{ F.c2.ch }};border-bottom:1px solid #C9D3E0">
+            <sc-if value="{{ c2.hasBand }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;top:0;bottom:0;left:{{ c2.bandL }};width:{{ c2.bandW }};background:#FBEDCF;border-left:1px dashed #C97A20;border-right:1px dashed #C97A20"></div></sc-if>
+            <sc-for list="{{ c2.lTicks }}" as="t" hint-placeholder-count="5"><div style="position:absolute;left:0;right:0;bottom:{{ t.b }};border-top:1px solid #EEF2F8"></div></sc-for>
+            <div style="position:absolute;inset:0;display:flex;gap:3px;align-items:flex-end"><sc-for list="{{ c2.bars }}" as="b" hint-placeholder-count="12"><div style="flex:1;height:100%;display:flex;align-items:flex-end;justify-content:center"><div style="width:64%;height:{{ b.h }};background:#B7D6EF;border-radius:2px 2px 0 0"></div></div></sc-for></div>
+            <svg viewBox="0 0 1000 100" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none"><polyline points="{{ c2.line }}" fill="none" stroke="#004AAD" stroke-width="2" vector-effect="non-scaling-stroke"></polyline></svg>
+            <sc-for list="{{ c2.dots }}" as="d" hint-placeholder-count="12"><div style="position:absolute;left:{{ d.l }};bottom:{{ d.b }};width:7px;height:7px;margin:0 0 -3.5px -3.5px;border-radius:50%;background:#FFFFFF;border:2px solid #004AAD;pointer-events:none"></div></sc-for>
+            <div style="position:absolute;inset:0;display:flex;gap:3px"><sc-for list="{{ c2.cols }}" as="c" hint-placeholder-count="12"><div onClick="{{ tapTip }}" data-tip="{{ c.tip }}" style="flex:1;border-radius:4px;cursor:pointer" style-active="background-color:rgba(0,74,173,.08)"></div></sc-for></div>
+          </div>
+          <div style="position:relative;height:{{ F.c2.ch }}"><sc-for list="{{ c1.rTicks }}" as="t" hint-placeholder-count="5"><span style="position:absolute;left:0;bottom:{{ t.b }};transform:translateY(50%);font-family:'IBM Plex Mono',monospace;font-size:10px;color:#6B7A90">{{ t.v }}</span></sc-for></div>
+          <div></div><div style="display:flex;gap:3px"><sc-for list="{{ hourShort }}" as="h" hint-placeholder-count="12"><span style="flex:1;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:9px;color:#4A5A70">{{ h }}</span></sc-for></div><div></div>
+        </div>
+        <sc-if value="{{ c2.hasBand }}" hint-placeholder-val="{{ true }}">
+          <div style="border:1px solid #C97A20;background:#FDF6E8;border-radius:10px;padding:10px 12px"><div style="font-size:13px;font-weight:600;color:#8F5410">Cuello de botella en recepción</div><div style="font-size:12px;margin-top:2px;line-height:1.45">{{ c2.note }}</div></div>
+        </sc-if>
+        <div style="font-size:13px;line-height:1.5">{{ c2.summary }}</div>
+        <sc-if value="{{ F.c2.on }}" hint-placeholder-val="{{ false }}"><div style="margin-top:auto;font-size:11px;color:#6B7A90;text-align:center">Gire el dispositivo para ver más detalle · toque los elementos para ver cifras</div></sc-if>
+      </div>
+        <div style="background:#FFFFFF;border-radius:16px;padding:12px 14px;font-size:12px;line-height:1.5"><strong style="font-weight:600;color:#004AAD">Tiempo de espera:</strong> minutos desde que el paciente cruza la línea de entrada hasta que ingresa al consultorio (entrada → recepción + recepción → operatorio).</div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ v.afluencia }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Móvil · Afluencias" style="display:flex;flex-direction:column;gap:12px">
+        
+      <div style="padding:4px 4px 0">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#4A5A70;letter-spacing:.06em">05</div>
+        <h2 style="margin:2px 0 0;font-size:22px;font-weight:600;color:#004AAD">Afluencias</h2>
+        <p style="margin:4px 0 0;font-size:14px;line-height:1.45;color:#13201F;text-wrap:pretty">Personas que cruzan la línea de entrada en recepción, día por día.</p>
+      </div>
+        
+      <div data-screen-label="Entradas por día · {{ af.month }}" style="position:{{ F.aflu.pos }};inset:{{ F.aflu.inset }};z-index:{{ F.aflu.z }};border-radius:{{ F.aflu.r }};overflow:{{ F.aflu.ov }};padding:{{ F.aflu.pad }};background:#FFFFFF;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+          <div style="min-width:0"><div style="font-size:15px;font-weight:600">Entradas por día · {{ af.month }}</div><div style="font-size:12px;color:#4A5A70;margin-top:2px;line-height:1.4">Total <span style="font-family:'IBM Plex Mono',monospace;color:#13201F">{{ af.total }}</span> · promedio diario <span style="font-family:'IBM Plex Mono',monospace;color:#13201F">{{ af.avg }}</span></div></div>
+          <button onClick="{{ F.aflu.toggle }}" aria-label="{{ F.aflu.label }}" style="flex:none;width:44px;height:44px;margin:-6px -6px 0 0;border-radius:50%;border:0;background:#FFFFFF;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#004AAD;transition:background-color .2s" style-hover="background-color:#E6ECF5" style-active="background-color:#D5DEEA">
+            <sc-if value="{{ F.aflu.off }}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" x2="14" y1="3" y2="10"></line><line x1="3" x2="10" y1="21" y2="14"></line></svg></sc-if>
+            <sc-if value="{{ F.aflu.on }}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></sc-if>
+          </button>
+        </div>
+        <div style="display:flex;gap:6px 12px;flex-wrap:wrap;font-size:11px;color:#4A5A70"><span style="display:flex;align-items:center;gap:5px"><span style="width:14px;border-top:2px solid #004AAD"></span>Entradas</span><span style="display:flex;align-items:center;gap:5px"><span style="width:14px;border-top:2px dashed #8C8C8C"></span>[Campaña]</span><sc-if value="{{ af.hasWeek }}" hint-placeholder-val="{{ true }}"><span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;background:#EEF4FB"></span>Semana seleccionada</span></sc-if></div>
+        
+        <div style="display:grid;grid-template-columns:30px minmax(0,1fr);column-gap:6px;row-gap:6px">
+          <div style="position:relative;height:{{ F.aflu.ch }}"><sc-for list="{{ af.ticks }}" as="t" hint-placeholder-count="5"><span style="position:absolute;right:0;bottom:{{ t.b }};transform:translateY(50%);font-family:'IBM Plex Mono',monospace;font-size:10px;color:#6B7A90">{{ t.v }}</span></sc-for></div>
+          <div style="position:relative;height:{{ F.aflu.ch }};border-bottom:1px solid #C9D3E0">
+            <sc-if value="{{ af.hasWeek }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;top:0;bottom:0;left:{{ af.weekL }};width:{{ af.weekW }};background:#EEF4FB"></div></sc-if>
+            <sc-for list="{{ af.ticks }}" as="t" hint-placeholder-count="5"><div style="position:absolute;left:0;right:0;bottom:{{ t.b }};border-top:1px solid #EEF2F8"></div></sc-for>
+            <sc-for list="{{ af.camps }}" as="c" hint-placeholder-count="2"><div style="position:absolute;top:0;bottom:0;left:{{ c.l }};border-left:2px dashed #8C8C8C"><span style="position:absolute;top:0;left:4px;font-size:9px;font-weight:500;color:#4A5A70;background:#FFFFFF;padding:0 3px;white-space:nowrap">[Campaña]</span></div></sc-for>
+            <svg viewBox="0 0 1000 100" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none"><polyline points="{{ af.line }}" fill="none" stroke="#004AAD" stroke-width="2" vector-effect="non-scaling-stroke"></polyline></svg>
+            <sc-for list="{{ af.dots }}" as="d" hint-placeholder-count="28"><div onClick="{{ tapTip }}" data-tip="{{ d.tip }}" style="position:absolute;left:{{ d.l }};bottom:{{ d.b }};width:14px;height:14px;margin:0 0 -7px -7px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer"><span style="width:5px;height:5px;border-radius:50%;background:{{ d.c }}"></span></div></sc-for>
+          </div>
+          <div></div>
+          <div style="position:relative;height:14px"><sc-for list="{{ af.xl }}" as="x" hint-placeholder-count="5"><span style="position:absolute;left:{{ x.l }};transform:translateX(-50%);font-family:'IBM Plex Mono',monospace;font-size:9px;color:#4A5A70;white-space:nowrap">{{ x.v }}</span></sc-for></div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:flex-start;border-top:1px solid #EEF2F8;padding-top:10px;font-size:12px;color:#1B3A6B;line-height:1.45"><span style="font-size:10px;font-weight:600;color:#8F5410;background:#FBEDCF;padding:1px 6px;border-radius:8px;white-space:nowrap">Pendiente</span><span>Tasa de captación pendiente: falta línea exterior de tráfico y calendario de campañas.</span></div>
+        <sc-if value="{{ F.aflu.on }}" hint-placeholder-val="{{ false }}"><div style="margin-top:auto;font-size:11px;color:#6B7A90;text-align:center">Gire el dispositivo para ver más detalle · toque los elementos para ver cifras</div></sc-if>
+      </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ v.abandono }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Móvil · Abandono" style="display:flex;flex-direction:column;gap:12px">
+        
+      <div style="padding:4px 4px 0">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#4A5A70;letter-spacing:.06em">06</div>
+        <h2 style="margin:2px 0 0;font-size:22px;font-weight:600;color:#004AAD">Abandono estimado</h2>
+        <p style="margin:4px 0 0;font-size:14px;line-height:1.45;color:#13201F;text-wrap:pretty">Pacientes que entran y salen sin pasar a consultorio, por franja horaria.</p>
+      </div>
+        
+      <div data-screen-label="Abandono por franja horaria" style="position:{{ F.aband.pos }};inset:{{ F.aband.inset }};z-index:{{ F.aband.z }};border-radius:{{ F.aband.r }};overflow:{{ F.aband.ov }};padding:{{ F.aband.pad }};background:#FFFFFF;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+          <div style="min-width:0"><div style="font-size:15px;font-weight:600">Abandono por franja horaria</div><div style="font-size:12px;color:#4A5A70;margin-top:2px;line-height:1.4">Izq.: % estimado · Der.: alertas de aglomeración</div></div>
+          <button onClick="{{ F.aband.toggle }}" aria-label="{{ F.aband.label }}" style="flex:none;width:44px;height:44px;margin:-6px -6px 0 0;border-radius:50%;border:0;background:#FFFFFF;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#004AAD;transition:background-color .2s" style-hover="background-color:#E6ECF5" style-active="background-color:#D5DEEA">
+            <sc-if value="{{ F.aband.off }}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" x2="14" y1="3" y2="10"></line><line x1="3" x2="10" y1="21" y2="14"></line></svg></sc-if>
+            <sc-if value="{{ F.aband.on }}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></sc-if>
+          </button>
+        </div>
+        <div style="display:flex;gap:6px 12px;flex-wrap:wrap;font-size:11px;color:#4A5A70"><span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;background:#8CC0E4"></span>Abandono estimado</span><span style="display:flex;align-items:center;gap:5px"><span style="width:14px;border-top:2px solid #C97A20"></span>Alertas de saturación</span><span style="font-size:10px;font-weight:500;border:1px dashed #8C8C8C;border-radius:4px;padding:0 5px">Estimado</span></div>
+        
+        <div style="display:grid;grid-template-columns:28px minmax(0,1fr) 20px;column-gap:6px;row-gap:6px">
+          <div style="position:relative;height:{{ F.aband.ch }}"><sc-for list="{{ tap.lTicks }}" as="t" hint-placeholder-count="5"><span style="position:absolute;right:0;bottom:{{ t.b }};transform:translateY(50%);font-family:'IBM Plex Mono',monospace;font-size:10px;color:#6B7A90">{{ t.v }}</span></sc-for></div>
+          <div style="position:relative;height:{{ F.aband.ch }};border-bottom:1px solid #C9D3E0">
+            <sc-for list="{{ tap.lTicks }}" as="t" hint-placeholder-count="5"><div style="position:absolute;left:0;right:0;bottom:{{ t.b }};border-top:1px solid #EEF2F8"></div></sc-for>
+            <div style="position:absolute;inset:0;display:flex;gap:6px;align-items:flex-end">
+              <sc-for list="{{ tap.bars }}" as="b" hint-placeholder-count="6"><div onClick="{{ tapTip }}" data-tip="{{ b.tip }}" style="flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;cursor:pointer;border-radius:6px 6px 0 0" style-active="background-color:#EEF4FB"><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;margin-bottom:2px;font-weight:500">{{ b.v }}</span><div style="width:56%;height:{{ b.h }};background:#8CC0E4;border-radius:2px 2px 0 0"></div></div></sc-for>
+            </div>
+            <svg viewBox="0 0 1000 100" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none"><polyline points="{{ tap.line }}" fill="none" stroke="#C97A20" stroke-width="2" vector-effect="non-scaling-stroke"></polyline></svg>
+            <sc-for list="{{ tap.dots }}" as="d" hint-placeholder-count="6"><div style="position:absolute;left:{{ d.l }};bottom:{{ d.b }};width:7px;height:7px;margin:0 0 -3.5px -3.5px;border-radius:50%;background:#FFFFFF;border:2px solid #C97A20;pointer-events:none"></div></sc-for>
+          </div>
+          <div style="position:relative;height:{{ F.aband.ch }}"><sc-for list="{{ tap.rTicks }}" as="t" hint-placeholder-count="5"><span style="position:absolute;left:0;bottom:{{ t.b }};transform:translateY(50%);font-family:'IBM Plex Mono',monospace;font-size:10px;color:#6B7A90">{{ t.v }}</span></sc-for></div>
+          <div></div>
+          <div style="display:flex;gap:6px"><sc-for list="{{ tap.bars }}" as="b" hint-placeholder-count="6"><span style="flex:1;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#4A5A70">{{ b.label }}</span></sc-for></div>
+          <div></div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:flex-start;border-top:1px solid #EEF2F8;padding-top:10px;font-size:12px;color:#1B3A6B"><span style="font-size:10px;font-weight:600;color:#4A5A70;border:1px dashed #8C8C8C;padding:0 6px;border-radius:8px;white-space:nowrap">Método</span><span>Estimación por balance de flujos; mejora con agenda de recepción.</span></div>
+        <sc-if value="{{ F.aband.on }}" hint-placeholder-val="{{ false }}"><div style="margin-top:auto;font-size:11px;color:#6B7A90;text-align:center">Gire el dispositivo para ver más detalle · toque los elementos para ver cifras</div></sc-if>
+      </div>
+        <div style="background:#FFFFFF;border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:10px">
+          <div><div style="font-size:15px;font-weight:600">Niveles de estimación</div><div style="font-size:12px;color:#4A5A70;margin-top:2px">Cómo mejora la fidelidad según los datos disponibles</div></div>
+          <sc-for list="{{ levels }}" as="l" hint-placeholder-count="3">
+            <div style="display:grid;grid-template-columns:30px minmax(0,1fr);gap:10px;padding:12px;border-radius:12px;border:1px solid {{ l.bd }};background:{{ l.bg }}">
+              <span style="width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-weight:600;background:{{ l.nBg }};color:{{ l.nFg }}">{{ l.n }}</span>
+              <div style="display:flex;flex-direction:column;gap:3px"><div style="display:flex;justify-content:space-between;gap:6px"><span style="font-size:13px;font-weight:600">{{ l.name }}</span><span style="font-size:10px;font-weight:600;color:{{ l.tFg }};white-space:nowrap">{{ l.tag }}</span></div><span style="font-size:12px;line-height:1.4;color:#1B3A6B">{{ l.desc }}</span><span style="font-size:11px;color:#4A5A70">Fidelidad: {{ l.fid }}</span></div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ hasFoot }}" hint-placeholder-val="{{ false }}">
+      <div style="background:#FFFFFF;border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:12px;border:1px solid #D5DEEA">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><span style="font-size:14px;font-weight:600;color:#004AAD">Fuente y condiciones</span><span style="font-size:11px;font-weight:600;padding:1px 8px;border-radius:10px;white-space:nowrap;background:{{ foot.vBg }};color:{{ foot.vFg }}">{{ foot.ver }}</span></div>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:12px;line-height:1.5">
+          <div><div style="font-size:10px;color:#6B7A90;letter-spacing:.06em">FUENTE · {{ foot.per }}</div>{{ foot.fuente }}</div>
+          <div><div style="font-size:10px;color:#6B7A90;letter-spacing:.06em">QUÉ SE GRAFICA</div>{{ foot.puede }}</div>
+          <div><div style="font-size:10px;color:#6B7A90;letter-spacing:.06em">DEPENDENCIA</div>{{ foot.falta }}</div>
+          <div><div style="font-size:10px;color:#6B7A90;letter-spacing:.06em">CONDICIONES</div><ul style="margin:2px 0 0;padding-left:16px;display:flex;flex-direction:column;gap:3px;color:#1B3A6B"><sc-for list="{{ foot.cond }}" as="c" hint-placeholder-count="2"><li>{{ c }}</li></sc-for></ul></div>
+        </div>
+      </div>
+    </sc-if>
+  </main>
+
+  <nav style="position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;justify-content:center;pointer-events:none">
+    <div style="pointer-events:auto;width:100%;max-width:480px;background:#FFFFFF;border-radius:22px 22px 0 0;box-shadow:0 -2px 14px rgba(0,74,173,.10);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));padding:6px 6px calc(8px + env(safe-area-inset-bottom))">
+      <button onClick="{{ go.inicio }}" style="border:0;background:transparent;display:flex;flex-direction:column;align-items:center;gap:3px;min-height:52px;justify-content:center;color:{{ nav.inicio.fg }};font-size:11px;font-weight:{{ nav.inicio.fw }};cursor:pointer;border-radius:12px;font-family:'IBM Plex Sans',sans-serif" style-active="background-color:#F2F6FC"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>Inicio<span style="width:18px;height:2px;border-radius:1px;background:{{ nav.inicio.bd }}"></span></button>
+      <button onClick="{{ go.espera }}" style="border:0;background:transparent;display:flex;flex-direction:column;align-items:center;gap:3px;min-height:52px;justify-content:center;color:{{ nav.espera.fg }};font-size:11px;font-weight:{{ nav.espera.fw }};cursor:pointer;border-radius:12px;font-family:'IBM Plex Sans',sans-serif" style-active="background-color:#F2F6FC"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path><path d="M12 7v5l4 2"></path></svg>Espera<span style="width:18px;height:2px;border-radius:1px;background:{{ nav.espera.bd }}"></span></button>
+      <button onClick="{{ go.saturacion }}" style="border:0;background:transparent;display:flex;flex-direction:column;align-items:center;gap:3px;min-height:52px;justify-content:center;color:{{ nav.saturacion.fg }};font-size:11px;font-weight:{{ nav.saturacion.fw }};cursor:pointer;border-radius:12px;font-family:'IBM Plex Sans',sans-serif" style-active="background-color:#F2F6FC"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>Saturación<span style="width:18px;height:2px;border-radius:1px;background:{{ nav.saturacion.bd }}"></span></button>
+      <button onClick="{{ go.consultorios }}" style="border:0;background:transparent;display:flex;flex-direction:column;align-items:center;gap:3px;min-height:52px;justify-content:center;color:{{ nav.consultorios.fg }};font-size:11px;font-weight:{{ nav.consultorios.fw }};cursor:pointer;border-radius:12px;font-family:'IBM Plex Sans',sans-serif" style-active="background-color:#F2F6FC"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"></path><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"></path><path d="M5 18v2"></path><path d="M19 18v2"></path></svg>Consultorios<span style="width:18px;height:2px;border-radius:1px;background:{{ nav.consultorios.bd }}"></span></button>
+      <button onClick="{{ openMore }}" style="border:0;background:transparent;display:flex;flex-direction:column;align-items:center;gap:3px;min-height:52px;justify-content:center;color:{{ more.fg }};font-size:11px;font-weight:{{ more.fw }};cursor:pointer;border-radius:12px;font-family:'IBM Plex Sans',sans-serif" style-active="background-color:#F2F6FC"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>{{ more.label }}<span style="width:18px;height:2px;border-radius:1px;background:{{ more.bd }}"></span></button>
+    </div>
+  </nav>
+
+  <sc-if value="{{ sheetOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeSheet }}" style="position:fixed;inset:0;z-index:400;background:rgba(11,42,91,.32);display:flex;justify-content:center;align-items:flex-end">
+      <div onClick="{{ stop }}" style="width:100%;max-width:480px;background:#FFFFFF;border-radius:22px 22px 0 0;padding:10px 16px calc(20px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:4px">
+        <div style="width:40px;height:4px;border-radius:2px;background:#D5DEEA;margin:0 auto 10px"></div>
+        <div style="font-size:11px;color:#6B7A90;letter-spacing:.06em;padding:0 4px 6px">{{ sheetTitle }}</div>
+        <sc-for list="{{ sheetItems }}" as="o" hint-placeholder-count="3">
+          <button onClick="{{ o.select }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:50px;border:0;border-radius:12px;background:{{ o.bg }};color:{{ o.fg }};padding:0 14px;font-size:15px;font-weight:{{ o.fw }};text-align:left;cursor:pointer;font-family:'IBM Plex Sans',sans-serif" style-active="background-color:#EEF4FB"><span>{{ o.label }}</span><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#4A5A70">{{ o.meta }}</span></button>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ tipOnFlag }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;left:{{ tip.x }};top:{{ tip.y }};transform:{{ tip.tf }};z-index:1000;pointer-events:none;background:#0B2A5B;color:#FFFFFF;border-radius:10px;padding:8px 12px;box-shadow:0 6px 18px rgba(11,42,91,.25);max-width:240px">
+      <div style="font-size:12px;font-weight:600">{{ tip.title }}</div>
+      <sc-for list="{{ tip.lines }}" as="ln" hint-placeholder-count="0"><div style="font-size:11px;margin-top:3px;color:#DCE8F7;font-family:'IBM Plex Mono',monospace">{{ ln }}</div></sc-for>
+    </div>
+  </sc-if>
+</div>
+
+</sc-if>
+<sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
 <div style="display:flex;min-width:1440px;height:{{ rootH }};min-height:760px;background:#FFFFFF;color:#13201F;font-family:'IBM Plex Sans',system-ui,sans-serif">
 
 <aside data-screen-label="Menú lateral" style="width:{{ sideW }};flex:none;position:relative;z-index:10;background:#FFFFFF;display:flex;flex-direction:column;padding:22px 0 24px;transition:width .32s cubic-bezier(.4,0,.2,1)">
@@ -678,8 +1214,9 @@ button{font-family:'IBM Plex Sans',sans-serif}
   </div>
 </sc-if>
 </div>
+</sc-if>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;defaultBranch&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;todas&quot;,&quot;universidad&quot;,&quot;satelite&quot;,&quot;interlomas&quot;],&quot;default&quot;:&quot;todas&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;tpesMeta&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:15,&quot;min&quot;:10,&quot;max&quot;:25,&quot;unit&quot;:&quot;min&quot;,&quot;tsType&quot;:&quot;number&quot;},&quot;startCollapsed&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;defaultBranch&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;todas&quot;,&quot;universidad&quot;,&quot;satelite&quot;,&quot;interlomas&quot;],&quot;default&quot;:&quot;todas&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;tpesMeta&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:15,&quot;min&quot;:10,&quot;max&quot;:25,&quot;unit&quot;:&quot;min&quot;,&quot;tsType&quot;:&quot;number&quot;},&quot;startCollapsed&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;vista&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;auto&quot;,&quot;escritorio&quot;,&quot;movil&quot;],&quot;default&quot;:&quot;auto&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 const HOURS=[9,10,11,12,13,14,15,16,17,18,19,20];
 const BA=[3,4,6,7,6,4,3,4,6,7,5,3],BB=[7,8,10,11,9,7,6,7,10,12,8,6];
 const BOCC=[42,64,82,88,70,45,38,50,54,48,44,30];
@@ -738,17 +1275,35 @@ const mean=a=>a.reduce((s,v)=>s+v,0)/a.length;
 const ovl=(raw,h)=>raw.reduce((m,[a,b])=>m+Math.max(0,Math.min(b,h+1)-Math.max(a,h)),0);
 const hr=h=>h+':00';
 
+const Q=k=>{try{return new URLSearchParams(location.search).get(k)}catch(e){return null}};
 class Component extends DCLogic {
-  state={branch:null,pick:'s39',view:'inicio',collapsed:null,sel:null,zone:null,tip:null,user:false,picker:false,dark:false,printing:false,fs:false};
+  state={vw:typeof window!=='undefined'?window.innerWidth:1440,fsCard:Q('fs'),sheet:null,branch:null,pick:'s39',view:VIEWS.includes(Q('view'))?Q('view'):'inicio',collapsed:null,sel:null,zone:null,tip:null,user:false,picker:false,dark:false,printing:false,fs:false};
   scrollRef=React.createRef();
   componentDidMount(){
-    this._fs=()=>this.setState({fs:!!document.fullscreenElement});
+    this._fs=()=>{const on=!!document.fullscreenElement;if(!on&&this._req){this._req=false;this.setState({fs:false,fsCard:null})}else this.setState({fs:on})};this._sc=()=>{if(this.state.tip&&this.isMob())this.setState({tip:null})};window.addEventListener('scroll',this._sc,{passive:true});
     this._ap=()=>this.setState({printing:false});
-    document.addEventListener('fullscreenchange',this._fs);
+    document.addEventListener('fullscreenchange',this._fs);this._rz=()=>this.setState({vw:window.innerWidth});window.addEventListener('resize',this._rz);
     window.addEventListener('afterprint',this._ap);
   }
   componentWillUnmount(){document.removeEventListener('fullscreenchange',this._fs);window.removeEventListener('afterprint',this._ap)}
-  go(v){this.setState({view:v,tip:null,picker:false});const el=this.scrollRef.current;if(el)el.scrollTop=0}
+  go(v){this.setState({view:v,tip:null,picker:false,sheet:null,fsCard:null});const el=this.scrollRef.current;if(el)el.scrollTop=0;try{window.scrollTo(0,0)}catch(e){}}
+  isMob(){const v=Q('vista')||this.props.vista||'auto';return v==='movil'||(v==='auto'&&this.state.vw<900)}
+  componentDidUpdate(){if(typeof document!=='undefined')document.body.style.overflow=(this.isMob()&&(this.state.fsCard||this.state.sheet))?'hidden':''}
+  toggleCard(id){
+    const on=this.state.fsCard===id;
+    this.setState({fsCard:on?null:id,tip:null});
+    const d=document.documentElement;
+    if(!on){if(!document.fullscreenElement&&d.requestFullscreen){d.requestFullscreen().then(()=>{this._req=true;try{screen.orientation&&screen.orientation.lock&&screen.orientation.lock('landscape').catch(()=>{})}catch(e){}}).catch(()=>{})}}
+    else if(document.fullscreenElement&&this._req){this._req=false;try{screen.orientation&&screen.orientation.unlock&&screen.orientation.unlock()}catch(e){}document.exitFullscreen().catch(()=>{})}
+  }
+  tapTip=e=>{
+    e.stopPropagation();
+    const el=e.currentTarget,t=el.getAttribute('data-tip');if(!t)return;
+    if(this.state.tip&&this._tipEl===el){this._tipEl=null;return this.setState({tip:null})}
+    this._tipEl=el;
+    const r=el.getBoundingClientRect(),W=window.innerWidth,x=Math.min(Math.max(r.left+r.width/2,128),W-128),above=r.top>130,parts=t.split('|');
+    this.setState({tip:{title:parts[0],lines:parts.slice(1),x:x+'px',y:(above?r.top-8:r.bottom+8)+'px',tf:above?'translate(-50%,-100%)':'translate(-50%,0)'}});
+  };
   tipOn=e=>{
     const el=e.currentTarget,t=el.getAttribute('data-tip');if(!t)return;
     if(el.getAttribute('data-nav')&&!this.isCollapsed())return;
@@ -761,6 +1316,29 @@ class Component extends DCLogic {
   st(key,label){return{stLabel:label,stDot:ST[key].dot,stBg:ST[key].bg,stFg:ST[key].fg}}
   vr(v,unit,lowerGood,dec=1){const good=lowerGood?v<0:v>0;return{varTxt:(v>0?'▲ ':v<0?'▼ ':'= ')+Math.abs(v).toFixed(dec)+unit+' '+(v===0?'sin cambio':good?'mejora':'empeora'),varColor:v===0?'#4A5A70':good?'#004AAD':'#8F5410'}}
   renderVals(){
+    const b=this.baseVals();
+    if(!b.isMobile)return b;
+    const s=this.state,F={};
+    ['espera','dist','wbr','heat','zonas','plano','uso','rank','c1','c2','aflu','aband'].forEach(id=>{const on=s.fsCard===id;F[id]={on,off:!on,pos:on?'fixed':'relative',inset:on?'0':'auto',z:on?'300':'1',r:on?'0':'20px',ov:on?'auto':'visible',pad:on?'calc(14px + env(safe-area-inset-top)) 16px 24px':'16px',
+      ch:on?'max(200px, calc(100dvh - 230px))':'180px',cell:on?'max(24px, calc((100dvh - 260px) / 7))':'24px',ucell:on?'max(16px, calc((100dvh - 340px) / '+b.useRows.length+'))':'16px',
+      planMw:on?'min(100%, calc((100dvh - 420px) * '+b.plan.ar+'))':'100%',label:on?'Cerrar pantalla completa':'Ver en pantalla completa',toggle:()=>this.toggleCard(id)}});
+    const moreIds=['cruces','afluencia','abandono'],inMore=moreIds.includes(s.view);
+    const nm={cruces:'Espera – Ocupación',afluencia:'Afluencias',abandono:'Abandono'};
+    const bd=x=>x.bg==='transparent'?'#D5DEEA':'#004AAD';
+    const mBranches=b.branches.map(x=>({...x,mbd:bd(x)}));
+    const mPeriods=b.periods.map((x,i)=>({...x,mbd:bd(x),select:i===2?()=>this.setState({sheet:'periodo',tip:null}):x.select}));
+    let sheetItems=[],sheetTitle='';
+    if(s.sheet==='more'){sheetTitle='MÁS SECCIONES';sheetItems=moreIds.map(id=>({label:nm[id],meta:'',select:()=>this.go(id),bg:s.view===id?'#EEF4FB':'transparent',fg:s.view===id?'#004AAD':'#13201F',fw:s.view===id?'600':'400'})).concat([{label:'Exportar como PDF',meta:'',select:()=>{this.setState({sheet:null});setTimeout(()=>window.print(),300)},bg:'transparent',fg:'#004AAD',fw:'500'}])}
+    else if(s.sheet==='periodo'){sheetTitle='ELEGIR PERIODO';sheetItems=b.pickList.map(o=>({label:o.label,meta:o.range,select:()=>{o.select();this.setState({sheet:null})},bg:o.bg,fg:'#13201F',fw:'500'}))}
+    else if(s.sheet==='user'){sheetTitle='SESIÓN · GERENTE REGIONAL';sheetItems=[{label:'Cerrar sesión',meta:'',select:()=>this.setState({sheet:null}),bg:'transparent',fg:'#A12424',fw:'600'}]}
+    const mUseRows=b.useRows.map(g=>({...g,mlabel:g.label.replace(' · Consultorio ',' · C').replace('Consultorio ','Cons. ')}));
+    return {...b,F,mBranches,mPeriods,mUseRows,hourShort:[9,10,11,12,13,14,15,16,17,18,19,20].map(String),
+      more:{label:inMore?nm[s.view].split(' ')[0]:'Más',fg:inMore?'#0077D6':'#1B3A6B',fw:inMore?'600':'400',bd:inMore?'#0091FF':'transparent'},
+      openMore:()=>this.setState({sheet:'more',tip:null}),openUser:()=>this.setState({sheet:'user',tip:null}),
+      sheetOpen:!!s.sheet,sheetTitle,sheetItems,closeSheet:()=>this.setState({sheet:null}),stop:e=>e.stopPropagation(),
+      tapTip:this.tapTip,clearTip:()=>{if(s.tip)this.setState({tip:null})}};
+  }
+  baseVals(){
     const s=this.state,p=this.props;
     const br=s.branch||p.defaultBranch||'todas';
     const pk=PICKS.find(x=>x.id===s.pick)||PICKS[0],pidx=PICKS.indexOf(pk),mes=pk.type==='mes',per=pk.type;
@@ -912,7 +1490,9 @@ class Component extends DCLogic {
     const activeCustom=!['s39','sep'].includes(pk.id);
     const pill=on=>({bg:on?'#004AAD':'transparent',fg:on?'#FFFFFF':'#004AAD',fw:on?'600':'400'});
     const tip=s.tip;
+    const isMobile=this.isMob();
     return {
+      isMobile,isDesktop:!isMobile,defBranch:br,
       rootH:s.printing?'auto':'100vh',mainH:s.printing?'auto':'100%',mainOv:s.printing?'visible':'auto',scrollRef:this.scrollRef,
       sideW:collapsed?'84px':'252px',lblOp:collapsed?0:1,markOp:collapsed?1:0,sideRot:collapsed?'rotate(180deg)':'none',sideTip:collapsed?'Expandir menú':'Contraer menú',
       toggleSide:()=>this.setState({collapsed:!collapsed,tip:null}),
